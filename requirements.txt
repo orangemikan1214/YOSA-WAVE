@@ -1,0 +1,12 @@
+#Pythonプロジェクトで使用する外部ライブラリを指定したファイル
+streamlit
+opencv-python-headless
+pillow
+requests
+beautifulsoup4
+pandas
+python-dotenv
+openai>=1.3.5
+supabase
+tavily-python
+datetime
