@@ -15,6 +15,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
+from utils.service import get_supabase_client
 
 # ----------------------------------------------------------------------------
 # 定数・固定サンプルデータ
@@ -154,6 +155,11 @@ def build_weekly_dataset():
 def week_bounds(start: pd.Timestamp):
     return start, start + pd.Timedelta(days=6)
 
+# ----------------------------------------------------------------------------
+# Supabase接続
+# ----------------------------------------------------------------------------
+
+supabase = get_supabase_client()
 
 # ----------------------------------------------------------------------------
 # ページ設定
@@ -366,3 +372,34 @@ st.caption(
     "※ 表示データはすべて固定のサンプル数値です。DB接続後は extracted_issues /"
     " hr_employees / recommendations テーブルからの集計・生成AI応答に差し替えます。"
 )
+
+# ----------------------------------------------------------------------------
+# chat_logs テーブル接続・データ取得テスト
+# ----------------------------------------------------------------------------
+st.divider()
+st.subheader("💬 Supabase: `chat_logs` データ取得テスト")
+
+if st.button("`chat_logs` の最新データを取得"):
+    try:
+        # chat_logs から最新 10 件を取得
+        response = (
+            supabase.table("chat_logs")
+            .select("*")
+            .order("log_id", desc=True)  # ※日時カラム名が created_at の場合
+            .limit(10)
+            .execute()
+        )
+        
+        data = response.data
+        if data:
+            st.success(f"✅ `chat_logs` から {len(data)} 件のログを取得しました！")
+            
+            # DataFrame化してテーブル表示
+            df_chat = pd.DataFrame(data)
+            st.dataframe(df_chat, use_container_width=True)
+        else:
+            st.info("ℹ️ テーブルは存在しますが、データが 0 件です。")
+
+    except Exception as e:
+        st.error(f"❌ データ取得エラー: {e}")
+        st.caption("※ テーブル名が異なる場合や、RLS (Row Level Security) のアクセス制限がかかっている可能性があります。")
