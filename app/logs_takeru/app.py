@@ -45,23 +45,9 @@ with st.sidebar:
         st.rerun()
 
 
-# ★追加①：DBへ保存する課題情報の入力欄
+# 追加①：DBへ保存する課題情報の入力欄
 st.subheader("課題情報")
 
-category = st.selectbox(
-    "課題のジャンル",
-    ["未分類", "予算・人員", "技術", "品質", "部署間連携", "その他"],
-)
-
-issue = st.text_input(
-    "具体的な課題名",
-    placeholder="例：開発担当者の不足",
-)
-
-issue_summary = st.text_area(
-    "課題の要約",
-    placeholder="例：新規事業の開発担当者が不足し、計画が遅れている",
-)
 
 
 if "messages" not in st.session_state:
@@ -84,8 +70,7 @@ if raw_prompt:
         st.error("先に社員IDを入力してください。")
 
     # 追加部分：課題名と要約が空ならAPIを呼ばない
-    elif not issue.strip() or not issue_summary.strip():
-        st.error("先に課題名と課題の要約を入力してください。")
+
 
     elif not os.getenv("OPENAI_API_KEY"):
         st.error("OPENAI_API_KEY が未設定です。.env の設定を確認してください。")
@@ -93,12 +78,11 @@ if raw_prompt:
     else:
         masked_prompt = mask_text(raw_prompt.strip())
 
-        # 追加部分：自由記述の課題名・要約もDB保存前にマスキング
-        masked_issue = mask_text(issue.strip())
-        masked_summary = mask_text(issue_summary.strip())
-
         # 過去の会話もマスキング済みの文字列だけをAPIに渡す。
-        messages_for_ai = st.session_state.messages + [
+        messages_for_ai = [
+            {"role": m["role"], "content": mask_text(m["content"])}
+            for m in st.session_state.messages
+        ] + [
             {"role": "user", "content": masked_prompt}
         ]
 
@@ -106,8 +90,11 @@ if raw_prompt:
 
         try:
             with st.spinner("回答を作成中..."):
-                answer = ask_ai(messages_for_ai)
-                masked_answer = mask_text(answer)
+                ai_result = ask_ai(messages_for_ai)
+
+                db_answer = mask_text(ai_result.answer)
+                db_issue = mask_text(ai_result.issue)
+                db_summary = mask_text(ai_result.issue_summary)
 
                 # 保存に失敗した場合、画面にも履歴にも回答を追加しない。
                 failed_step = "SQLiteへの保存"
@@ -116,10 +103,10 @@ if raw_prompt:
                 save_chat_log(
                     employee_id.strip(),
                     department,
-                    category,
-                    masked_issue,
-                    masked_summary,
-                    masked_answer,
+                    ai_result.category,
+                    db_issue,
+                    db_summary,
+                    db_answer,
                 )
 
         except Exception as exc:
@@ -134,6 +121,7 @@ if raw_prompt:
         else:
             st.session_state.messages.extend([
                 {"role": "user", "content": masked_prompt},
-                {"role": "assistant", "content": masked_answer},
+                # 画面には元の回答を出力
+                {"role": "assistant", "content": ai_result.answer},  
             ])
             st.rerun()
