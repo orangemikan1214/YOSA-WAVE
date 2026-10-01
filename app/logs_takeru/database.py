@@ -25,7 +25,7 @@ def save_chat_log(
     issue_summary, response_masked
 ):
     with get_connection() as conn:
-        conn.execute(
+        cursor = conn.execute(
             """INSERT INTO chat_logs
                (employee_id, department, category, issue,
                 issue_summary, response_masked, created_at)
