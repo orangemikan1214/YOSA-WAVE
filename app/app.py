@@ -1,27 +1,46 @@
 """
 課題ダッシュボード（マネージャー支援AIプラットフォーム）
 ------------------------------------------------------
-FEATURE 01「相談ログ分析」の画面①相当。
-DB未接続のため、本ファイル単体で固定のサンプル数値を保持してUIを確認できるようにしている。
-実装フェーズでは build_weekly_dataset() を database.py（chat_logs / extracted_issues）
-からの読み込みに置き換えるだけで良い構成。
+Supabase の chat_logs テーブルを実データソースとして使用する。
 
 起動方法:
-    pip install streamlit pandas plotly
-    streamlit run dashboard_app.py
+    pip install streamlit pandas plotly openai supabase
+    # OpenAI APIを使う場合は下記のいずれかでキーを設定（未設定ならフォールバック固定回答）
+    #   export OPENAI_API_KEY="sk-..."
+    #   または .streamlit/secrets.toml に OPENAI_API_KEY = "sk-..." を記載
+    streamlit run app.py
 """
+
+import os
 
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
+
 from utils.service import get_supabase_client
 
+try:
+    from openai import OpenAI  # openai>=1.0 系のクライアント
+except ImportError:  # ライブラリ未インストールでも画面自体は落とさない
+    OpenAI = None
+
+OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-4o-mini")
+
 # ----------------------------------------------------------------------------
-# 定数・固定サンプルデータ
+# ページ設定（Streamlitコマンドの中で一番最初に呼ぶ必要がある）
 # ----------------------------------------------------------------------------
 
-# ジャンル（大分類）。ユーザー提供のカテゴリマスタに準拠
+st.set_page_config(page_title="課題ダッシュボード", page_icon="📊", layout="wide")
+
+st.title("📊 課題ダッシュボード")
+st.caption("相談ログ分析（FEATURE 01）｜個人・部署の粒度は表示せず、カテゴリ単位で集計。")
+
+# ----------------------------------------------------------------------------
+# 定数
+# ----------------------------------------------------------------------------
+
+# ジャンル（大分類）= chat_logs.category_1
 CATEGORIES = [
     "技術検討",
     "人材・スキル",
@@ -40,16 +59,7 @@ CATEGORY_COLORS = {
 
 TREND_WEEKS = 8  # 傾向表示は8週分で固定
 
-# ジャンル別の週次件数（固定値・古い週→新しい週の順、末尾が「今週」）
-WEEKLY_COUNTS = {
-    "技術検討":       [10, 11, 10, 12, 13, 12, 14, 15],
-    "人材・スキル":    [9, 8, 8, 7, 7, 6, 6, 5],
-    "他部署連携":     [9, 11, 10, 12, 11, 13, 12, 14],
-    "事業戦略":       [5, 6, 5, 6, 7, 6, 7, 8],
-    "予算・リソース配分": [9, 8, 10, 9, 9, 10, 10, 11],
-}
-
-# 課題（ジャンルとは独立した「別分類」。ユーザー提供のカテゴリマスタに準拠）
+# 課題（別分類）= chat_logs.category_2
 ISSUE_TYPES = [
     "手順がわからない",
     "判断基準が分からない",
@@ -59,17 +69,6 @@ ISSUE_TYPES = [
     "作業代行",
     "課題ではない",
 ]
-
-# 課題別の週次件数（固定値・古い週→新しい週の順、末尾が「今週」）
-WEEKLY_ISSUE_COUNTS = {
-    "手順がわからない":       [7, 8, 8, 9, 10, 10, 11, 12],
-    "判断基準が分からない":    [4, 4, 5, 5, 5, 6, 6, 6],
-    "エラー・障害":          [5, 6, 6, 7, 7, 8, 8, 9],
-    "誰に聞くか分からない":    [3, 3, 4, 4, 4, 5, 5, 5],
-    "情報が見つからない":     [4, 5, 5, 6, 6, 6, 7, 7],
-    "作業代行":             [2, 2, 3, 3, 3, 4, 4, 4],
-    "課題ではない":          [2, 2, 2, 3, 3, 3, 3, 3],
-}
 
 ISSUE_COLORS = {
     "手順がわからない": "#2b5f8a",
@@ -81,24 +80,13 @@ ISSUE_COLORS = {
     "課題ではない": "#57666d",
 }
 
-# ジャンル × 課題 のクロス集計（固定値。ヒートマップ表示用）
-CROSS_TAB_COUNTS = {
-    "技術検討":       [6, 1, 0, 1, 1, 4, 1],
-    "人材・スキル":    [1, 4, 0, 1, 0, 0, 2],
-    "他部署連携":     [1, 0, 6, 1, 1, 0, 0],
-    "事業戦略":       [1, 1, 0, 3, 1, 0, 0],
-    "予算・リソース配分": [1, 0, 1, 0, 4, 0, 0],
-}
+# 「今週」の基準。
+# True : chat_logs 内で最新のログがある週を「今週」とする（サンプルデータが過去日付のため）
+# False: 実行日の週を「今週」とする（本番運用向け）
+ANCHOR_TO_LATEST_DATA = True
 
-# 折りたたみで見せる「具体的な課題」の例（固定サンプル。ジャンル×課題タグ付き）
-CONCRETE_ISSUES = [
-    {"genre": "技術検討", "issue_type": "手順がわからない", "detail": "新しい検証ツールの操作手順が分からず作業が止まっている"},
-    {"genre": "技術検討", "issue_type": "作業代行", "detail": "負荷試験用スクリプトの作成を代わりにやってほしいという依頼"},
-    {"genre": "人材・スキル", "issue_type": "判断基準が分からない", "detail": "評価面談での評点基準が人によって解釈が分かれている"},
-    {"genre": "他部署連携", "issue_type": "エラー・障害", "detail": "他部署管理のシステムでエラーが頻発しているが問い合わせ窓口が分からない"},
-    {"genre": "事業戦略", "issue_type": "誰に聞くか分からない", "detail": "新規事業の方針転換について誰に確認すればよいか分からない"},
-    {"genre": "予算・リソース配分", "issue_type": "情報が見つからない", "detail": "予算申請に必要な過去実績データがどこにあるか分からない"},
-]
+TABLE_NAME = "chat_logs"
+PAGE_SIZE = 1000  # Supabaseの1リクエストあたり取得上限
 
 # 今週トップの相談カテゴリに対する人材マッチング結果（固定値）
 # 本番では matching_engine.py が hr_employees / performance_records と突合して算出する想定
@@ -123,10 +111,19 @@ CANDIDATES = [
     },
 ]
 
-# AIアドバイザーからの回答例（固定値）
+# AIアドバイザーに渡す固定プロンプト（ユーザーが質問を入力するのではなく、
+# 集計結果そのものを根拠に自動でアドバイスを生成させる）
+ADVISOR_PROMPT = (
+    "①②の今週の集計結果（ジャンル別・課題別の件数と前週比、具体的な課題の例、"
+    "支援候補となる社員）を踏まえて、マネージャーが今週取るべきアクションを"
+    "提案してください。特にどのジャンル・課題への対応を優先すべきか、"
+    "誰にどう動いてもらうと良いかを具体的に述べてください。"
+)
+
+# APIキー未設定時のフォールバック回答（固定値）
 AI_ADVISOR = {
-    "query": "技術検討まわりの相談が今週最多です。対応を加速するための増員候補は？",
     "response": (
+        "［フォールバック回答／OpenAI APIキー未設定］ "
         "直近1週間で「技術検討」カテゴリの相談が最多となっています。"
         "手順が分からない・作業を代行してほしいという相談が中心とみられるため、"
         "まずは技術検討に知見のある候補者を暫定支援に充てることを提案します。"
@@ -136,44 +133,180 @@ AI_ADVISOR = {
 }
 
 
-@st.cache_data
-def build_weekly_dataset():
-    """
-    固定のサンプル数値から、週開始日つきの集計テーブルを組み立てる。
-    本番では database.py 経由で extracted_issues
-    （year_month / topic_category / mention_count）を集計してこの形にする想定。
-    """
-    today = pd.Timestamp.today().normalize()
-    this_week_start = today - pd.Timedelta(days=today.weekday())
-    week_starts = [this_week_start - pd.Timedelta(weeks=(TREND_WEEKS - 1 - i)) for i in range(TREND_WEEKS)]
+# ----------------------------------------------------------------------------
+# Supabaseからのデータ取得・集計
+# ----------------------------------------------------------------------------
 
-    weekly_pivot = pd.DataFrame(WEEKLY_COUNTS, index=week_starts).reindex(columns=CATEGORIES, fill_value=0)
-    weekly_issue_pivot = pd.DataFrame(WEEKLY_ISSUE_COUNTS, index=week_starts).reindex(columns=ISSUE_TYPES, fill_value=0)
-    return weekly_pivot, weekly_issue_pivot, this_week_start
+@st.cache_data(ttl=300, show_spinner="Supabaseからデータを取得中...")
+def load_chat_logs() -> pd.DataFrame:
+    """chat_logs を全件取得（1000件超でも取りこぼさないようページングする）。"""
+    client = get_supabase_client()
+    rows, start = [], 0
+    while True:
+        res = (
+            client.table(TABLE_NAME)
+            .select("log_id, timestamp, category_1, category_2, issue_summary")
+            .order("timestamp")
+            .range(start, start + PAGE_SIZE - 1)
+            .execute()
+        )
+        batch = res.data or []
+        rows.extend(batch)
+        if len(batch) < PAGE_SIZE:
+            break
+        start += PAGE_SIZE
+
+    df = pd.DataFrame(rows, columns=["log_id", "timestamp", "category_1", "category_2", "issue_summary"])
+    if df.empty:
+        return df
+
+    # text型（"2025/7/3 9:15"）でも timestamptz でも読めるようにする
+    ts = pd.to_datetime(df["timestamp"], errors="coerce")
+    if getattr(ts.dt, "tz", None) is not None:
+        ts = ts.dt.tz_convert("Asia/Tokyo").dt.tz_localize(None)
+    df["timestamp"] = ts
+    df = df.dropna(subset=["timestamp"])
+
+    # 週開始日（月曜）
+    df["week_start"] = df["timestamp"].dt.normalize() - pd.to_timedelta(
+        df["timestamp"].dt.weekday, unit="D"
+    )
+    return df
+
+
+def build_weekly_dataset(df: pd.DataFrame):
+    """
+    ログから週次のピボット（行=週開始日、列=ジャンル/課題）を作る。
+    ログが0件の週も 0 で埋めて、直近 TREND_WEEKS 週ぶんを返す。
+    """
+    if ANCHOR_TO_LATEST_DATA:
+        this_week_start = df["week_start"].max()
+    else:
+        today = pd.Timestamp.today().normalize()
+        this_week_start = today - pd.Timedelta(days=today.weekday())
+
+    week_starts = [
+        this_week_start - pd.Timedelta(weeks=(TREND_WEEKS - 1 - i))
+        for i in range(TREND_WEEKS)
+    ]
+
+    def pivot(col, order):
+        p = (
+            df.groupby(["week_start", col]).size().unstack(fill_value=0)
+            .reindex(index=week_starts, columns=order, fill_value=0)
+        )
+        p.index.name = None
+        return p
+
+    weekly_pivot = pivot("category_1", CATEGORIES)
+    weekly_issue_pivot = pivot("category_2", ISSUE_TYPES)
+
+    # 今週のジャンル × 課題 クロス集計（ヒートマップ用）
+    this_week_df = df[df["week_start"] == this_week_start]
+    cross_tab = (
+        pd.crosstab(this_week_df["category_1"], this_week_df["category_2"])
+        .reindex(index=CATEGORIES, columns=ISSUE_TYPES, fill_value=0)
+    )
+    return weekly_pivot, weekly_issue_pivot, cross_tab, this_week_start
 
 
 def week_bounds(start: pd.Timestamp):
     return start, start + pd.Timedelta(days=6)
 
+
+def build_advisor_context(this_week_logs: pd.DataFrame) -> str:
+    """
+    「相談ログ（chat_logs）データ」から AI アドバイザーに渡す文脈をテキスト化する。
+    件数集計に加え、今週の生ログから具体例を抜粋して根拠として渡す。
+    """
+    genre_lines = "\n".join(
+        f"- {cat}: {int(this_week_counts[cat])}件（前週比 {int(this_week_counts[cat] - last_week_counts[cat]):+d}）"
+        for cat in CATEGORIES
+    )
+    issue_lines = "\n".join(
+        f"- {issue}: {int(this_week_issue_counts[issue])}件" for issue in ISSUE_TYPES
+    )
+
+    sample_logs = this_week_logs.dropna(subset=["issue_summary"]).head(15)
+    concrete_lines = "\n".join(
+        f"- [{row['category_1']} / {row['category_2']}] {row['issue_summary']}"
+        for _, row in sample_logs.iterrows()
+    ) or "- （該当ログなし）"
+
+    candidate_lines = "\n".join(
+        f"- {c['name']}（上司: {c['manager']}）: {c['feature']}" for c in CANDIDATES
+    )
+
+    return (
+        "■ 今週のジャンル別相談件数\n"
+        f"{genre_lines}\n\n"
+        "■ 今週の課題別件数（ジャンルとは別分類）\n"
+        f"{issue_lines}\n\n"
+        "■ 相談ログからの具体的な課題例（抜粋）\n"
+        f"{concrete_lines}\n\n"
+        "■ 支援候補となる社員\n"
+        f"{candidate_lines}"
+    )
+
+
+def generate_advisor_response(context: str) -> str:
+    """
+    相談ログの集計データ（context）だけを根拠に、OpenAI API に
+    マネージャー向けアドバイスを自動生成させる。ユーザーからの質問入力は受け付けず、
+    集計結果に基づく提案をそのまま生成する。APIキー未設定・呼び出し失敗時は
+    固定のフォールバック回答を返す。
+    """
+    api_key = os.environ.get("OPENAI_API_KEY")
+    if not api_key:
+        try:
+            api_key = st.secrets.get("OPENAI_API_KEY")
+        except Exception:
+            api_key = None
+
+    if not OpenAI or not api_key:
+        return AI_ADVISOR["response"]
+
+    try:
+        client = OpenAI(api_key=api_key)
+        completion = client.chat.completions.create(
+            model=OPENAI_MODEL,
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "あなたは社内のマネージャー支援AIアドバイザーです。"
+                        "以下の相談ログの集計データ・具体例・候補者情報だけを根拠に、"
+                        "簡潔で実行可能な助言を日本語で200字程度で回答してください。"
+                        "データにない人名や数値を創作しないでください。\n\n"
+                        f"{context}"
+                    ),
+                },
+                {"role": "user", "content": ADVISOR_PROMPT},
+            ],
+            temperature=0.3,
+            max_tokens=500,
+        )
+        return completion.choices[0].message.content.strip()
+    except Exception as e:  # APIエラー時も画面を落とさずフォールバック
+        st.error(f"OpenAI APIの呼び出しに失敗しました（{e}）。フォールバック回答を表示します。")
+        return AI_ADVISOR["response"]
+
+
 # ----------------------------------------------------------------------------
-# Supabase接続
+# データ取得
 # ----------------------------------------------------------------------------
 
-supabase = get_supabase_client()
+try:
+    logs_df = load_chat_logs()
+except Exception as e:
+    st.error(f"Supabaseからのデータ取得に失敗しました: {e}")
+    st.stop()
 
-# ----------------------------------------------------------------------------
-# ページ設定
-# ----------------------------------------------------------------------------
+if logs_df.empty:
+    st.warning("chat_logs にデータがありません。")
+    st.stop()
 
-st.set_page_config(page_title="課題ダッシュボード", page_icon="📊", layout="wide")
-
-st.title("📊 課題ダッシュボード")
-st.caption(
-    "相談ログ分析（FEATURE 01）｜個人・部署の粒度は表示せず、カテゴリ単位で集計。"
-    "現在は **固定のサンプル数値** で表示中（DB未接続 / フロント確認用）。"
-)
-
-weekly_pivot, weekly_issue_pivot, this_week_start = build_weekly_dataset()
+weekly_pivot, weekly_issue_pivot, cross_tab, this_week_start = build_weekly_dataset(logs_df)
 this_week_end = week_bounds(this_week_start)[1]
 last_week_start = this_week_start - pd.Timedelta(weeks=1)
 last_week_end = week_bounds(last_week_start)[1]
@@ -181,6 +314,7 @@ last_week_end = week_bounds(last_week_start)[1]
 this_week_counts = weekly_pivot.loc[this_week_start]
 last_week_counts = weekly_pivot.loc[last_week_start]
 this_week_issue_counts = weekly_issue_pivot.loc[this_week_start]
+this_week_logs = logs_df[logs_df["week_start"] == this_week_start]
 
 # ----------------------------------------------------------------------------
 # KPIサマリー
@@ -192,7 +326,7 @@ delta_total = total_this_week - total_last_week
 
 top_category_this_week = this_week_counts.idxmax()
 
-col1, col2= st.columns(2)
+col1, col2 = st.columns(2)
 col1.metric("今週の相談件数", f"{total_this_week} 件", delta=f"{delta_total:+d} 件（前週比）")
 col2.metric("最多カテゴリ", top_category_this_week)
 
@@ -264,8 +398,6 @@ with sec1:
         st.plotly_chart(fig_issue, use_container_width=True)
 
     st.caption("ジャンル × 課題（件数が多いマスほど濃い色）")
-    cross_tab = pd.DataFrame(CROSS_TAB_COUNTS, index=ISSUE_TYPES).T.reindex(CATEGORIES)
-
     fig_heatmap = px.imshow(
         cross_tab,
         labels=dict(x="課題", y="ジャンル", color="件数"),
@@ -329,13 +461,36 @@ with sec2:
 st.divider()
 
 # ----------------------------------------------------------------------------
-# 今週上がっている課題の詳細（折りたたみ）
+# 具体的な課題の一覧（折りたたみ）。個人・部署の情報は出さない
 # ----------------------------------------------------------------------------
 
-with st.expander("📂 具体的な課題を見る"):
-    st.caption("相談ログから抽出された、ジャンル・課題タグ付きの具体例（固定サンプル）")
-    for item in CONCRETE_ISSUES:
-        st.markdown(f"- **[{item['genre']} / {item['issue_type']}]** {item['detail']}")
+with st.expander(f"具体的な課題を見る（今週 {len(this_week_logs)} 件）"):
+    f1, f2 = st.columns(2)
+    sel_genres = f1.multiselect("ジャンルで絞り込み", CATEGORIES, key="issue_list_genre")
+    sel_issues = f2.multiselect("課題で絞り込み", ISSUE_TYPES, key="issue_list_issue")
+
+    view_df = this_week_logs
+    if sel_genres:
+        view_df = view_df[view_df["category_1"].isin(sel_genres)]
+    if sel_issues:
+        view_df = view_df[view_df["category_2"].isin(sel_issues)]
+
+    if view_df.empty:
+        st.info("該当する課題はありません。")
+    else:
+        st.dataframe(
+            view_df.sort_values("timestamp", ascending=False)[
+                ["timestamp", "category_1", "category_2", "issue_summary"]
+            ].rename(columns={
+                "timestamp": "日時",
+                "category_1": "ジャンル",
+                "category_2": "課題",
+                "issue_summary": "内容",
+            }),
+            use_container_width=True,
+            hide_index=True,
+            column_config={"日時": st.column_config.DatetimeColumn(format="YYYY-MM-DD HH:mm")},
+        )
 
 st.divider()
 
@@ -363,43 +518,24 @@ st.divider()
 # ----------------------------------------------------------------------------
 
 st.subheader("④ AIアドバイザーの回答")
-
-with st.chat_message("assistant"):
-    st.caption(f"Q. {AI_ADVISOR['query']}")
-    st.write(AI_ADVISOR["response"])
-
 st.caption(
-    "※ 表示データはすべて固定のサンプル数値です。DB接続後は extracted_issues /"
-    " hr_employees / recommendations テーブルからの集計・生成AI応答に差し替えます。"
+    "①②の相談ログ集計データ（ジャンル別・課題別件数、具体例、候補者情報）を根拠に、"
+    "OpenAI API が今週取るべきアクションを自動で提案します。"
+    "OPENAI_API_KEY が未設定の場合はフォールバックの固定回答を表示します。"
 )
 
-# ----------------------------------------------------------------------------
-# chat_logs テーブル接続・データ取得テスト
-# ----------------------------------------------------------------------------
-st.divider()
-st.subheader("💬 Supabase: `chat_logs` データ取得テスト")
+if "advisor_response" not in st.session_state:
+    st.session_state["advisor_response"] = AI_ADVISOR["response"]
 
-if st.button("`chat_logs` の最新データを取得"):
-    try:
-        # chat_logs から最新 10 件を取得
-        response = (
-            supabase.table("chat_logs")
-            .select("*")
-            .order("log_id", desc=True)  # ※日時カラム名が created_at の場合
-            .limit(10)
-            .execute()
-        )
-        
-        data = response.data
-        if data:
-            st.success(f"✅ `chat_logs` から {len(data)} 件のログを取得しました！")
-            
-            # DataFrame化してテーブル表示
-            df_chat = pd.DataFrame(data)
-            st.dataframe(df_chat, use_container_width=True)
-        else:
-            st.info("ℹ️ テーブルは存在しますが、データが 0 件です。")
+if st.button("🤖 今週の結果からAIアドバイスを生成"):
+    with st.spinner("AIアドバイザーが今週の結果を分析しています..."):
+        context = build_advisor_context(this_week_logs)
+        st.session_state["advisor_response"] = generate_advisor_response(context)
 
-    except Exception as e:
-        st.error(f"❌ データ取得エラー: {e}")
-        st.caption("※ テーブル名が異なる場合や、RLS (Row Level Security) のアクセス制限がかかっている可能性があります。")
+with st.chat_message("assistant"):
+    st.write(st.session_state["advisor_response"])
+
+st.caption(
+    "※ ジャンル・課題の集計は Supabase `chat_logs` テーブルの実データです。"
+    "人材マッチング候補のみ固定サンプルです。"
+)
