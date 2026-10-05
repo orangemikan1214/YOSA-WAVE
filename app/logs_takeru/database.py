@@ -1,39 +1,40 @@
 """相談ログのSQLite保存。既存のTech0 Searchと同じ接続・INSERT方式。"""
 
-import sqlite3
-from datetime import datetime, timezone
-from pathlib import Path
+import os
 
-BASE_DIR = Path(__file__).resolve().parent
-DB_PATH = BASE_DIR / "data" / "manager_ai.db"
+from supabase import Client, create_client
 
+def get_client() -> Client:
+    #環境変数を使ってSupabaseに接続する。
+    url = os.getenv("SUPABASE_URL")
+    key = os.getenv("SUPABASE_SECRET_KEY")
 
-def get_connection() -> sqlite3.Connection:
-    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    return conn
+    if not url or not key:
+        raise RuntimeError("Supabaseの接続設定がありません")
 
-
-def init_db() -> None:
-    with get_connection() as conn:
-        conn.executescript((BASE_DIR / "schema.sql").read_text(encoding="utf-8"))
+    return create_client(url, key)
 
 
 def save_chat_log(
-    employee_id, department, category, issue,
-    issue_summary, response_masked
-):
-    with get_connection() as conn:
-        cursor = conn.execute(
-            """INSERT INTO chat_logs
-               (employee_id, department, category, issue,
-                issue_summary, response_masked, created_at)
-               VALUES (?, ?, ?, ?, ?, ?, ?)""",
-            (
-                employee_id, department, category, issue,
-                issue_summary, response_masked,
-                datetime.now(timezone.utc).isoformat(),
-            ),
-        )
-        return cursor.lastrowid
+    employee_id: str,
+    department: str,
+    category_1: str | None,
+    category_2: str,
+    issue_summary: str,
+) -> str:
+    #相談ログを1件保存し、発行されたlog_idを返す
+    result = (
+        get_client()
+        .table("chat_logs")
+        .insert({
+            "employee_id": employee_id,
+            "department": department,
+            "category_1": category_1,
+            "category_2": category_2,
+            "issue_summary": issue_summary,
+        })
+        .select("log_id")
+        .execute()
+    )
+
+    return result.data[0]["log_id"]
