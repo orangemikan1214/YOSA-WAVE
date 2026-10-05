@@ -7,22 +7,24 @@ from dotenv import load_dotenv
 
 from ai_client import ask_ai
 from anonymizer import mask_text
-from database import init_db, save_chat_log
+from database import save_chat_log
+import re
 
 load_dotenv()
 st.set_page_config(page_title="マネージャー支援AI", page_icon="💬")
-init_db()
 
 st.title("せーせーAI-分からん事相談してミーナ")
 
 # ★変更：DBには質問全文ではなく、入力した課題の要約を保存する
-st.caption("相談内容をAIに送り、課題情報とマスキング済みの回答をSQLiteに保存")
+st.caption("相談内容をAIに送り、課題情報とマスキング済みの回答をSupabaseに保存")
 
 # ★変更：employee_idはDBに保存されることを明示
 st.info(
-    "メールアドレスとハイフン付き電話番号を自動置換します。"
-    "氏名・会社名などは自動で除去できません。"
-    "社員IDはデータベースにそのまま保存されます。"
+    "相談内容はマスキングせずAIに送信するで。"
+    "データベースには、AIが作成した課題の要約をマスキングして保存するから安心してや。"
+    "メールアドレスとハイフン付き電話番号を自動置換するけど"
+    "氏名・会社名などは自動で除去できんからな"
+    "社員IDはデータベースにそのまま保存されるで"
 )
 
 # chatGPT風にサイドバーを作成
@@ -36,7 +38,7 @@ with st.sidebar:
 
     department = st.selectbox(
         "部署",
-        ["経営企画本部", "新規事業開発部", "技術本部",
+        ["経営企画部", "新規事業開発部", "技術本部",
          "品質保証部", "営業本部", "DX推進部", "その他"],
     )
 
@@ -47,8 +49,6 @@ with st.sidebar:
 
 # 追加①：DBへ保存する課題情報の入力欄
 st.subheader("課題情報")
-
-
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
@@ -75,15 +75,15 @@ if raw_prompt:
     elif not os.getenv("OPENAI_API_KEY"):
         st.error("OPENAI_API_KEY が未設定です。.env の設定を確認してください。")
 
+    elif not os.getenv("SUPABASE_URL") or not os.getenv("SUPABASE_SECRET_KEY"):
+        st.error("Supabaseの接続設定が未設定です。.env を確認してください。")
+
     else:
         masked_prompt = mask_text(raw_prompt.strip())
 
-        # 過去の会話もマスキング済みの文字列だけをAPIに渡す。
-        messages_for_ai = [
-            {"role": m["role"], "content": mask_text(m["content"])}
-            for m in st.session_state.messages
-        ] + [
-            {"role": "user", "content": masked_prompt}
+        # 過去の会話もマスキングせずに文字列だけをAPIに渡す。
+        messages_for_ai = st.session_state.messages + [
+            {"role": "user", "content": raw_prompt.strip()}
         ]
 
         failed_step = "AI API"
@@ -92,30 +92,32 @@ if raw_prompt:
             with st.spinner("回答を作成中..."):
                 ai_result = ask_ai(messages_for_ai)
 
-                db_answer = mask_text(ai_result.answer)
-                db_issue = mask_text(ai_result.issue)
                 db_summary = mask_text(ai_result.issue_summary)
 
                 # 保存に失敗した場合、画面にも履歴にも回答を追加しない。
-                failed_step = "SQLiteへの保存"
+                failed_step = "Supabaseへの保存"
 
                 # 変更部分：database.pyの新しい引数に合わせて6項目渡す
                 save_chat_log(
                     employee_id.strip(),
                     department,
-                    ai_result.category,
-                    db_issue,
+                    ai_result.category_1,
+                    ai_result.category_2,
                     db_summary,
-                    db_answer,
                 )
 
         except Exception as exc:
-            # 例外の詳細には送信内容などが含まれる場合があるため画面へ出さない。
+            # 相談内容が含まれる可能性のある詳細は表示しない。
+            code = getattr(exc, "code", None)
             status = getattr(exc, "status_code", None)
-            http_code = f" / HTTP {status}" if status is not None else ""
+            match = re.search(r'constraint "([^"]+)"', str(exc))
+            constraint = match.group(1) if match else "不明"
             st.error(
+                f"{failed_step}で失敗しました：{type(exc).__name__}"
+                f" / code={code} / constraint={constraint}"
                 f"{failed_step}で失敗しました："
-                f"{type(exc).__name__}{http_code}"
+                f"{type(exc).__name__}"
+                f" / code={code} / HTTP={status}"
             )
 
         else:
