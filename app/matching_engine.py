@@ -7,31 +7,26 @@ FEATURE 02「人材マッチング」の中核ロジック。
 人事マスタ・業績データ・プロジェクトの稼働状況と突合し、対応に適した人材を
 スコア順に提案する。
 
-データの読み込み元は環境変数 MATCHING_DATA_SOURCE で切り替える。
-    supabase（既定） : Supabase の各テーブルを読む（.env の SUPABASE_URL / SUPABASE_KEY が必要）
-    csv              : data/dummy_data/*.csv を読む（オフラインで動作確認したいとき用）
-「データ取得(_fetch / load_*)」と「スコアリング(_*_score)」は分離してあるので、
-読み込み元を変えてもスコアリングには影響しない。
+データは Supabase の各テーブル（employees / skill_master / performance_records /
+project_members / extracted_issues など）から読む。.env の SUPABASE_URL / SUPABASE_KEY が必要。
+「データ取得(_fetch / load_*)」と「スコアリング(_*_score)」は分離してある。
 
-起動方法（動作確認用）:
-    python matching_engine.py                                  # Supabase を読む
-    MATCHING_DATA_SOURCE=csv python matching_engine.py         # CSV を読む（Windows PowerShell: $env:MATCHING_DATA_SOURCE="csv"）
+起動方法（動作確認用。app/ フォルダで実行）:
+    python matching_engine.py
 """
 
 from __future__ import annotations
 
-import csv
-import os
 import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
 
 # ----------------------------------------------------------------------------
-# パス設定
+# パス設定（.env は app/ 直下とその親フォルダの両方を探す）
 # ----------------------------------------------------------------------------
-PROJECT_ROOT = Path(__file__).resolve().parent.parent  # .env と data/ があるフォルダ
-DATA_DIR = PROJECT_ROOT / "data" / "dummy_data"
+APP_DIR = Path(__file__).resolve().parent
+ENV_CANDIDATES = [APP_DIR / ".env", APP_DIR.parent / ".env"]
 
 # ----------------------------------------------------------------------------
 # スコアリングの重み・パラメータ（チームで調整しやすいよう定数化）
@@ -117,42 +112,28 @@ class Candidate:
 
 
 # ----------------------------------------------------------------------------
-# データ取得（_fetch / load_*）— 読み込み元の切り替えはここだけで完結する
+# データ取得（_fetch / load_*）
 # ----------------------------------------------------------------------------
 
 # 同じテーブルを何度も取りに行かないよう、短時間だけ結果を使い回す。
 # ログが増えたことを反映したいときは clear_cache() を呼ぶ。
 CACHE_TTL_SECONDS = 60
 _PAGE_SIZE = 1000  # Supabase(PostgREST) は1回の取得上限が1000行なので、ページ分割して全件取る
-_cache: dict[tuple[str, str], tuple[float, list[dict]]] = {}
+_cache: dict[str, tuple[float, list[dict]]] = {}
 
 
 def clear_cache() -> None:
     _cache.clear()
 
 
-def _data_source() -> str:
-    source = os.getenv("MATCHING_DATA_SOURCE", "supabase").strip().lower()
-    if source not in ("supabase", "csv"):
-        raise ValueError(f"MATCHING_DATA_SOURCE は 'supabase' か 'csv' を指定してください（現在: '{source}'）")
-    return source
-
-
-def _normalize(row: dict) -> dict:
-    """列名を小文字に揃える（CSVの skill1_Level と、DBの skill1_level の差を吸収する）"""
-    return {key.lower(): value for key, value in row.items()}
-
-
-def _read_csv(filename: str) -> list[dict]:
-    with open(DATA_DIR / filename, encoding="utf-8-sig", newline="") as f:
-        return list(csv.DictReader(f))
-
-
 def _read_supabase(table: str) -> list[dict]:
     try:
         from dotenv import load_dotenv
 
-        load_dotenv(PROJECT_ROOT / ".env")  # どのフォルダから起動しても .env を見つけられるようにする
+        for env_path in ENV_CANDIDATES:  # どのフォルダから起動しても .env を見つけられるようにする
+            if env_path.exists():
+                load_dotenv(env_path)
+                break
     except ImportError:
         pass
 
@@ -169,34 +150,31 @@ def _read_supabase(table: str) -> list[dict]:
         start += _PAGE_SIZE
 
 
-def _fetch(table: str, csv_filename: str) -> list[dict]:
-    """テーブル（Supabase）またはCSVの全行を、列名を小文字化した辞書のリストで返す。"""
-    source = _data_source()
-    key = (source, table)
-    cached = _cache.get(key)
+def _fetch(table: str) -> list[dict]:
+    """Supabase のテーブルの全行を辞書のリストで返す（短時間キャッシュ付き）。"""
+    cached = _cache.get(table)
     if cached and time.monotonic() - cached[0] < CACHE_TTL_SECONDS:
         return cached[1]
 
-    raw = _read_supabase(table) if source == "supabase" else _read_csv(csv_filename)
-    rows = [_normalize(row) for row in raw]
-    _cache[key] = (time.monotonic(), rows)
+    rows = _read_supabase(table)
+    _cache[table] = (time.monotonic(), rows)
     return rows
 
 
 def load_employees() -> dict[str, dict]:
     """employee_id -> 社員情報dict"""
-    return {row["employee_id"]: row for row in _fetch("employees", "hr_employees.csv")}
+    return {row["employee_id"]: row for row in _fetch("employees")}
 
 
 def load_skill_master() -> dict[str, str]:
     """skill_name -> related_category_1"""
-    return {row["skill_name"]: row["related_category_1"] for row in _fetch("skill_master", "skill_master.csv")}
+    return {row["skill_name"]: row["related_category_1"] for row in _fetch("skill_master")}
 
 
 def load_skill_keywords() -> dict[str, list[str]]:
     """skill_name -> 課題文に出てきたら関連するとみなす語のリスト（skill_master.keywords）"""
     result: dict[str, list[str]] = {}
-    for row in _fetch("skill_master", "skill_master.csv"):
+    for row in _fetch("skill_master"):
         raw = row.get("keywords") or ""
         result[row["skill_name"]] = [kw.strip() for kw in raw.split(";") if kw.strip()]
     return result
@@ -205,7 +183,7 @@ def load_skill_keywords() -> dict[str, list[str]]:
 def load_performance() -> dict[str, list[dict]]:
     """employee_id -> 業績レコードのリスト（複数年度分）"""
     by_employee: dict[str, list[dict]] = {}
-    for row in _fetch("performance_records", "performance_records.csv"):
+    for row in _fetch("performance_records"):
         by_employee.setdefault(row["employee_id"], []).append(row)
     return by_employee
 
@@ -213,7 +191,7 @@ def load_performance() -> dict[str, list[dict]]:
 def load_active_assignment_counts() -> dict[str, int]:
     """employee_id -> 実績（確定）ベースの現在のプロジェクト稼働数"""
     counts: dict[str, int] = {}
-    for row in _fetch("project_members", "project_members.csv"):
+    for row in _fetch("project_members"):
         if row.get("assignment_type") == "実績":
             counts[row["employee_id"]] = counts.get(row["employee_id"], 0) + 1
     return counts
@@ -221,13 +199,13 @@ def load_active_assignment_counts() -> dict[str, int]:
 
 def load_extracted_issues() -> dict[str, dict]:
     """issue_id -> 課題ログ（extracted_issuesの1行）。issue_id順に並べて返す。"""
-    rows = _fetch("extracted_issues", "extracted_issues.csv")
+    rows = _fetch("extracted_issues")
     return {row["issue_id"]: row for row in sorted(rows, key=lambda r: r["issue_id"])}
 
 
 def load_category1_values() -> set[str]:
     """ジャンル（category_1）マスタに定義されている値の集合"""
-    return {row["category_1"] for row in _fetch("category1_master", "category_master.csv") if row.get("category_1")}
+    return {row["category_1"] for row in _fetch("category1_master") if row.get("category_1")}
 
 
 # ----------------------------------------------------------------------------
@@ -434,7 +412,7 @@ def match_employees(
     課題（ジャンル + 相談文）に対して、対応候補となる社員をスコア順に返す。
 
     Args:
-        category_1: 課題のジャンル（category1_master / category_master.csvのcategory_1に準拠）。
+        category_1: 課題のジャンル（category1_masterのcategory_1に準拠）。
                     Noneの場合はカテゴリ一致を使わず、issue_textとの部分一致のみで判定する。
         issue_text: 相談内容の要約文（issue_summary等）。空文字でもよい。
         department: 指定した場合、その部署の社員のみを候補にする（Noneなら全社対象）。
@@ -564,7 +542,6 @@ def to_ui_list(candidates: list[Candidate]) -> list[dict]:
 # ----------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    print(f"データ読み込み元: {_data_source()}")
     print("=" * 60)
     print("課題ログ(extracted_issues)に対するマッチング")
     print("=" * 60)
@@ -579,7 +556,7 @@ if __name__ == "__main__":
     print("\n" + "=" * 60)
     print("自由記述クエリ(recommendationsのmanager_query)に対するマッチング")
     print("=" * 60)
-    for rec in _fetch("recommendations", "recommendations.csv"):
+    for rec in _fetch("recommendations"):
         query = rec["manager_query"]
         guessed = guess_category_1(query)
         print(f"\nQ. {query}")
