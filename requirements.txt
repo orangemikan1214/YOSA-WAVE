@@ -11,3 +11,4 @@ supabase
 tavily-python
 datetime
 plotly
+pydantic
