@@ -36,6 +36,22 @@ st.set_page_config(page_title="課題ダッシュボード", page_icon="📊", l
 st.title("📊 課題ダッシュボード")
 st.caption("相談ログ分析（FEATURE 01）｜個人・部署の粒度は表示せず、カテゴリ単位で集計。")
 
+# サイドバーの自動ページ一覧（ナビゲーション）を隠すCSS
+st.markdown(
+    """
+    <style>
+    [data-testid="stSidebarNav"] {
+        display: none;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+with st.sidebar:
+    if st.button("せーせーAI-分からん事相談してミーナに戻る", use_container_width=True):
+        st.switch_page("app_aichat.py")
+
 # ----------------------------------------------------------------------------
 # 定数
 # ----------------------------------------------------------------------------

@@ -1,55 +1,44 @@
 import os
-import uuid
-from datetime import datetime, timedelta, date, timezone
-from typing import Optional, Dict, Any, List
-
 import streamlit as st
 from dotenv import load_dotenv
 from supabase import create_client, Client 
 
-# .env 読み込み
-load_dotenv(dotenv_path=".env")
-
-# =========================
-# Secrets/環境変数の取得
-# =========================
+# アプリ起動時に1回だけ.envをロード
+load_dotenv(dotenv_path=".env", override=True)
 
 def _get_supabase_creds():
     """Supabase認証情報を取得"""
-    url = None
-    key = None
-    try:
-        url = st.secrets.get("SUPABASE_URL", url)
-        key = st.secrets.get("SUPABASE_KEY", key)
-    except Exception:
-        pass
-    url = url or os.getenv("SUPABASE_URL")
-    key = key or os.getenv("SUPABASE_KEY")
+    url = st.secrets.get("SUPABASE_URL") if "SUPABASE_URL" in st.secrets else os.getenv("SUPABASE_URL")
+    key = st.secrets.get("SUPABASE_KEY") if "SUPABASE_KEY" in st.secrets else os.getenv("SUPABASE_KEY")
     return url, key
 
-SUPABASE_URL, SUPABASE_KEY = _get_supabase_creds()
+# クライアント作成をキャッシュ化して高速化
+@st.cache_resource
+def _create_cached_supabase_client(url: str, key: str) -> Client:
+    """Supabaseクライアント本体の生成（キャッシュ対象）"""
+    clean_url = str(url).strip().rstrip("/")
+    clean_key = str(key).strip()
+    return create_client(clean_url, clean_key)
 
-# =========================
-# Supabase クライアント
-# =========================
 
 def get_supabase_client() -> Client:
-    """Supabaseクライアントを取得（認証セッション付き）"""
-    
-    if not SUPABASE_URL or not SUPABASE_KEY:
-        raise ValueError("SUPABASE_URL または SUPABASE_KEY が設定されていません。.env または Secrets を確認してください。")
+    """高速かつ安全にSupabaseクライアントを取得"""
+    url, key = _get_supabase_creds()
 
-    # 末尾の余計なスラッシュを除去（PGRST125エラー防止）
-    clean_url = SUPABASE_URL.rstrip("/")
-    clean_key = SUPABASE_KEY.strip()
+    if not url or not key:
+        raise ValueError("SUPABASE_URL または SUPABASE_KEY が取得できていません。")
 
-    supabase = create_client(clean_url, clean_key)
-    
-    # セッションステートから認証情報を取得して設定
+    # キャッシュされたクライアントを取得（爆速化）
+    supabase = _create_cached_supabase_client(url, key)
+
+    # ユーザー認証セッションがある場合のみ反映
     if "access_token" in st.session_state and "refresh_token" in st.session_state:
-        supabase.auth.set_session(
-            st.session_state["access_token"],
-            st.session_state["refresh_token"]
-        )
-    
+        try:
+            supabase.auth.set_session(
+                st.session_state["access_token"],
+                st.session_state["refresh_token"]
+            )
+        except Exception:
+            pass
+
     return supabase
