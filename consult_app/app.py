@@ -1,16 +1,21 @@
-"""Streamlit 相談画面。起動: streamlit run app.py"""
+"""Streamlit 相談画面（社員が使う相談AI）。起動: プロジェクト直下で streamlit run consult_app/app.py"""
 
 import os
+import re
+import sys
+from pathlib import Path
 
 import streamlit as st
-from dotenv import load_dotenv
 
-from ai_client import ask_ai
-from anonymizer import mask_text
-from database import save_chat_log
-import re
+# 共通設定（utils/）をプロジェクト直下から読めるようにする
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-load_dotenv()
+from utils.env import load_env  # noqa: E402
+from ai_client import ask_ai  # noqa: E402
+from anonymizer import mask_text  # noqa: E402
+from database import load_category_options, load_employees, save_chat_log  # noqa: E402
+
+load_env()
 st.set_page_config(page_title="マネージャー支援AI", page_icon="💬")
 
 st.title("せーせーAI-分からん事相談してミーナ")
@@ -27,20 +32,26 @@ st.info(
     "社員IDはデータベースにそのまま保存されるで"
 )
 
+# 社員の一覧と、AIが選べる分類（ジャンル・困りごと）は、Supabaseのマスタから取得する
+try:
+    employees = load_employees()
+    category_1_values, category_2_values = load_category_options()
+except Exception as exc:
+    st.error(f"Supabaseからマスタを取得できませんでした：{type(exc).__name__}")
+    st.stop()
+
 # chatGPT風にサイドバーを作成
 with st.sidebar:
     st.header("ユーザ情報")
 
-    # ★変更：画面上の表示もemployee_idに合わせる
-    employee_id = st.text_input(
-        "社員ID", placeholder="例: E001", max_chars=40
-    )
-
-    department = st.selectbox(
-        "部署",
-        ["経営企画部", "新規事業開発部", "技術本部",
-         "品質保証部", "営業本部", "DX推進部", "その他"],
-    )
+    # 社員はマスタ（employees）から選ぶ。部署は、選んだ社員の所属が自動で入る
+    employee_options = {f"{e['employee_id']}　{e['name']}": e for e in employees}
+    selected_label = st.selectbox("社員", ["（選択してください）"] + list(employee_options))
+    selected_employee = employee_options.get(selected_label)
+    employee_id = selected_employee["employee_id"] if selected_employee else ""
+    department = selected_employee["department"] if selected_employee else ""
+    if selected_employee:
+        st.caption(f"部署：{department}")
 
     if st.button("画面の会話を消去"):
         st.session_state.messages = []
@@ -67,7 +78,7 @@ raw_prompt = st.chat_input("相談内容を入力してください")
 
 if raw_prompt:
     if not employee_id.strip():
-        st.error("先に社員IDを入力してください。")
+        st.error("先にサイドバーで社員を選択してください。")
 
     # 追加部分：課題名と要約が空ならAPIを呼ばない
 
@@ -75,7 +86,7 @@ if raw_prompt:
     elif not os.getenv("OPENAI_API_KEY"):
         st.error("OPENAI_API_KEY が未設定です。.env の設定を確認してください。")
 
-    elif not os.getenv("SUPABASE_URL") or not os.getenv("SUPABASE_SECRET_KEY"):
+    elif not os.getenv("SUPABASE_URL") or not os.getenv("SUPABASE_KEY"):
         st.error("Supabaseの接続設定が未設定です。.env を確認してください。")
 
     else:
@@ -90,7 +101,7 @@ if raw_prompt:
 
         try:
             with st.spinner("回答を作成中..."):
-                ai_result = ask_ai(messages_for_ai)
+                ai_result = ask_ai(messages_for_ai, category_1_values, category_2_values)
 
                 db_summary = mask_text(ai_result.issue_summary)
 
@@ -114,10 +125,7 @@ if raw_prompt:
             constraint = match.group(1) if match else "不明"
             st.error(
                 f"{failed_step}で失敗しました：{type(exc).__name__}"
-                f" / code={code} / constraint={constraint}"
-                f"{failed_step}で失敗しました："
-                f"{type(exc).__name__}"
-                f" / code={code} / HTTP={status}"
+                f" / code={code} / HTTP={status} / constraint={constraint}"
             )
 
         else:

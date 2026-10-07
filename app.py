@@ -3,12 +3,13 @@
 ------------------------------------------------------
 Supabase の chat_logs テーブルを実データソースとして使用する。
 
-起動方法:
-    pip install streamlit pandas plotly openai supabase
-    # OpenAI APIを使う場合は下記のいずれかでキーを設定（未設定ならフォールバック固定回答）
-    #   export OPENAI_API_KEY="sk-..."
-    #   または .streamlit/secrets.toml に OPENAI_API_KEY = "sk-..." を記載
+起動方法（このファイルがあるフォルダで）:
+    pip install -r requirements.txt
+    # .env.example を .env にコピーし、SUPABASE_URL / SUPABASE_KEY（公開キーのみ）/ OPENAI_API_KEY を設定する
+    # OPENAI_API_KEY が未設定なら、AIアドバイスは今週のデータから作る簡易文にフォールバックする
     streamlit run app.py
+
+社員が使う相談AIは別アプリ: streamlit run consult_app/app.py
 """
 
 import os
@@ -18,6 +19,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
+from matching_engine import match_employees, to_ui_list
 from utils.service import get_supabase_client
 
 try:
@@ -34,51 +36,54 @@ OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-4o-mini")
 st.set_page_config(page_title="課題ダッシュボード", page_icon="📊", layout="wide")
 
 st.title("📊 課題ダッシュボード")
-st.caption("相談ログ分析（FEATURE 01）｜個人・部署の粒度は表示せず、カテゴリ単位で集計。")
+st.caption("相談ログ分析（FEATURE 01）｜個人・部署の粒度は表示せず、カテゴリ単位で集計。「課題ではない」と判定された相談は集計に含めない。")
 
 # ----------------------------------------------------------------------------
 # 定数
 # ----------------------------------------------------------------------------
 
-# ジャンル（大分類）= chat_logs.category_1
-CATEGORIES = [
-    "技術検討",
-    "人材・スキル",
-    "他部署連携",
-    "事業戦略",
-    "予算・リソース配分",
-]
+# ジャンル（category_1）・課題（category_2）の一覧は、Supabase のマスタ
+# （category1_master / category2_master）から読む。マスタに分類が増えても、このコードを直さずに集計へ反映される。
+UNCLASSIFIED = "未分類"  # category_1 が空のログの表示名
+EXCLUDED_ISSUE_TYPE = "課題ではない"  # この困りごとのログは、集計・一覧・AIアドバイスのすべてから除外する
 
-CATEGORY_COLORS = {
+CATEGORIES: list[str] = []   # データ取得後に、マスタ + UNCLASSIFIED で埋める
+ISSUE_TYPES: list[str] = []  # データ取得後に、マスタで埋める
+CATEGORY_COLORS: dict[str, str] = {}
+ISSUE_COLORS: dict[str, str] = {}
+
+TREND_WEEKS = 8  # 傾向表示は8週分で固定
+
+# 色は従来の分類に固定で割り当て、マスタに増えた分類は予備の色を順に割り当てる
+KNOWN_CATEGORY_COLORS = {
     "技術検討": "#2b5f8a",
     "人材・スキル": "#3c7a5a",
     "他部署連携": "#a5771f",
     "事業戦略": "#6a5aa8",
     "予算・リソース配分": "#b5432e",
+    UNCLASSIFIED: "#8a9ba3",
 }
-
-TREND_WEEKS = 8  # 傾向表示は8週分で固定
-
-# 課題（別分類）= chat_logs.category_2
-ISSUE_TYPES = [
-    "手順がわからない",
-    "判断基準が分からない",
-    "エラー・障害",
-    "誰に聞くか分からない",
-    "情報が見つからない",
-    "作業代行",
-    "課題ではない",
-]
-
-ISSUE_COLORS = {
+KNOWN_ISSUE_COLORS = {
     "手順がわからない": "#2b5f8a",
     "判断基準が分からない": "#a5771f",
     "エラー・障害": "#b5432e",
     "誰に聞くか分からない": "#3c7a5a",
     "情報が見つからない": "#6a5aa8",
     "作業代行": "#c47eb0",
-    "課題ではない": "#57666d",
 }
+EXTRA_COLORS = ["#0f766e", "#c2410c", "#3d5a80", "#9a3f6b", "#8a6d3b", "#4b7f52"]
+
+
+def assign_colors(names: list[str], known: dict[str, str]) -> dict[str, str]:
+    colors, spare = {}, 0
+    for name in names:
+        if name in known:
+            colors[name] = known[name]
+        else:
+            colors[name] = EXTRA_COLORS[spare % len(EXTRA_COLORS)]
+            spare += 1
+    return colors
+
 
 # 「今週」の基準。
 # True : chat_logs 内で最新のログがある週を「今週」とする（サンプルデータが過去日付のため）
@@ -88,28 +93,10 @@ ANCHOR_TO_LATEST_DATA = True
 TABLE_NAME = "chat_logs"
 PAGE_SIZE = 1000  # Supabaseの1リクエストあたり取得上限
 
-# 今週トップの相談カテゴリに対する人材マッチング結果（固定値）
-# 本番では matching_engine.py が hr_employees / performance_records と突合して算出する想定
-CANDIDATES = [
-    {
-        "name": "中村 拓也",
-        "feature": "AI・機械学習／データ分析が専門。関連プロジェクトへの相談対応実績が豊富で稼働にも余裕あり。",
-        "manager": "佐藤 健一",
-        "match_score": 0.91,
-    },
-    {
-        "name": "吉田 真理",
-        "feature": "大口顧客折衝・業界標準化交渉に強み。外部規格対応や部門間の渉外調整の経験が豊富。",
-        "manager": "高橋 直子",
-        "match_score": 0.84,
-    },
-    {
-        "name": "鈴木 美咲",
-        "feature": "サブスクリプションモデル設計・顧客共創のリード経験あり。新規事業側の事情にも明るい。",
-        "manager": "山本 修",
-        "match_score": 0.78,
-    },
-]
+# 人材マッチングの設定。候補者は matching_engine.py が Supabase の社員・スキル・業績データから算出する
+MATCH_TOP_N = 3         # 表示する候補者の人数
+MATCH_SAMPLE_LOGS = 10  # 課題文として渡す、今週の相談要約の件数（新しい順）
+CANDIDATES: list[dict] = []  # ③で算出する。④のAIアドバイスの根拠にも使う
 
 # AIアドバイザーに渡す固定プロンプト（ユーザーが質問を入力するのではなく、
 # 集計結果そのものを根拠に自動でアドバイスを生成させる）
@@ -120,22 +107,29 @@ ADVISOR_PROMPT = (
     "誰にどう動いてもらうと良いかを具体的に述べてください。"
 )
 
-# APIキー未設定時のフォールバック回答（固定値）
-AI_ADVISOR = {
-    "response": (
-        "［フォールバック回答／OpenAI APIキー未設定］ "
-        "直近1週間で「技術検討」カテゴリの相談が最多となっています。"
-        "手順が分からない・作業を代行してほしいという相談が中心とみられるため、"
-        "まずは技術検討に知見のある候補者を暫定支援に充てることを提案します。"
-        "中村さんはAI・機械学習側からの技術サポートが可能、吉田さんは外部との"
-        "折衝が絡む論点の整理に貢献できます。"
-    ),
-}
+# APIキー未設定・API呼び出し失敗時のフォールバック回答。固定文ではなく、今週のデータから組み立てる
+def fallback_response() -> str:
+    names = "、".join(c["name"] for c in CANDIDATES) or "（該当する候補者なし）"
+    return (
+        f"［フォールバック回答／AIは未使用］ 今週は「{top_category_this_week}」の相談が最多"
+        f"（{int(this_week_counts[top_category_this_week])}件）です。"
+        f"まず対応できる候補者（{names}）に、暫定的な支援を相談することを検討してください。"
+        "「🤖 今週の結果からAIアドバイスを生成」を押すと、AIがより具体的な提案を作ります。"
+    )
 
 
 # ----------------------------------------------------------------------------
 # Supabaseからのデータ取得・集計
 # ----------------------------------------------------------------------------
+
+@st.cache_data(ttl=300, show_spinner=False)
+def load_masters() -> tuple[list[str], list[str]]:
+    """ジャンル（category_1）と課題（category_2）の一覧をマスタテーブルから取得する。"""
+    client = get_supabase_client()
+    category_1 = [r["category_1"] for r in client.table("category1_master").select("category_1").execute().data or []]
+    category_2 = [r["category_2"] for r in client.table("category2_master").select("category_2").execute().data or []]
+    return category_1, category_2
+
 
 @st.cache_data(ttl=300, show_spinner="Supabaseからデータを取得中...")
 def load_chat_logs() -> pd.DataFrame:
@@ -160,11 +154,15 @@ def load_chat_logs() -> pd.DataFrame:
     if df.empty:
         return df
 
-    # text型（"2025/7/3 9:15"）でも timestamptz でも読めるようにする
-    ts = pd.to_datetime(df["timestamp"], errors="coerce")
-    if getattr(ts.dt, "tz", None) is not None:
-        ts = ts.dt.tz_convert("Asia/Tokyo").dt.tz_localize(None)
+    df = df[df["category_2"] != EXCLUDED_ISSUE_TYPE].copy()
+    df["category_1"] = df["category_1"].fillna(UNCLASSIFIED)
+
+    # timestamptz は「秒まで」と「小数秒つき」が混在する（ダミーデータと、相談画面から保存した分）。
+    # pandas は最初の行の形式で全体を読むため、format="ISO8601" を指定して両方を読めるようにする。
+    ts = pd.to_datetime(df["timestamp"], errors="coerce", format="ISO8601", utc=True)
+    ts = ts.dt.tz_convert("Asia/Tokyo").dt.tz_localize(None)
     df["timestamp"] = ts
+    df.attrs["unparsed_rows"] = int(ts.isna().sum())  # 日時を読めずに除外した件数（画面に警告を出す）
     df = df.dropna(subset=["timestamp"])
 
     # 週開始日（月曜）
@@ -234,8 +232,8 @@ def build_advisor_context(this_week_logs: pd.DataFrame) -> str:
     ) or "- （該当ログなし）"
 
     candidate_lines = "\n".join(
-        f"- {c['name']}（上司: {c['manager']}）: {c['feature']}" for c in CANDIDATES
-    )
+        f"- {c['name']}（上司: {c['manager']}）: {c['feature']}（{c['availability']}）" for c in CANDIDATES
+    ) or "- （該当する候補者なし）"
 
     return (
         "■ 今週のジャンル別相談件数\n"
@@ -264,7 +262,7 @@ def generate_advisor_response(context: str) -> str:
             api_key = None
 
     if not OpenAI or not api_key:
-        return AI_ADVISOR["response"]
+        return fallback_response()
 
     try:
         client = OpenAI(api_key=api_key)
@@ -289,7 +287,7 @@ def generate_advisor_response(context: str) -> str:
         return completion.choices[0].message.content.strip()
     except Exception as e:  # APIエラー時も画面を落とさずフォールバック
         st.error(f"OpenAI APIの呼び出しに失敗しました（{e}）。フォールバック回答を表示します。")
-        return AI_ADVISOR["response"]
+        return fallback_response()
 
 
 # ----------------------------------------------------------------------------
@@ -297,6 +295,11 @@ def generate_advisor_response(context: str) -> str:
 # ----------------------------------------------------------------------------
 
 try:
+    master_category_1, master_category_2 = load_masters()
+    CATEGORIES = master_category_1 + [UNCLASSIFIED]
+    ISSUE_TYPES = [t for t in master_category_2 if t != EXCLUDED_ISSUE_TYPE]
+    CATEGORY_COLORS = assign_colors(CATEGORIES, KNOWN_CATEGORY_COLORS)
+    ISSUE_COLORS = assign_colors(ISSUE_TYPES, KNOWN_ISSUE_COLORS)
     logs_df = load_chat_logs()
 except Exception as e:
     st.error(f"Supabaseからのデータ取得に失敗しました: {e}")
@@ -305,6 +308,9 @@ except Exception as e:
 if logs_df.empty:
     st.warning("chat_logs にデータがありません。")
     st.stop()
+
+if logs_df.attrs.get("unparsed_rows"):
+    st.warning(f"日時を読み取れない相談ログが {logs_df.attrs['unparsed_rows']} 件あり、集計から除外しています。")
 
 weekly_pivot, weekly_issue_pivot, cross_tab, this_week_start = build_weekly_dataset(logs_df)
 this_week_end = week_bounds(this_week_start)[1]
@@ -324,7 +330,7 @@ total_this_week = int(this_week_counts.sum())
 total_last_week = int(last_week_counts.sum())
 delta_total = total_this_week - total_last_week
 
-top_category_this_week = this_week_counts.idxmax()
+top_category_this_week = this_week_counts.drop(labels=[UNCLASSIFIED], errors="ignore").idxmax()
 
 col1, col2 = st.columns(2)
 col1.metric("今週の相談件数", f"{total_this_week} 件", delta=f"{delta_total:+d} 件（前週比）")
@@ -370,7 +376,7 @@ with sec1:
             margin=dict(l=10, r=10, t=10, b=10),
         )
         fig_bar.update_traces(textposition="outside")
-        st.plotly_chart(fig_bar, use_container_width=True)
+        st.plotly_chart(fig_bar, width="stretch")
 
     with bar_right:
         st.caption("課題別（別分類）")
@@ -395,7 +401,7 @@ with sec1:
             height=300,
             margin=dict(l=10, r=10, t=10, b=10),
         )
-        st.plotly_chart(fig_issue, use_container_width=True)
+        st.plotly_chart(fig_issue, width="stretch")
 
     st.caption("ジャンル × 課題（件数が多いマスほど濃い色）")
     fig_heatmap = px.imshow(
@@ -411,7 +417,7 @@ with sec1:
         height=320,
         margin=dict(l=10, r=10, t=10, b=10),
     )
-    st.plotly_chart(fig_heatmap, use_container_width=True)
+    st.plotly_chart(fig_heatmap, width="stretch")
 
 with sec2:
     st.subheader(f"② これまでのトレンド（直近{TREND_WEEKS}週）")
@@ -435,7 +441,7 @@ with sec2:
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
         margin=dict(l=10, r=10, t=10, b=10),
     )
-    st.plotly_chart(fig_trend, use_container_width=True)
+    st.plotly_chart(fig_trend, width="stretch")
 
     st.caption("課題別（別分類）")
     fig_trend_issue = go.Figure()
@@ -456,7 +462,7 @@ with sec2:
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
         margin=dict(l=10, r=10, t=10, b=10),
     )
-    st.plotly_chart(fig_trend_issue, use_container_width=True)
+    st.plotly_chart(fig_trend_issue, width="stretch")
 
 st.divider()
 
@@ -487,7 +493,7 @@ with st.expander(f"具体的な課題を見る（今週 {len(this_week_logs)} �
                 "category_2": "課題",
                 "issue_summary": "内容",
             }),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
             column_config={"日時": st.column_config.DatetimeColumn(format="YYYY-MM-DD HH:mm")},
         )
@@ -499,7 +505,24 @@ st.divider()
 # ----------------------------------------------------------------------------
 
 st.subheader("③ 人材マッチング")
-st.caption(f"今週最多カテゴリ「{top_category_this_week}」の課題に対する暫定支援候補（固定サンプル）")
+
+# 今週の最多ジャンルの相談要約（新しい順）を課題文として渡し、対応できる社員を探す
+top_logs = this_week_logs[this_week_logs["category_1"] == top_category_this_week]
+issue_text = "。".join(
+    top_logs.sort_values("timestamp", ascending=False)["issue_summary"].dropna().head(MATCH_SAMPLE_LOGS)
+)
+try:
+    CANDIDATES = to_ui_list(match_employees(category_1=top_category_this_week, issue_text=issue_text, top_n=MATCH_TOP_N))
+except Exception as e:
+    st.error(f"人材マッチングの実行に失敗しました: {e}")
+
+st.caption(
+    f"今週最多カテゴリ「{top_category_this_week}」の相談（{len(top_logs)}件）に対する支援候補。"
+    "スキル・業績から算出し、稼働状況は点数に含めず参考として表示します。"
+)
+
+if not CANDIDATES:
+    st.info("該当する候補者が見つかりませんでした。")
 
 for person in CANDIDATES:
     with st.container(border=True):
@@ -508,6 +531,7 @@ for person in CANDIDATES:
             st.markdown(f"**{person['name']}**")
             st.caption(f"上司: {person['manager']}")
             st.caption(f"マッチ度 {person['match_score']:.2f}")
+            st.caption(f"稼働: {person['availability']}")
         with c2:
             st.write(person["feature"])
 
@@ -525,7 +549,7 @@ st.caption(
 )
 
 if "advisor_response" not in st.session_state:
-    st.session_state["advisor_response"] = AI_ADVISOR["response"]
+    st.session_state["advisor_response"] = fallback_response()
 
 if st.button("🤖 今週の結果からAIアドバイスを生成"):
     with st.spinner("AIアドバイザーが今週の結果を分析しています..."):
@@ -537,5 +561,5 @@ with st.chat_message("assistant"):
 
 st.caption(
     "※ ジャンル・課題の集計は Supabase `chat_logs` テーブルの実データです。"
-    "人材マッチング候補のみ固定サンプルです。"
+    "人材マッチング候補は matching_engine.py が社員・スキル・業績データから算出しています。"
 )

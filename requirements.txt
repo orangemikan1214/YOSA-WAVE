@@ -1,14 +1,8 @@
-#Pythonプロジェクトで使用する外部ライブラリを指定したファイル
-streamlit
-opencv-python-headless
-pillow
-requests
-beautifulsoup4
-pandas
-python-dotenv
-openai>=1.3.5
-supabase
-tavily-python
-datetime
+# アプリで使うライブラリ（各ファイルの import から整理。下限は動作を確認した最小の版）
+streamlit>=1.51.0   # st.plotly_chart / st.dataframe の width="stretch"
+pandas>=2.0         # pd.to_datetime(format="ISO8601")
 plotly
-pydantic
+python-dotenv
+openai>=1.66.0      # 相談AIの client.responses.parse（1.65以前には無い）
+pydantic>=2
+supabase
