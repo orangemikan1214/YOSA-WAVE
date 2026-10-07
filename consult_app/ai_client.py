@@ -2,26 +2,28 @@
 
 import os
 
-from typing import Literal
+from typing import Literal, Optional
 
 from openai import OpenAI
-from pydantic import BaseModel
+from pydantic import BaseModel, create_model
 
-class AIResult(BaseModel):
-    category_1: Literal[
-        "技術検討", "人材・スキル", "他部署連携",
-        "事業戦略", "予算・リソース配分","働き方・職場環境"
-    ] | None
-    category_2: Literal[
-        "手順がわからない", "判断基準が分からない",
-        "エラー・障害", "誰に聞くか分からない",
-        "情報が見つからない", "作業代行", "課題ではない","悩み・不安", "その他の業務課題"
-    ]
-    issue_summary: str
-    answer: str
 
-def ask_ai(messages: list[dict[str, str]]) -> AIResult:
+def build_result_model(category_1_values: list[str], category_2_values: list[str]) -> type[BaseModel]:
+    """AIが返す形式を作る。ジャンル・困りごとの選択肢は、DBのマスタから渡された値だけにする。"""
+    return create_model(
+        "AIResult",
+        category_1=(Optional[Literal[tuple(category_1_values)]], ...),
+        category_2=(Literal[tuple(category_2_values)], ...),
+        issue_summary=(str, ...),
+        answer=(str, ...),
+    )
+
+
+def ask_ai(
+    messages: list[dict[str, str]], category_1_values: list[str], category_2_values: list[str]
+) -> BaseModel:
     """マスキング済み会話を渡し、回答文を返す。"""
+    AIResult = build_result_model(category_1_values, category_2_values)
     model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
     # 毎回履歴を渡すのでサーバー側の会話保存には依存しない。
     response = OpenAI(timeout=30.0, max_retries=1).responses.parse(

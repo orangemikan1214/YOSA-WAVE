@@ -11,7 +11,9 @@ FEATURE 02「人材マッチング」の中核ロジック。
 project_members / extracted_issues など）から読む。.env の SUPABASE_URL / SUPABASE_KEY が必要。
 「データ取得(_fetch / load_*)」と「スコアリング(_*_score)」は分離してある。
 
-起動方法（動作確認用。app/ フォルダで実行）:
+接続情報（.env）の読み込みは utils/service.py に任せている。
+
+起動方法（動作確認用。どのフォルダからでも実行できる）:
     python matching_engine.py
 """
 
@@ -19,14 +21,7 @@ from __future__ import annotations
 
 import time
 from dataclasses import dataclass
-from pathlib import Path
 from typing import Optional
-
-# ----------------------------------------------------------------------------
-# パス設定（.env は app/ 直下とその親フォルダの両方を探す）
-# ----------------------------------------------------------------------------
-APP_DIR = Path(__file__).resolve().parent
-ENV_CANDIDATES = [APP_DIR / ".env", APP_DIR.parent / ".env"]
 
 # ----------------------------------------------------------------------------
 # スコアリングの重み・パラメータ（チームで調整しやすいよう定数化）
@@ -127,16 +122,6 @@ def clear_cache() -> None:
 
 
 def _read_supabase(table: str) -> list[dict]:
-    try:
-        from dotenv import load_dotenv
-
-        for env_path in ENV_CANDIDATES:  # どのフォルダから起動しても .env を見つけられるようにする
-            if env_path.exists():
-                load_dotenv(env_path)
-                break
-    except ImportError:
-        pass
-
     from utils.service import get_supabase_client  # SUPABASE_URL / SUPABASE_KEY が未設定ならここで ValueError
 
     client = get_supabase_client()
