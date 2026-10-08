@@ -20,6 +20,7 @@ import plotly.graph_objects as go
 import streamlit as st
 
 from matching_engine import match_employees, to_ui_list
+from utils.auth import require_manager_login
 from utils.service import get_supabase_client
 
 try:
@@ -34,6 +35,9 @@ OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-4o-mini")
 # ----------------------------------------------------------------------------
 
 st.set_page_config(page_title="課題ダッシュボード", page_icon="📊", layout="wide")
+
+# デモ用の簡易ログイン。マネージャー以外にはダッシュボードを見せない（Supabase側の保護は別途）
+require_manager_login()
 
 st.title("📊 課題ダッシュボード")
 st.caption("相談ログ分析（FEATURE 01）｜個人・部署の粒度は表示せず、カテゴリ単位で集計。「課題ではない」と判定された相談は集計に含めない。")
