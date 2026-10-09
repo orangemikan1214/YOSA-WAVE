@@ -1,0 +1,6684 @@
+{
+ "departments": [
+  {
+   "department_name": "素材研究所"
+  },
+  {
+   "department_name": "高分子研究所"
+  },
+  {
+   "department_name": "樹脂事業部"
+  },
+  {
+   "department_name": "繊維事業部"
+  },
+  {
+   "department_name": "フィルム事業部"
+  },
+  {
+   "department_name": "機能性材料事業部"
+  },
+  {
+   "department_name": "生産技術部"
+  },
+  {
+   "department_name": "環境・サステナビリティ推進部"
+  },
+  {
+   "department_name": "知財・法務部"
+  },
+  {
+   "department_name": "海外営業部"
+  }
+ ],
+ "skill_master": [
+  {
+   "skill_id": "S23",
+   "skill_name": "再生材配合設計",
+   "related_category_1": "技術検討",
+   "keywords": "再生材;再生PET;リサイクル材;マテリアルリサイクル;強度低下"
+  },
+  {
+   "skill_id": "S24",
+   "skill_name": "難燃材料開発",
+   "related_category_1": "技術検討",
+   "keywords": "難燃;燃焼;UL94;難燃剤"
+  },
+  {
+   "skill_id": "S25",
+   "skill_name": "PFAS代替材料開発",
+   "related_category_1": "技術検討",
+   "keywords": "PFAS;フッ素;代替材料;規制対応"
+  },
+  {
+   "skill_id": "S26",
+   "skill_name": "軽量化設計",
+   "related_category_1": "技術検討",
+   "keywords": "軽量化;軽量;比重;CFRP"
+  },
+  {
+   "skill_id": "S27",
+   "skill_name": "耐熱樹脂開発",
+   "related_category_1": "技術検討",
+   "keywords": "耐熱;高温;ガラス転移"
+  },
+  {
+   "skill_id": "S28",
+   "skill_name": "高分子合成",
+   "related_category_1": "技術検討",
+   "keywords": "重合;高分子;ポリマー;分子量"
+  },
+  {
+   "skill_id": "S29",
+   "skill_name": "繊維加工技術",
+   "related_category_1": "技術検討",
+   "keywords": "繊維;紡糸;不織布;染色"
+  },
+  {
+   "skill_id": "S30",
+   "skill_name": "フィルム成形",
+   "related_category_1": "技術検討",
+   "keywords": "フィルム;押出;延伸;包装材"
+  },
+  {
+   "skill_id": "S31",
+   "skill_name": "ケミカルリサイクル",
+   "related_category_1": "技術検討",
+   "keywords": "ケミカルリサイクル;解重合;モノマー回収"
+  },
+  {
+   "skill_id": "S32",
+   "skill_name": "LCA・CO2算定",
+   "related_category_1": "技術検討",
+   "keywords": "LCA;CO2算定;カーボンフットプリント;排出量"
+  },
+  {
+   "skill_id": "S33",
+   "skill_name": "材料評価・分析",
+   "related_category_1": "技術検討",
+   "keywords": "物性評価;引張;物性分析;劣化;耐久試験"
+  },
+  {
+   "skill_id": "S34",
+   "skill_name": "成形加工",
+   "related_category_1": "技術検討",
+   "keywords": "射出成形;成形条件;ひけ;バリ"
+  },
+  {
+   "skill_id": "S35",
+   "skill_name": "スケールアップ",
+   "related_category_1": "技術検討",
+   "keywords": "スケールアップ;量産化;ラボ;パイロット"
+  },
+  {
+   "skill_id": "S36",
+   "skill_name": "化学物質規制対応",
+   "related_category_1": "他部署連携",
+   "keywords": "REACH;RoHS;化審法;SDS;規制"
+  },
+  {
+   "skill_id": "S37",
+   "skill_name": "品質規格・認証",
+   "related_category_1": "他部署連携",
+   "keywords": "規格;認証;ISO;自動車規格;IATF"
+  },
+  {
+   "skill_id": "S38",
+   "skill_name": "自動車向け技術営業",
+   "related_category_1": "事業戦略",
+   "keywords": "自動車;内装材;OEM;Tier1;車載"
+  },
+  {
+   "skill_id": "S39",
+   "skill_name": "包装・食品向け提案",
+   "related_category_1": "事業戦略",
+   "keywords": "包装;食品;バリア;ラミネート"
+  },
+  {
+   "skill_id": "S40",
+   "skill_name": "電子材料向け提案",
+   "related_category_1": "事業戦略",
+   "keywords": "電子材料;半導体;ディスプレイ"
+  },
+  {
+   "skill_id": "S41",
+   "skill_name": "用途開発",
+   "related_category_1": "事業戦略",
+   "keywords": "新用途;用途開発;顧客課題;用途提案"
+  },
+  {
+   "skill_id": "S42",
+   "skill_name": "海外顧客対応",
+   "related_category_1": "事業戦略",
+   "keywords": "海外;東南アジア;欧州;現地"
+  },
+  {
+   "skill_id": "S43",
+   "skill_name": "知財調査・出願",
+   "related_category_1": "事業戦略",
+   "keywords": "特許;先行技術;出願;FTO"
+  },
+  {
+   "skill_id": "S44",
+   "skill_name": "生産計画・調達",
+   "related_category_1": "予算・リソース配分",
+   "keywords": "原料調達;生産計画;設備投資;稼働率"
+  },
+  {
+   "skill_id": "S45",
+   "skill_name": "コスト・採算分析",
+   "related_category_1": "予算・リソース配分",
+   "keywords": "原価;採算;コスト;投資対効果"
+  },
+  {
+   "skill_id": "S46",
+   "skill_name": "研究人材育成",
+   "related_category_1": "人材・スキル",
+   "keywords": "若手研究者;技術継承;OJT;教育"
+  },
+  {
+   "skill_id": "S47",
+   "skill_name": "技術伝承",
+   "related_category_1": "人材・スキル",
+   "keywords": "ベテラン;暗黙知;ノウハウ;継承"
+  },
+  {
+   "skill_id": "S48",
+   "skill_name": "組織間調整",
+   "related_category_1": "他部署連携",
+   "keywords": "研究所;事業部;部門間;部門間調整"
+  },
+  {
+   "skill_id": "S49",
+   "skill_name": "働き方・メンタルケア",
+   "related_category_1": "働き方・職場環境",
+   "keywords": "在宅;残業;メンタル;孤独;両立"
+  },
+  {
+   "skill_id": "S50",
+   "skill_name": "データ活用（材料開発）",
+   "related_category_1": "技術検討",
+   "keywords": "マテリアルズ・インフォマティクス;実験データ;予測"
+  }
+ ],
+ "employees": [
+  {
+   "employee_id": "E021",
+   "name": "古川 真由",
+   "department": "素材研究所",
+   "position": "部長",
+   "manager_id": null,
+   "age": 52,
+   "years_of_experience": 29,
+   "employment_type": "正社員",
+   "skill1": "データ活用（材料開発）",
+   "skill1_year": 7,
+   "skill1_level": 4,
+   "skill2": "材料工学",
+   "skill2_year": 28,
+   "skill2_level": 5,
+   "certifications": "なし",
+   "hire_date": "1997-04-01"
+  },
+  {
+   "employee_id": "E022",
+   "name": "大野 沙織",
+   "department": "素材研究所",
+   "position": "主任",
+   "manager_id": "E021",
+   "age": 36,
+   "years_of_experience": 14,
+   "employment_type": "正社員",
+   "skill1": "難燃材料開発",
+   "skill1_year": 9,
+   "skill1_level": 4,
+   "skill2": "データ活用（材料開発）",
+   "skill2_year": 7,
+   "skill2_level": 4,
+   "certifications": "なし",
+   "hire_date": "2012-04-01"
+  },
+  {
+   "employee_id": "E023",
+   "name": "宮崎 雄介",
+   "department": "素材研究所",
+   "position": "一般社員",
+   "manager_id": "E021",
+   "age": 22,
+   "years_of_experience": 0,
+   "employment_type": "正社員",
+   "skill1": "材料工学",
+   "skill1_year": 0,
+   "skill1_level": 1,
+   "skill2": "難燃材料開発",
+   "skill2_year": 0,
+   "skill2_level": 2,
+   "certifications": "なし",
+   "hire_date": "2026-04-01"
+  },
+  {
+   "employee_id": "E024",
+   "name": "千葉 沙織",
+   "department": "素材研究所",
+   "position": "課長",
+   "manager_id": "E021",
+   "age": 42,
+   "years_of_experience": 18,
+   "employment_type": "正社員",
+   "skill1": "材料評価・分析",
+   "skill1_year": 11,
+   "skill1_level": 5,
+   "skill2": "材料工学",
+   "skill2_year": 4,
+   "skill2_level": 2,
+   "certifications": "なし",
+   "hire_date": "2008-04-01"
+  },
+  {
+   "employee_id": "E025",
+   "name": "平野 拓也",
+   "department": "素材研究所",
+   "position": "主任",
+   "manager_id": "E021",
+   "age": 31,
+   "years_of_experience": 9,
+   "employment_type": "正社員",
+   "skill1": "PFAS代替材料開発",
+   "skill1_year": 2,
+   "skill1_level": 2,
+   "skill2": "材料評価・分析",
+   "skill2_year": 5,
+   "skill2_level": 2,
+   "certifications": "危険物取扱者（甲種）",
+   "hire_date": "2017-04-01"
+  },
+  {
+   "employee_id": "E026",
+   "name": "遠藤 恵",
+   "department": "素材研究所",
+   "position": "主任",
+   "manager_id": "E021",
+   "age": 37,
+   "years_of_experience": 15,
+   "employment_type": "正社員",
+   "skill1": "データ活用（材料開発）",
+   "skill1_year": 12,
+   "skill1_level": 5,
+   "skill2": "材料工学",
+   "skill2_year": 3,
+   "skill2_level": 2,
+   "certifications": "なし",
+   "hire_date": "2011-04-01"
+  },
+  {
+   "employee_id": "E027",
+   "name": "前田 恵",
+   "department": "素材研究所",
+   "position": "一般社員",
+   "manager_id": "E021",
+   "age": 24,
+   "years_of_experience": 0,
+   "employment_type": "正社員",
+   "skill1": "高分子合成",
+   "skill1_year": 0,
+   "skill1_level": 1,
+   "skill2": "PFAS代替材料開発",
+   "skill2_year": 0,
+   "skill2_level": 1,
+   "certifications": "危険物取扱者（甲種）",
+   "hire_date": "2026-04-01"
+  },
+  {
+   "employee_id": "E028",
+   "name": "平野 雄介",
+   "department": "素材研究所",
+   "position": "課長",
+   "manager_id": "E021",
+   "age": 46,
+   "years_of_experience": 23,
+   "employment_type": "正社員",
+   "skill1": "難燃材料開発",
+   "skill1_year": 13,
+   "skill1_level": 4,
+   "skill2": "データ活用（材料開発）",
+   "skill2_year": 20,
+   "skill2_level": 5,
+   "certifications": "技術士（化学）",
+   "hire_date": "2003-04-01"
+  },
+  {
+   "employee_id": "E029",
+   "name": "谷口 美咲",
+   "department": "素材研究所",
+   "position": "一般社員",
+   "manager_id": "E021",
+   "age": 29,
+   "years_of_experience": 5,
+   "employment_type": "正社員",
+   "skill1": "データ活用（材料開発）",
+   "skill1_year": 4,
+   "skill1_level": 2,
+   "skill2": "再生材配合設計",
+   "skill2_year": 2,
+   "skill2_level": 1,
+   "certifications": "危険物取扱者（甲種）",
+   "hire_date": "2021-04-01"
+  },
+  {
+   "employee_id": "E030",
+   "name": "杉山 真由",
+   "department": "素材研究所",
+   "position": "主任",
+   "manager_id": "E021",
+   "age": 33,
+   "years_of_experience": 9,
+   "employment_type": "正社員",
+   "skill1": "ケミカルリサイクル",
+   "skill1_year": 2,
+   "skill1_level": 1,
+   "skill2": "高分子合成",
+   "skill2_year": 3,
+   "skill2_level": 2,
+   "certifications": "なし",
+   "hire_date": "2017-04-01"
+  },
+  {
+   "employee_id": "E031",
+   "name": "坂本 太郎",
+   "department": "高分子研究所",
+   "position": "部長",
+   "manager_id": null,
+   "age": 49,
+   "years_of_experience": 25,
+   "employment_type": "正社員",
+   "skill1": "耐熱樹脂開発",
+   "skill1_year": 25,
+   "skill1_level": 5,
+   "skill2": "スケールアップ",
+   "skill2_year": 23,
+   "skill2_level": 5,
+   "certifications": "技術士（化学）",
+   "hire_date": "2001-04-01"
+  },
+  {
+   "employee_id": "E032",
+   "name": "三浦 学",
+   "department": "高分子研究所",
+   "position": "課長",
+   "manager_id": "E031",
+   "age": 39,
+   "years_of_experience": 15,
+   "employment_type": "正社員",
+   "skill1": "PFAS代替材料開発",
+   "skill1_year": 5,
+   "skill1_level": 3,
+   "skill2": "耐熱樹脂開発",
+   "skill2_year": 4,
+   "skill2_level": 2,
+   "certifications": "なし",
+   "hire_date": "2011-04-01"
+  },
+  {
+   "employee_id": "E033",
+   "name": "近藤 涼太",
+   "department": "高分子研究所",
+   "position": "主任",
+   "manager_id": "E031",
+   "age": 30,
+   "years_of_experience": 8,
+   "employment_type": "正社員",
+   "skill1": "PFAS代替材料開発",
+   "skill1_year": 5,
+   "skill1_level": 2,
+   "skill2": "軽量化設計",
+   "skill2_year": 8,
+   "skill2_level": 4,
+   "certifications": "危険物取扱者（甲種）",
+   "hire_date": "2018-04-01"
+  },
+  {
+   "employee_id": "E034",
+   "name": "井上 香織",
+   "department": "高分子研究所",
+   "position": "課長",
+   "manager_id": "E031",
+   "age": 43,
+   "years_of_experience": 21,
+   "employment_type": "正社員",
+   "skill1": "PFAS代替材料開発",
+   "skill1_year": 9,
+   "skill1_level": 3,
+   "skill2": "スケールアップ",
+   "skill2_year": 2,
+   "skill2_level": 1,
+   "certifications": "危険物取扱者（甲種）",
+   "hire_date": "2005-04-01"
+  },
+  {
+   "employee_id": "E035",
+   "name": "中野 美穂",
+   "department": "高分子研究所",
+   "position": "一般社員",
+   "manager_id": "E031",
+   "age": 27,
+   "years_of_experience": 3,
+   "employment_type": "正社員",
+   "skill1": "PFAS代替材料開発",
+   "skill1_year": 3,
+   "skill1_level": 2,
+   "skill2": "スケールアップ",
+   "skill2_year": 3,
+   "skill2_level": 2,
+   "certifications": "なし",
+   "hire_date": "2023-04-01"
+  },
+  {
+   "employee_id": "E036",
+   "name": "坂本 香織",
+   "department": "高分子研究所",
+   "position": "一般社員",
+   "manager_id": "E031",
+   "age": 26,
+   "years_of_experience": 4,
+   "employment_type": "正社員",
+   "skill1": "高分子合成",
+   "skill1_year": 2,
+   "skill1_level": 1,
+   "skill2": "難燃材料開発",
+   "skill2_year": 3,
+   "skill2_level": 2,
+   "certifications": "なし",
+   "hire_date": "2022-04-01"
+  },
+  {
+   "employee_id": "E037",
+   "name": "太田 舞",
+   "department": "高分子研究所",
+   "position": "一般社員",
+   "manager_id": "E031",
+   "age": 23,
+   "years_of_experience": 0,
+   "employment_type": "正社員",
+   "skill1": "スケールアップ",
+   "skill1_year": 0,
+   "skill1_level": 1,
+   "skill2": "PFAS代替材料開発",
+   "skill2_year": 0,
+   "skill2_level": 1,
+   "certifications": "なし",
+   "hire_date": "2026-04-01"
+  },
+  {
+   "employee_id": "E038",
+   "name": "村上 誠",
+   "department": "高分子研究所",
+   "position": "一般社員",
+   "manager_id": "E031",
+   "age": 22,
+   "years_of_experience": 0,
+   "employment_type": "正社員",
+   "skill1": "スケールアップ",
+   "skill1_year": 0,
+   "skill1_level": 2,
+   "skill2": "難燃材料開発",
+   "skill2_year": 0,
+   "skill2_level": 2,
+   "certifications": "なし",
+   "hire_date": "2026-04-01"
+  },
+  {
+   "employee_id": "E039",
+   "name": "小野 浩二",
+   "department": "高分子研究所",
+   "position": "主任",
+   "manager_id": "E031",
+   "age": 32,
+   "years_of_experience": 10,
+   "employment_type": "正社員",
+   "skill1": "耐熱樹脂開発",
+   "skill1_year": 9,
+   "skill1_level": 4,
+   "skill2": "PFAS代替材料開発",
+   "skill2_year": 1,
+   "skill2_level": 2,
+   "certifications": "技術士（化学）",
+   "hire_date": "2016-04-01"
+  },
+  {
+   "employee_id": "E040",
+   "name": "小島 大樹",
+   "department": "高分子研究所",
+   "position": "主任",
+   "manager_id": "E031",
+   "age": 33,
+   "years_of_experience": 11,
+   "employment_type": "正社員",
+   "skill1": "材料評価・分析",
+   "skill1_year": 10,
+   "skill1_level": 5,
+   "skill2": "スケールアップ",
+   "skill2_year": 2,
+   "skill2_level": 2,
+   "certifications": "なし",
+   "hire_date": "2015-04-01"
+  },
+  {
+   "employee_id": "E041",
+   "name": "福田 直人",
+   "department": "樹脂事業部",
+   "position": "部長",
+   "manager_id": null,
+   "age": 56,
+   "years_of_experience": 32,
+   "employment_type": "正社員",
+   "skill1": "軽量化設計",
+   "skill1_year": 28,
+   "skill1_level": 5,
+   "skill2": "難燃材料開発",
+   "skill2_year": 21,
+   "skill2_level": 5,
+   "certifications": "なし",
+   "hire_date": "1994-04-01"
+  },
+  {
+   "employee_id": "E042",
+   "name": "中山 直人",
+   "department": "樹脂事業部",
+   "position": "一般社員",
+   "manager_id": "E041",
+   "age": 23,
+   "years_of_experience": 0,
+   "employment_type": "正社員",
+   "skill1": "品質規格・認証",
+   "skill1_year": 0,
+   "skill1_level": 1,
+   "skill2": "再生材配合設計",
+   "skill2_year": 0,
+   "skill2_level": 1,
+   "certifications": "危険物取扱者（甲種）",
+   "hire_date": "2026-04-01"
+  },
+  {
+   "employee_id": "E043",
+   "name": "森田 豊",
+   "department": "樹脂事業部",
+   "position": "一般社員",
+   "manager_id": "E041",
+   "age": 26,
+   "years_of_experience": 2,
+   "employment_type": "正社員",
+   "skill1": "成形加工",
+   "skill1_year": 1,
+   "skill1_level": 2,
+   "skill2": "再生材配合設計",
+   "skill2_year": 1,
+   "skill2_level": 1,
+   "certifications": "なし",
+   "hire_date": "2024-04-01"
+  },
+  {
+   "employee_id": "E044",
+   "name": "林 美穂",
+   "department": "樹脂事業部",
+   "position": "主任",
+   "manager_id": "E041",
+   "age": 38,
+   "years_of_experience": 16,
+   "employment_type": "正社員",
+   "skill1": "用途開発",
+   "skill1_year": 2,
+   "skill1_level": 1,
+   "skill2": "顧客共創(共同開発)",
+   "skill2_year": 8,
+   "skill2_level": 3,
+   "certifications": "なし",
+   "hire_date": "2010-04-01"
+  },
+  {
+   "employee_id": "E045",
+   "name": "上田 香織",
+   "department": "樹脂事業部",
+   "position": "主任",
+   "manager_id": "E041",
+   "age": 38,
+   "years_of_experience": 15,
+   "employment_type": "正社員",
+   "skill1": "自動車向け技術営業",
+   "skill1_year": 8,
+   "skill1_level": 4,
+   "skill2": "品質規格・認証",
+   "skill2_year": 3,
+   "skill2_level": 2,
+   "certifications": "なし",
+   "hire_date": "2011-04-01"
+  },
+  {
+   "employee_id": "E046",
+   "name": "柴田 美穂",
+   "department": "樹脂事業部",
+   "position": "一般社員",
+   "manager_id": "E041",
+   "age": 26,
+   "years_of_experience": 3,
+   "employment_type": "正社員",
+   "skill1": "成形加工",
+   "skill1_year": 2,
+   "skill1_level": 2,
+   "skill2": "再生材配合設計",
+   "skill2_year": 1,
+   "skill2_level": 1,
+   "certifications": "なし",
+   "hire_date": "2023-04-01"
+  },
+  {
+   "employee_id": "E047",
+   "name": "平野 亮",
+   "department": "樹脂事業部",
+   "position": "主任",
+   "manager_id": "E041",
+   "age": 32,
+   "years_of_experience": 8,
+   "employment_type": "正社員",
+   "skill1": "顧客共創(共同開発)",
+   "skill1_year": 4,
+   "skill1_level": 3,
+   "skill2": "用途開発",
+   "skill2_year": 6,
+   "skill2_level": 3,
+   "certifications": "なし",
+   "hire_date": "2018-04-01"
+  },
+  {
+   "employee_id": "E048",
+   "name": "近藤 真由",
+   "department": "樹脂事業部",
+   "position": "課長",
+   "manager_id": "E041",
+   "age": 45,
+   "years_of_experience": 21,
+   "employment_type": "正社員",
+   "skill1": "自動車向け技術営業",
+   "skill1_year": 16,
+   "skill1_level": 5,
+   "skill2": "再生材配合設計",
+   "skill2_year": 7,
+   "skill2_level": 3,
+   "certifications": "なし",
+   "hire_date": "2005-04-01"
+  },
+  {
+   "employee_id": "E049",
+   "name": "藤原 修",
+   "department": "樹脂事業部",
+   "position": "課長",
+   "manager_id": "E041",
+   "age": 48,
+   "years_of_experience": 25,
+   "employment_type": "正社員",
+   "skill1": "成形加工",
+   "skill1_year": 8,
+   "skill1_level": 4,
+   "skill2": "用途開発",
+   "skill2_year": 13,
+   "skill2_level": 5,
+   "certifications": "危険物取扱者（甲種）",
+   "hire_date": "2001-04-01"
+  },
+  {
+   "employee_id": "E050",
+   "name": "野口 直人",
+   "department": "繊維事業部",
+   "position": "部長",
+   "manager_id": null,
+   "age": 58,
+   "years_of_experience": 34,
+   "employment_type": "正社員",
+   "skill1": "技術伝承",
+   "skill1_year": 8,
+   "skill1_level": 3,
+   "skill2": "組織間調整",
+   "skill2_year": 1,
+   "skill2_level": 1,
+   "certifications": "QC検定1級",
+   "hire_date": "1992-04-01"
+  },
+  {
+   "employee_id": "E051",
+   "name": "井上 翔太",
+   "department": "繊維事業部",
+   "position": "主任",
+   "manager_id": "E050",
+   "age": 32,
+   "years_of_experience": 10,
+   "employment_type": "正社員",
+   "skill1": "ケミカルリサイクル",
+   "skill1_year": 7,
+   "skill1_level": 3,
+   "skill2": "顧客共創(共同開発)",
+   "skill2_year": 1,
+   "skill2_level": 2,
+   "certifications": "なし",
+   "hire_date": "2016-04-01"
+  },
+  {
+   "employee_id": "E052",
+   "name": "近藤 浩二",
+   "department": "繊維事業部",
+   "position": "一般社員",
+   "manager_id": "E050",
+   "age": 22,
+   "years_of_experience": 0,
+   "employment_type": "正社員",
+   "skill1": "顧客共創(共同開発)",
+   "skill1_year": 0,
+   "skill1_level": 1,
+   "skill2": "ケミカルリサイクル",
+   "skill2_year": 0,
+   "skill2_level": 2,
+   "certifications": "技術士（繊維）",
+   "hire_date": "2026-04-01"
+  },
+  {
+   "employee_id": "E053",
+   "name": "吉田 蓮",
+   "department": "繊維事業部",
+   "position": "主任",
+   "manager_id": "E050",
+   "age": 29,
+   "years_of_experience": 7,
+   "employment_type": "正社員",
+   "skill1": "再生材配合設計",
+   "skill1_year": 3,
+   "skill1_level": 2,
+   "skill2": "顧客共創(共同開発)",
+   "skill2_year": 6,
+   "skill2_level": 3,
+   "certifications": "なし",
+   "hire_date": "2019-04-01"
+  },
+  {
+   "employee_id": "E054",
+   "name": "菅原 健太郎",
+   "department": "繊維事業部",
+   "position": "主任",
+   "manager_id": "E050",
+   "age": 37,
+   "years_of_experience": 13,
+   "employment_type": "正社員",
+   "skill1": "用途開発",
+   "skill1_year": 9,
+   "skill1_level": 5,
+   "skill2": "顧客共創(共同開発)",
+   "skill2_year": 8,
+   "skill2_level": 3,
+   "certifications": "技術士（繊維）",
+   "hire_date": "2013-04-01"
+  },
+  {
+   "employee_id": "E055",
+   "name": "菅原 一郎",
+   "department": "繊維事業部",
+   "position": "課長",
+   "manager_id": "E050",
+   "age": 46,
+   "years_of_experience": 23,
+   "employment_type": "正社員",
+   "skill1": "繊維加工技術",
+   "skill1_year": 22,
+   "skill1_level": 5,
+   "skill2": "ケミカルリサイクル",
+   "skill2_year": 2,
+   "skill2_level": 1,
+   "certifications": "QC検定1級",
+   "hire_date": "2003-04-01"
+  },
+  {
+   "employee_id": "E056",
+   "name": "山崎 雄介",
+   "department": "繊維事業部",
+   "position": "課長",
+   "manager_id": "E050",
+   "age": 44,
+   "years_of_experience": 20,
+   "employment_type": "正社員",
+   "skill1": "再生材配合設計",
+   "skill1_year": 3,
+   "skill1_level": 2,
+   "skill2": "用途開発",
+   "skill2_year": 5,
+   "skill2_level": 2,
+   "certifications": "QC検定1級、技術士（繊維）",
+   "hire_date": "2006-04-01"
+  },
+  {
+   "employee_id": "E057",
+   "name": "森 陽子",
+   "department": "繊維事業部",
+   "position": "一般社員",
+   "manager_id": "E050",
+   "age": 22,
+   "years_of_experience": 0,
+   "employment_type": "正社員",
+   "skill1": "再生材配合設計",
+   "skill1_year": 0,
+   "skill1_level": 1,
+   "skill2": "材料評価・分析",
+   "skill2_year": 0,
+   "skill2_level": 1,
+   "certifications": "技術士（繊維）",
+   "hire_date": "2026-04-01"
+  },
+  {
+   "employee_id": "E058",
+   "name": "竹内 彩",
+   "department": "繊維事業部",
+   "position": "一般社員",
+   "manager_id": "E050",
+   "age": 28,
+   "years_of_experience": 6,
+   "employment_type": "正社員",
+   "skill1": "顧客共創(共同開発)",
+   "skill1_year": 2,
+   "skill1_level": 1,
+   "skill2": "用途開発",
+   "skill2_year": 5,
+   "skill2_level": 1,
+   "certifications": "QC検定1級",
+   "hire_date": "2020-04-01"
+  },
+  {
+   "employee_id": "E059",
+   "name": "吉田 祐子",
+   "department": "フィルム事業部",
+   "position": "部長",
+   "manager_id": null,
+   "age": 50,
+   "years_of_experience": 28,
+   "employment_type": "正社員",
+   "skill1": "用途開発",
+   "skill1_year": 24,
+   "skill1_level": 5,
+   "skill2": "材料評価・分析",
+   "skill2_year": 17,
+   "skill2_level": 5,
+   "certifications": "なし",
+   "hire_date": "1998-04-01"
+  },
+  {
+   "employee_id": "E060",
+   "name": "内田 亮",
+   "department": "フィルム事業部",
+   "position": "主任",
+   "manager_id": "E059",
+   "age": 34,
+   "years_of_experience": 11,
+   "employment_type": "正社員",
+   "skill1": "包装・食品向け提案",
+   "skill1_year": 11,
+   "skill1_level": 5,
+   "skill2": "フィルム成形",
+   "skill2_year": 10,
+   "skill2_level": 4,
+   "certifications": "高圧ガス製造保安責任者",
+   "hire_date": "2015-04-01"
+  },
+  {
+   "employee_id": "E061",
+   "name": "福田 誠",
+   "department": "フィルム事業部",
+   "position": "主任",
+   "manager_id": "E059",
+   "age": 29,
+   "years_of_experience": 7,
+   "employment_type": "正社員",
+   "skill1": "包装・食品向け提案",
+   "skill1_year": 6,
+   "skill1_level": 3,
+   "skill2": "フィルム成形",
+   "skill2_year": 3,
+   "skill2_level": 2,
+   "certifications": "なし",
+   "hire_date": "2019-04-01"
+  },
+  {
+   "employee_id": "E062",
+   "name": "木村 千尋",
+   "department": "フィルム事業部",
+   "position": "主任",
+   "manager_id": "E059",
+   "age": 33,
+   "years_of_experience": 9,
+   "employment_type": "正社員",
+   "skill1": "包装・食品向け提案",
+   "skill1_year": 2,
+   "skill1_level": 1,
+   "skill2": "PFAS代替材料開発",
+   "skill2_year": 8,
+   "skill2_level": 3,
+   "certifications": "QC検定1級",
+   "hire_date": "2017-04-01"
+  },
+  {
+   "employee_id": "E063",
+   "name": "福田 裕子",
+   "department": "フィルム事業部",
+   "position": "課長",
+   "manager_id": "E059",
+   "age": 45,
+   "years_of_experience": 21,
+   "employment_type": "正社員",
+   "skill1": "組織間調整",
+   "skill1_year": 13,
+   "skill1_level": 5,
+   "skill2": "用途開発",
+   "skill2_year": 4,
+   "skill2_level": 3,
+   "certifications": "なし",
+   "hire_date": "2005-04-01"
+  },
+  {
+   "employee_id": "E064",
+   "name": "阿部 里奈",
+   "department": "フィルム事業部",
+   "position": "一般社員",
+   "manager_id": "E059",
+   "age": 25,
+   "years_of_experience": 2,
+   "employment_type": "正社員",
+   "skill1": "包装・食品向け提案",
+   "skill1_year": 1,
+   "skill1_level": 1,
+   "skill2": "電子材料向け提案",
+   "skill2_year": 2,
+   "skill2_level": 1,
+   "certifications": "QC検定1級",
+   "hire_date": "2024-04-01"
+  },
+  {
+   "employee_id": "E065",
+   "name": "藤井 一郎",
+   "department": "フィルム事業部",
+   "position": "一般社員",
+   "manager_id": "E059",
+   "age": 27,
+   "years_of_experience": 3,
+   "employment_type": "契約社員",
+   "skill1": "PFAS代替材料開発",
+   "skill1_year": 2,
+   "skill1_level": 1,
+   "skill2": "包装・食品向け提案",
+   "skill2_year": 3,
+   "skill2_level": 3,
+   "certifications": "なし",
+   "hire_date": "2023-04-01"
+  },
+  {
+   "employee_id": "E066",
+   "name": "井上 和也",
+   "department": "機能性材料事業部",
+   "position": "部長",
+   "manager_id": null,
+   "age": 53,
+   "years_of_experience": 29,
+   "employment_type": "正社員",
+   "skill1": "技術伝承",
+   "skill1_year": 4,
+   "skill1_level": 2,
+   "skill2": "電子材料向け提案",
+   "skill2_year": 23,
+   "skill2_level": 5,
+   "certifications": "TOEIC900",
+   "hire_date": "1997-04-01"
+  },
+  {
+   "employee_id": "E067",
+   "name": "青木 美咲",
+   "department": "機能性材料事業部",
+   "position": "一般社員",
+   "manager_id": "E066",
+   "age": 24,
+   "years_of_experience": 2,
+   "employment_type": "正社員",
+   "skill1": "軽量化設計",
+   "skill1_year": 2,
+   "skill1_level": 1,
+   "skill2": "材料評価・分析",
+   "skill2_year": 2,
+   "skill2_level": 1,
+   "certifications": "なし",
+   "hire_date": "2024-04-01"
+  },
+  {
+   "employee_id": "E068",
+   "name": "松本 学",
+   "department": "機能性材料事業部",
+   "position": "一般社員",
+   "manager_id": "E066",
+   "age": 29,
+   "years_of_experience": 6,
+   "employment_type": "契約社員",
+   "skill1": "軽量化設計",
+   "skill1_year": 4,
+   "skill1_level": 1,
+   "skill2": "高分子合成",
+   "skill2_year": 5,
+   "skill2_level": 2,
+   "certifications": "技術士（化学）",
+   "hire_date": "2020-04-01"
+  },
+  {
+   "employee_id": "E069",
+   "name": "工藤 健太郎",
+   "department": "機能性材料事業部",
+   "position": "主任",
+   "manager_id": "E066",
+   "age": 30,
+   "years_of_experience": 8,
+   "employment_type": "正社員",
+   "skill1": "材料評価・分析",
+   "skill1_year": 4,
+   "skill1_level": 2,
+   "skill2": "電子材料向け提案",
+   "skill2_year": 6,
+   "skill2_level": 3,
+   "certifications": "技術士（化学）",
+   "hire_date": "2018-04-01"
+  },
+  {
+   "employee_id": "E070",
+   "name": "小島 康平",
+   "department": "機能性材料事業部",
+   "position": "一般社員",
+   "manager_id": "E066",
+   "age": 23,
+   "years_of_experience": 1,
+   "employment_type": "正社員",
+   "skill1": "耐熱樹脂開発",
+   "skill1_year": 1,
+   "skill1_level": 1,
+   "skill2": "顧客共創(共同開発)",
+   "skill2_year": 1,
+   "skill2_level": 1,
+   "certifications": "なし",
+   "hire_date": "2025-04-01"
+  },
+  {
+   "employee_id": "E071",
+   "name": "坂本 舞",
+   "department": "機能性材料事業部",
+   "position": "課長",
+   "manager_id": "E066",
+   "age": 42,
+   "years_of_experience": 18,
+   "employment_type": "正社員",
+   "skill1": "組織間調整",
+   "skill1_year": 11,
+   "skill1_level": 5,
+   "skill2": "研究人材育成",
+   "skill2_year": 3,
+   "skill2_level": 1,
+   "certifications": "TOEIC900",
+   "hire_date": "2008-04-01"
+  },
+  {
+   "employee_id": "E072",
+   "name": "和田 航",
+   "department": "機能性材料事業部",
+   "position": "一般社員",
+   "manager_id": "E066",
+   "age": 29,
+   "years_of_experience": 5,
+   "employment_type": "正社員",
+   "skill1": "用途開発",
+   "skill1_year": 1,
+   "skill1_level": 1,
+   "skill2": "軽量化設計",
+   "skill2_year": 1,
+   "skill2_level": 1,
+   "certifications": "なし",
+   "hire_date": "2021-04-01"
+  },
+  {
+   "employee_id": "E073",
+   "name": "野口 和也",
+   "department": "技術本部",
+   "position": "一般社員",
+   "manager_id": "E006",
+   "age": 26,
+   "years_of_experience": 4,
+   "employment_type": "正社員",
+   "skill1": "組織間調整",
+   "skill1_year": 4,
+   "skill1_level": 2,
+   "skill2": "データ活用（材料開発）",
+   "skill2_year": 3,
+   "skill2_level": 2,
+   "certifications": "統計検定2級",
+   "hire_date": "2022-04-01"
+  },
+  {
+   "employee_id": "E074",
+   "name": "岡本 麻衣",
+   "department": "生産技術部",
+   "position": "部長",
+   "manager_id": null,
+   "age": 48,
+   "years_of_experience": 25,
+   "employment_type": "正社員",
+   "skill1": "成形加工",
+   "skill1_year": 15,
+   "skill1_level": 5,
+   "skill2": "AI・機械学習",
+   "skill2_year": 6,
+   "skill2_level": 3,
+   "certifications": "なし",
+   "hire_date": "2001-04-01"
+  },
+  {
+   "employee_id": "E075",
+   "name": "清水 裕子",
+   "department": "生産技術部",
+   "position": "一般社員",
+   "manager_id": "E074",
+   "age": 25,
+   "years_of_experience": 1,
+   "employment_type": "正社員",
+   "skill1": "コスト・採算分析",
+   "skill1_year": 1,
+   "skill1_level": 2,
+   "skill2": "品質マネジメント",
+   "skill2_year": 1,
+   "skill2_level": 1,
+   "certifications": "なし",
+   "hire_date": "2025-04-01"
+  },
+  {
+   "employee_id": "E076",
+   "name": "斎藤 隆",
+   "department": "生産技術部",
+   "position": "主任",
+   "manager_id": "E074",
+   "age": 31,
+   "years_of_experience": 8,
+   "employment_type": "正社員",
+   "skill1": "生産計画・調達",
+   "skill1_year": 7,
+   "skill1_level": 3,
+   "skill2": "AI・機械学習",
+   "skill2_year": 6,
+   "skill2_level": 3,
+   "certifications": "なし",
+   "hire_date": "2018-04-01"
+  },
+  {
+   "employee_id": "E077",
+   "name": "中島 奈々",
+   "department": "生産技術部",
+   "position": "一般社員",
+   "manager_id": "E074",
+   "age": 29,
+   "years_of_experience": 5,
+   "employment_type": "正社員",
+   "skill1": "スケールアップ",
+   "skill1_year": 5,
+   "skill1_level": 2,
+   "skill2": "成形加工",
+   "skill2_year": 3,
+   "skill2_level": 3,
+   "certifications": "高圧ガス製造保安責任者",
+   "hire_date": "2021-04-01"
+  },
+  {
+   "employee_id": "E078",
+   "name": "岡田 愛",
+   "department": "生産技術部",
+   "position": "主任",
+   "manager_id": "E074",
+   "age": 31,
+   "years_of_experience": 8,
+   "employment_type": "正社員",
+   "skill1": "コスト・採算分析",
+   "skill1_year": 7,
+   "skill1_level": 2,
+   "skill2": "成形加工",
+   "skill2_year": 7,
+   "skill2_level": 3,
+   "certifications": "高圧ガス製造保安責任者、衛生管理者",
+   "hire_date": "2018-04-01"
+  },
+  {
+   "employee_id": "E079",
+   "name": "後藤 愛",
+   "department": "生産技術部",
+   "position": "課長",
+   "manager_id": "E074",
+   "age": 41,
+   "years_of_experience": 18,
+   "employment_type": "正社員",
+   "skill1": "コスト・採算分析",
+   "skill1_year": 3,
+   "skill1_level": 3,
+   "skill2": "成形加工",
+   "skill2_year": 15,
+   "skill2_level": 5,
+   "certifications": "衛生管理者",
+   "hire_date": "2008-04-01"
+  },
+  {
+   "employee_id": "E080",
+   "name": "石井 学",
+   "department": "営業本部",
+   "position": "課長",
+   "manager_id": "E011",
+   "age": 38,
+   "years_of_experience": 15,
+   "employment_type": "正社員",
+   "skill1": "市場調査",
+   "skill1_year": 10,
+   "skill1_level": 4,
+   "skill2": "大口顧客折衝",
+   "skill2_year": 3,
+   "skill2_level": 2,
+   "certifications": "MBA",
+   "hire_date": "2011-04-01"
+  },
+  {
+   "employee_id": "E081",
+   "name": "西村 涼太",
+   "department": "営業本部",
+   "position": "一般社員",
+   "manager_id": "E011",
+   "age": 23,
+   "years_of_experience": 1,
+   "employment_type": "正社員",
+   "skill1": "自動車向け技術営業",
+   "skill1_year": 1,
+   "skill1_level": 1,
+   "skill2": "電子材料向け提案",
+   "skill2_year": 1,
+   "skill2_level": 1,
+   "certifications": "なし",
+   "hire_date": "2025-04-01"
+  },
+  {
+   "employee_id": "E082",
+   "name": "岡本 健太郎",
+   "department": "営業本部",
+   "position": "一般社員",
+   "manager_id": "E011",
+   "age": 27,
+   "years_of_experience": 4,
+   "employment_type": "正社員",
+   "skill1": "大口顧客折衝",
+   "skill1_year": 3,
+   "skill1_level": 1,
+   "skill2": "電子材料向け提案",
+   "skill2_year": 1,
+   "skill2_level": 1,
+   "certifications": "MBA、TOEIC900",
+   "hire_date": "2022-04-01"
+  },
+  {
+   "employee_id": "E083",
+   "name": "谷口 葵",
+   "department": "営業本部",
+   "position": "主任",
+   "manager_id": "E011",
+   "age": 30,
+   "years_of_experience": 7,
+   "employment_type": "正社員",
+   "skill1": "市場調査",
+   "skill1_year": 5,
+   "skill1_level": 2,
+   "skill2": "大口顧客折衝",
+   "skill2_year": 3,
+   "skill2_level": 1,
+   "certifications": "TOEIC900",
+   "hire_date": "2019-04-01"
+  },
+  {
+   "employee_id": "E084",
+   "name": "小島 美穂",
+   "department": "海外営業部",
+   "position": "課長",
+   "manager_id": null,
+   "age": 46,
+   "years_of_experience": 24,
+   "employment_type": "正社員",
+   "skill1": "海外顧客対応",
+   "skill1_year": 16,
+   "skill1_level": 5,
+   "skill2": "海外市場開拓",
+   "skill2_year": 4,
+   "skill2_level": 3,
+   "certifications": "中国語検定",
+   "hire_date": "2002-04-01"
+  },
+  {
+   "employee_id": "E085",
+   "name": "大野 一郎",
+   "department": "海外営業部",
+   "position": "一般社員",
+   "manager_id": "E084",
+   "age": 26,
+   "years_of_experience": 2,
+   "employment_type": "正社員",
+   "skill1": "海外顧客対応",
+   "skill1_year": 2,
+   "skill1_level": 2,
+   "skill2": "海外市場開拓",
+   "skill2_year": 2,
+   "skill2_level": 1,
+   "certifications": "中国語検定、MBA",
+   "hire_date": "2024-04-01"
+  },
+  {
+   "employee_id": "E086",
+   "name": "岡本 悠斗",
+   "department": "海外営業部",
+   "position": "主任",
+   "manager_id": "E084",
+   "age": 36,
+   "years_of_experience": 13,
+   "employment_type": "正社員",
+   "skill1": "語学(英/中)",
+   "skill1_year": 11,
+   "skill1_level": 4,
+   "skill2": "大口顧客折衝",
+   "skill2_year": 6,
+   "skill2_level": 3,
+   "certifications": "MBA",
+   "hire_date": "2013-04-01"
+  },
+  {
+   "employee_id": "E087",
+   "name": "阿部 修",
+   "department": "海外営業部",
+   "position": "一般社員",
+   "manager_id": "E084",
+   "age": 25,
+   "years_of_experience": 3,
+   "employment_type": "正社員",
+   "skill1": "大口顧客折衝",
+   "skill1_year": 2,
+   "skill1_level": 2,
+   "skill2": "語学(英/中)",
+   "skill2_year": 1,
+   "skill2_level": 1,
+   "certifications": "なし",
+   "hire_date": "2023-04-01"
+  },
+  {
+   "employee_id": "E088",
+   "name": "宮本 恵",
+   "department": "海外営業部",
+   "position": "主任",
+   "manager_id": "E084",
+   "age": 29,
+   "years_of_experience": 5,
+   "employment_type": "正社員",
+   "skill1": "海外市場開拓",
+   "skill1_year": 3,
+   "skill1_level": 2,
+   "skill2": "化学物質規制対応",
+   "skill2_year": 1,
+   "skill2_level": 1,
+   "certifications": "TOEIC900、中国語検定",
+   "hire_date": "2021-04-01"
+  },
+  {
+   "employee_id": "E089",
+   "name": "上田 祐子",
+   "department": "品質保証部",
+   "position": "一般社員",
+   "manager_id": "E015",
+   "age": 29,
+   "years_of_experience": 6,
+   "employment_type": "正社員",
+   "skill1": "品質規格・認証",
+   "skill1_year": 4,
+   "skill1_level": 3,
+   "skill2": "化学物質規制対応",
+   "skill2_year": 5,
+   "skill2_level": 2,
+   "certifications": "なし",
+   "hire_date": "2020-04-01"
+  },
+  {
+   "employee_id": "E090",
+   "name": "小林 奈々",
+   "department": "品質保証部",
+   "position": "一般社員",
+   "manager_id": "E015",
+   "age": 24,
+   "years_of_experience": 1,
+   "employment_type": "正社員",
+   "skill1": "化学物質規制対応",
+   "skill1_year": 1,
+   "skill1_level": 1,
+   "skill2": "材料評価・分析",
+   "skill2_year": 1,
+   "skill2_level": 1,
+   "certifications": "なし",
+   "hire_date": "2025-04-01"
+  },
+  {
+   "employee_id": "E091",
+   "name": "河野 雄介",
+   "department": "環境・サステナビリティ推進部",
+   "position": "課長",
+   "manager_id": null,
+   "age": 42,
+   "years_of_experience": 20,
+   "employment_type": "正社員",
+   "skill1": "化学物質規制対応",
+   "skill1_year": 15,
+   "skill1_level": 5,
+   "skill2": "LCA・CO2算定",
+   "skill2_year": 20,
+   "skill2_level": 5,
+   "certifications": "公害防止管理者",
+   "hire_date": "2006-04-01"
+  },
+  {
+   "employee_id": "E092",
+   "name": "太田 雄介",
+   "department": "環境・サステナビリティ推進部",
+   "position": "一般社員",
+   "manager_id": "E091",
+   "age": 29,
+   "years_of_experience": 6,
+   "employment_type": "正社員",
+   "skill1": "化学物質規制対応",
+   "skill1_year": 4,
+   "skill1_level": 3,
+   "skill2": "ケミカルリサイクル",
+   "skill2_year": 3,
+   "skill2_level": 2,
+   "certifications": "なし",
+   "hire_date": "2020-04-01"
+  },
+  {
+   "employee_id": "E093",
+   "name": "河野 直人",
+   "department": "環境・サステナビリティ推進部",
+   "position": "主任",
+   "manager_id": "E091",
+   "age": 36,
+   "years_of_experience": 14,
+   "employment_type": "正社員",
+   "skill1": "化学物質規制対応",
+   "skill1_year": 9,
+   "skill1_level": 4,
+   "skill2": "ケミカルリサイクル",
+   "skill2_year": 2,
+   "skill2_level": 1,
+   "certifications": "なし",
+   "hire_date": "2012-04-01"
+  },
+  {
+   "employee_id": "E094",
+   "name": "今井 奈々",
+   "department": "環境・サステナビリティ推進部",
+   "position": "一般社員",
+   "manager_id": "E091",
+   "age": 28,
+   "years_of_experience": 4,
+   "employment_type": "正社員",
+   "skill1": "ケミカルリサイクル",
+   "skill1_year": 4,
+   "skill1_level": 1,
+   "skill2": "組織間調整",
+   "skill2_year": 1,
+   "skill2_level": 1,
+   "certifications": "なし",
+   "hire_date": "2022-04-01"
+  },
+  {
+   "employee_id": "E095",
+   "name": "宮本 葵",
+   "department": "知財・法務部",
+   "position": "課長",
+   "manager_id": null,
+   "age": 42,
+   "years_of_experience": 20,
+   "employment_type": "正社員",
+   "skill1": "化学物質規制対応",
+   "skill1_year": 8,
+   "skill1_level": 3,
+   "skill2": "知財戦略",
+   "skill2_year": 20,
+   "skill2_level": 5,
+   "certifications": "弁理士",
+   "hire_date": "2006-04-01"
+  },
+  {
+   "employee_id": "E096",
+   "name": "石川 結衣",
+   "department": "知財・法務部",
+   "position": "一般社員",
+   "manager_id": "E095",
+   "age": 29,
+   "years_of_experience": 5,
+   "employment_type": "契約社員",
+   "skill1": "知財調査・出願",
+   "skill1_year": 2,
+   "skill1_level": 1,
+   "skill2": "知財戦略",
+   "skill2_year": 2,
+   "skill2_level": 1,
+   "certifications": "なし",
+   "hire_date": "2021-04-01"
+  },
+  {
+   "employee_id": "E097",
+   "name": "藤田 智也",
+   "department": "知財・法務部",
+   "position": "一般社員",
+   "manager_id": "E095",
+   "age": 24,
+   "years_of_experience": 2,
+   "employment_type": "正社員",
+   "skill1": "知財調査・出願",
+   "skill1_year": 2,
+   "skill1_level": 1,
+   "skill2": "事業提携交渉",
+   "skill2_year": 2,
+   "skill2_level": 1,
+   "certifications": "なし",
+   "hire_date": "2024-04-01"
+  },
+  {
+   "employee_id": "E098",
+   "name": "千葉 隆",
+   "department": "DX推進部",
+   "position": "課長",
+   "manager_id": null,
+   "age": 48,
+   "years_of_experience": 24,
+   "employment_type": "正社員",
+   "skill1": "AI・機械学習",
+   "skill1_year": 1,
+   "skill1_level": 1,
+   "skill2": "UXデザイン",
+   "skill2_year": 24,
+   "skill2_level": 5,
+   "certifications": "統計検定1級",
+   "hire_date": "2002-04-01"
+  },
+  {
+   "employee_id": "E099",
+   "name": "山口 航",
+   "department": "DX推進部",
+   "position": "主任",
+   "manager_id": "E098",
+   "age": 34,
+   "years_of_experience": 10,
+   "employment_type": "正社員",
+   "skill1": "データ分析",
+   "skill1_year": 10,
+   "skill1_level": 4,
+   "skill2": "IoTセンサー開発",
+   "skill2_year": 2,
+   "skill2_level": 1,
+   "certifications": "統計検定2級",
+   "hire_date": "2016-04-01"
+  },
+  {
+   "employee_id": "E100",
+   "name": "前田 健一",
+   "department": "DX推進部",
+   "position": "一般社員",
+   "manager_id": "E098",
+   "age": 29,
+   "years_of_experience": 5,
+   "employment_type": "正社員",
+   "skill1": "IoTセンサー開発",
+   "skill1_year": 1,
+   "skill1_level": 1,
+   "skill2": "AI・機械学習",
+   "skill2_year": 4,
+   "skill2_level": 2,
+   "certifications": "なし",
+   "hire_date": "2021-04-01"
+  }
+ ],
+ "performance_records": [
+  {
+   "record_id": "P041",
+   "employee_id": "E021",
+   "fiscal_year": 2024,
+   "performance_rating": "C",
+   "point": 85.0,
+   "key_project": "予測の評価手法の確立",
+   "comment": "マテリアルズ・インフォマティクスの知見を共有し推進"
+  },
+  {
+   "record_id": "P042",
+   "employee_id": "E021",
+   "fiscal_year": 2025,
+   "performance_rating": "C",
+   "point": 84.0,
+   "key_project": "新素材の量産立上げ",
+   "comment": "材料の検証を主導し成果を上げた"
+  },
+  {
+   "record_id": "P043",
+   "employee_id": "E022",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 92.0,
+   "key_project": "ハロゲンフリー難燃剤の評価",
+   "comment": "燃焼試験を主導し顧客認証を取得"
+  },
+  {
+   "record_id": "P044",
+   "employee_id": "E022",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 106.0,
+   "key_project": "マテリアルズ・インフォマティクスの量産立上げ",
+   "comment": "実験データの検証を主導し成果を上げた"
+  },
+  {
+   "record_id": "P045",
+   "employee_id": "E023",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 96.0,
+   "key_project": "素材に関する改善プロジェクト",
+   "comment": "素材で関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P046",
+   "employee_id": "E023",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 103.0,
+   "key_project": "マテリアルズ・インフォマティクスの量産立上げ",
+   "comment": "マテリアルズ・インフォマティクスの検証を主導し成果を上げた"
+  },
+  {
+   "record_id": "P047",
+   "employee_id": "E024",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 105.0,
+   "key_project": "耐久試験に関する改善プロジェクト",
+   "comment": "引張の検証を主導し成果を上げた"
+  },
+  {
+   "record_id": "P048",
+   "employee_id": "E024",
+   "fiscal_year": 2025,
+   "performance_rating": "S",
+   "point": 110.0,
+   "key_project": "耐久試験対応の顧客別検証",
+   "comment": "引張の検証を主導し成果を上げた"
+  },
+  {
+   "record_id": "P049",
+   "employee_id": "E025",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 99.0,
+   "key_project": "PFAS規制対応の代替材料選定",
+   "comment": "規制対応を前倒しで完了し顧客から高評価"
+  },
+  {
+   "record_id": "P050",
+   "employee_id": "E025",
+   "fiscal_year": 2025,
+   "performance_rating": "C",
+   "point": 81.0,
+   "key_project": "物性評価の評価手法の確立",
+   "comment": "物性分析に関して一部で遅延が出たが改善"
+  },
+  {
+   "record_id": "P051",
+   "employee_id": "E026",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 108.0,
+   "key_project": "実験データの社内標準化",
+   "comment": "予測で関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P052",
+   "employee_id": "E026",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 95.0,
+   "key_project": "材料対応の顧客別検証",
+   "comment": "歩留まりで関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P053",
+   "employee_id": "E027",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 92.0,
+   "key_project": "ポリマーの評価手法の確立",
+   "comment": "高分子の知見を共有し推進"
+  },
+  {
+   "record_id": "P054",
+   "employee_id": "E027",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 104.0,
+   "key_project": "ポリマーの量産立上げ",
+   "comment": "分子量で関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P055",
+   "employee_id": "E028",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 93.0,
+   "key_project": "ハロゲンフリー難燃剤の評価",
+   "comment": "燃焼試験を主導し顧客認証を取得"
+  },
+  {
+   "record_id": "P056",
+   "employee_id": "E028",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 101.0,
+   "key_project": "実験データ対応の顧客別検証",
+   "comment": "マテリアルズ・インフォマティクスの課題に対し粘り強く取り組み達成"
+  },
+  {
+   "record_id": "P057",
+   "employee_id": "E029",
+   "fiscal_year": 2024,
+   "performance_rating": "C",
+   "point": 85.0,
+   "key_project": "マテリアルズ・インフォマティクスに関する改善プロジェクト",
+   "comment": "マテリアルズ・インフォマティクスで関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P058",
+   "employee_id": "E029",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 103.0,
+   "key_project": "再生PET繊維の強度改善",
+   "comment": "配合見直しで引張強度の低下を抑え量産化に貢献"
+  },
+  {
+   "record_id": "P059",
+   "employee_id": "E030",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 99.0,
+   "key_project": "使用済みPETの解重合検討",
+   "comment": "プロセス条件を確立し事業化検討に貢献"
+  },
+  {
+   "record_id": "P060",
+   "employee_id": "E030",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 108.0,
+   "key_project": "分子量の量産立上げ",
+   "comment": "重合に関して一部で遅延が出たが改善"
+  },
+  {
+   "record_id": "P061",
+   "employee_id": "E031",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 105.0,
+   "key_project": "ガラス転移の量産立上げ",
+   "comment": "高温の課題に対し粘り強く取り組み達成"
+  },
+  {
+   "record_id": "P062",
+   "employee_id": "E031",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 99.0,
+   "key_project": "ガラス転移の量産立上げ",
+   "comment": "高温の知見を共有し推進"
+  },
+  {
+   "record_id": "P063",
+   "employee_id": "E032",
+   "fiscal_year": 2024,
+   "performance_rating": "D",
+   "point": 75.0,
+   "key_project": "PFASフリー撥水コーティング開発",
+   "comment": "フッ素を使わない代替材料で顧客評価を達成"
+  },
+  {
+   "record_id": "P064",
+   "employee_id": "E032",
+   "fiscal_year": 2025,
+   "performance_rating": "D",
+   "point": 75.0,
+   "key_project": "PFASフリー撥水コーティング開発",
+   "comment": "フッ素を使わない代替材料で顧客評価を達成"
+  },
+  {
+   "record_id": "P065",
+   "employee_id": "E033",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 94.0,
+   "key_project": "PFASフリー撥水コーティング開発",
+   "comment": "フッ素を使わない代替材料で顧客評価を達成"
+  },
+  {
+   "record_id": "P066",
+   "employee_id": "E033",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 102.0,
+   "key_project": "CFRP複合材の軽量化検証",
+   "comment": "軽量化目標を超過達成"
+  },
+  {
+   "record_id": "P067",
+   "employee_id": "E034",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 95.0,
+   "key_project": "PFAS規制対応の代替材料選定",
+   "comment": "規制対応を前倒しで完了し顧客から高評価"
+  },
+  {
+   "record_id": "P068",
+   "employee_id": "E034",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 94.0,
+   "key_project": "分子量の社内標準化",
+   "comment": "高分子の課題に対し粘り強く取り組み達成"
+  },
+  {
+   "record_id": "P069",
+   "employee_id": "E035",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 101.0,
+   "key_project": "PFAS規制対応の代替材料選定",
+   "comment": "規制対応を前倒しで完了し顧客から高評価"
+  },
+  {
+   "record_id": "P070",
+   "employee_id": "E035",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 99.0,
+   "key_project": "量産化対応の顧客別検証",
+   "comment": "パイロットの課題に対し粘り強く取り組み達成"
+  },
+  {
+   "record_id": "P071",
+   "employee_id": "E036",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 90.0,
+   "key_project": "ポリマーの量産立上げ",
+   "comment": "重合の知見を共有し推進"
+  },
+  {
+   "record_id": "P072",
+   "employee_id": "E036",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 106.0,
+   "key_project": "ハロゲンフリー難燃剤の評価",
+   "comment": "燃焼試験を主導し顧客認証を取得"
+  },
+  {
+   "record_id": "P073",
+   "employee_id": "E037",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 95.0,
+   "key_project": "ラボの評価手法の確立",
+   "comment": "ラボで関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P074",
+   "employee_id": "E037",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 100.0,
+   "key_project": "PFASフリー撥水コーティング開発",
+   "comment": "フッ素を使わない代替材料で顧客評価を達成"
+  },
+  {
+   "record_id": "P075",
+   "employee_id": "E038",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 96.0,
+   "key_project": "パイロットの社内標準化",
+   "comment": "量産化に関して一部で遅延が出たが改善"
+  },
+  {
+   "record_id": "P076",
+   "employee_id": "E038",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 101.0,
+   "key_project": "ラボの社内標準化",
+   "comment": "スケールアップに関して一部で遅延が出たが改善"
+  },
+  {
+   "record_id": "P077",
+   "employee_id": "E039",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 109.0,
+   "key_project": "ガラス転移に関する改善プロジェクト",
+   "comment": "耐熱で関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P078",
+   "employee_id": "E039",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 97.0,
+   "key_project": "PFAS規制対応の代替材料選定",
+   "comment": "規制対応を前倒しで完了し顧客から高評価"
+  },
+  {
+   "record_id": "P079",
+   "employee_id": "E040",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 94.0,
+   "key_project": "引張の量産立上げ",
+   "comment": "引張に関して一部で遅延が出たが改善"
+  },
+  {
+   "record_id": "P080",
+   "employee_id": "E040",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 93.0,
+   "key_project": "自動車内装材の軽量化プロジェクト",
+   "comment": "比重を下げつつ強度を確保し量産採用"
+  },
+  {
+   "record_id": "P081",
+   "employee_id": "E041",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 94.0,
+   "key_project": "CFRP複合材の軽量化検証",
+   "comment": "軽量化目標を超過達成"
+  },
+  {
+   "record_id": "P082",
+   "employee_id": "E041",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 95.0,
+   "key_project": "CFRP複合材の軽量化検証",
+   "comment": "軽量化目標を超過達成"
+  },
+  {
+   "record_id": "P083",
+   "employee_id": "E042",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 95.0,
+   "key_project": "自動車規格の社内標準化",
+   "comment": "規格の知見を共有し推進"
+  },
+  {
+   "record_id": "P084",
+   "employee_id": "E042",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 90.0,
+   "key_project": "再生材グレードの品質安定化",
+   "comment": "ロット間のばらつきを抑える配合基準を確立"
+  },
+  {
+   "record_id": "P085",
+   "employee_id": "E043",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 95.0,
+   "key_project": "ひけの評価手法の確立",
+   "comment": "ひけに関して一部で遅延が出たが改善"
+  },
+  {
+   "record_id": "P086",
+   "employee_id": "E043",
+   "fiscal_year": 2025,
+   "performance_rating": "D",
+   "point": 71.0,
+   "key_project": "再生材グレードの品質安定化",
+   "comment": "ロット間のばらつきを抑える配合基準を確立"
+  },
+  {
+   "record_id": "P087",
+   "employee_id": "E044",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 90.0,
+   "key_project": "顧客課題対応の顧客別検証",
+   "comment": "用途開発の知見を共有し推進"
+  },
+  {
+   "record_id": "P088",
+   "employee_id": "E044",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 101.0,
+   "key_project": "用途開発対応の顧客別検証",
+   "comment": "用途開発の課題に対し粘り強く取り組み達成"
+  },
+  {
+   "record_id": "P089",
+   "employee_id": "E045",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 105.0,
+   "key_project": "自動車内装材の新規受注",
+   "comment": "Tier1との技術折衝を主導し新規契約を獲得"
+  },
+  {
+   "record_id": "P090",
+   "employee_id": "E045",
+   "fiscal_year": 2025,
+   "performance_rating": "D",
+   "point": 72.0,
+   "key_project": "自動車規格の社内標準化",
+   "comment": "自動車規格に関して一部で遅延が出たが改善"
+  },
+  {
+   "record_id": "P091",
+   "employee_id": "E046",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 109.0,
+   "key_project": "バリの社内標準化",
+   "comment": "バリの検証を主導し成果を上げた"
+  },
+  {
+   "record_id": "P092",
+   "employee_id": "E046",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 106.0,
+   "key_project": "ひけに関する改善プロジェクト",
+   "comment": "バリで関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P093",
+   "employee_id": "E047",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 96.0,
+   "key_project": "顧客要望の量産立上げ",
+   "comment": "共同開発の知見を共有し推進"
+  },
+  {
+   "record_id": "P094",
+   "employee_id": "E047",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 99.0,
+   "key_project": "用途開発の社内標準化",
+   "comment": "用途提案の課題に対し粘り強く取り組み達成"
+  },
+  {
+   "record_id": "P095",
+   "employee_id": "E048",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 102.0,
+   "key_project": "車載向け樹脂の拡販",
+   "comment": "OEMの要求仕様を整理し提案を成功させた"
+  },
+  {
+   "record_id": "P096",
+   "employee_id": "E048",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 109.0,
+   "key_project": "車載向け樹脂の拡販",
+   "comment": "OEMの要求仕様を整理し提案を成功させた"
+  },
+  {
+   "record_id": "P097",
+   "employee_id": "E049",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 99.0,
+   "key_project": "成形条件の量産立上げ",
+   "comment": "成形条件で関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P098",
+   "employee_id": "E049",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 109.0,
+   "key_project": "成形条件の評価手法の確立",
+   "comment": "ひけの知見を共有し推進"
+  },
+  {
+   "record_id": "P099",
+   "employee_id": "E050",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 94.0,
+   "key_project": "ベテラン技術者のノウハウ集約",
+   "comment": "暗黙知を文書化し継承の仕組みを構築"
+  },
+  {
+   "record_id": "P100",
+   "employee_id": "E050",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 91.0,
+   "key_project": "開発テーマの事業部への引き渡し",
+   "comment": "役割分担を明確にし立ち上げを円滑化"
+  },
+  {
+   "record_id": "P101",
+   "employee_id": "E051",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 90.0,
+   "key_project": "使用済みPETの解重合検討",
+   "comment": "プロセス条件を確立し事業化検討に貢献"
+  },
+  {
+   "record_id": "P102",
+   "employee_id": "E051",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 100.0,
+   "key_project": "再生材グレードの品質安定化",
+   "comment": "ロット間のばらつきを抑える配合基準を確立"
+  },
+  {
+   "record_id": "P103",
+   "employee_id": "E052",
+   "fiscal_year": 2024,
+   "performance_rating": "S",
+   "point": 110.0,
+   "key_project": "顧客要望の社内標準化",
+   "comment": "共同開発の課題に対し粘り強く取り組み達成"
+  },
+  {
+   "record_id": "P104",
+   "employee_id": "E052",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 105.0,
+   "key_project": "共創の社内標準化",
+   "comment": "共同開発で関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P105",
+   "employee_id": "E053",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 109.0,
+   "key_project": "リサイクル材比率向上プロジェクト",
+   "comment": "再生材の相溶化剤を選定し強度低下の原因を特定"
+  },
+  {
+   "record_id": "P106",
+   "employee_id": "E053",
+   "fiscal_year": 2025,
+   "performance_rating": "S",
+   "point": 119.0,
+   "key_project": "リサイクル材比率向上プロジェクト",
+   "comment": "再生材の相溶化剤を選定し強度低下の原因を特定"
+  },
+  {
+   "record_id": "P107",
+   "employee_id": "E054",
+   "fiscal_year": 2024,
+   "performance_rating": "C",
+   "point": 88.0,
+   "key_project": "顧客課題対応の顧客別検証",
+   "comment": "新用途の課題に対し粘り強く取り組み達成"
+  },
+  {
+   "record_id": "P108",
+   "employee_id": "E054",
+   "fiscal_year": 2025,
+   "performance_rating": "C",
+   "point": 90.0,
+   "key_project": "耐久試験の量産立上げ",
+   "comment": "耐久試験の検証を主導し成果を上げた"
+  },
+  {
+   "record_id": "P109",
+   "employee_id": "E055",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 100.0,
+   "key_project": "紡糸の量産立上げ",
+   "comment": "繊維で関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P110",
+   "employee_id": "E055",
+   "fiscal_year": 2025,
+   "performance_rating": "S",
+   "point": 118.0,
+   "key_project": "ケミカルリサイクル実証プラント立上げ",
+   "comment": "解重合条件を最適化しモノマー回収率を向上"
+  },
+  {
+   "record_id": "P111",
+   "employee_id": "E056",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 104.0,
+   "key_project": "再生PET繊維の強度改善",
+   "comment": "配合見直しで引張強度の低下を抑え量産化に貢献"
+  },
+  {
+   "record_id": "P112",
+   "employee_id": "E056",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 100.0,
+   "key_project": "用途開発に関する改善プロジェクト",
+   "comment": "用途開発の知見を共有し推進"
+  },
+  {
+   "record_id": "P113",
+   "employee_id": "E057",
+   "fiscal_year": 2024,
+   "performance_rating": "C",
+   "point": 88.0,
+   "key_project": "リサイクル材比率向上プロジェクト",
+   "comment": "再生材の相溶化剤を選定し強度低下の原因を特定"
+  },
+  {
+   "record_id": "P114",
+   "employee_id": "E057",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 102.0,
+   "key_project": "再生材グレードの品質安定化",
+   "comment": "ロット間のばらつきを抑える配合基準を確立"
+  },
+  {
+   "record_id": "P115",
+   "employee_id": "E058",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 91.0,
+   "key_project": "共同開発に関する改善プロジェクト",
+   "comment": "共創の知見を共有し推進"
+  },
+  {
+   "record_id": "P116",
+   "employee_id": "E058",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 100.0,
+   "key_project": "ケミカルリサイクル実証プラント立上げ",
+   "comment": "解重合条件を最適化しモノマー回収率を向上"
+  },
+  {
+   "record_id": "P117",
+   "employee_id": "E059",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 109.0,
+   "key_project": "新用途の量産立上げ",
+   "comment": "顧客課題の課題に対し粘り強く取り組み達成"
+  },
+  {
+   "record_id": "P118",
+   "employee_id": "E059",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 91.0,
+   "key_project": "劣化に関する改善プロジェクト",
+   "comment": "物性分析の知見を共有し推進"
+  },
+  {
+   "record_id": "P119",
+   "employee_id": "E060",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 107.0,
+   "key_project": "食品対応の顧客別検証",
+   "comment": "バリアに関して一部で遅延が出たが改善"
+  },
+  {
+   "record_id": "P120",
+   "employee_id": "E060",
+   "fiscal_year": 2025,
+   "performance_rating": "S",
+   "point": 113.0,
+   "key_project": "電子材料対応の顧客別検証",
+   "comment": "ディスプレイに関して一部で遅延が出たが改善"
+  },
+  {
+   "record_id": "P121",
+   "employee_id": "E061",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 100.0,
+   "key_project": "食品対応の顧客別検証",
+   "comment": "ラミネートの知見を共有し推進"
+  },
+  {
+   "record_id": "P122",
+   "employee_id": "E061",
+   "fiscal_year": 2025,
+   "performance_rating": "D",
+   "point": 72.0,
+   "key_project": "フィルムの社内標準化",
+   "comment": "押出の検証を主導し成果を上げた"
+  },
+  {
+   "record_id": "P123",
+   "employee_id": "E062",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 100.0,
+   "key_project": "ラミネートの社内標準化",
+   "comment": "バリアの課題に対し粘り強く取り組み達成"
+  },
+  {
+   "record_id": "P124",
+   "employee_id": "E062",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 108.0,
+   "key_project": "PFASフリー撥水コーティング開発",
+   "comment": "フッ素を使わない代替材料で顧客評価を達成"
+  },
+  {
+   "record_id": "P125",
+   "employee_id": "E063",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 101.0,
+   "key_project": "研究所と事業部の連携会議の運営",
+   "comment": "部門間調整を主導しテーマの停滞を解消"
+  },
+  {
+   "record_id": "P126",
+   "employee_id": "E063",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 99.0,
+   "key_project": "顧客課題の社内標準化",
+   "comment": "用途提案の検証を主導し成果を上げた"
+  },
+  {
+   "record_id": "P127",
+   "employee_id": "E064",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 94.0,
+   "key_project": "バリア対応の顧客別検証",
+   "comment": "バリアの知見を共有し推進"
+  },
+  {
+   "record_id": "P128",
+   "employee_id": "E064",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 107.0,
+   "key_project": "ディスプレイに関する改善プロジェクト",
+   "comment": "半導体の検証を主導し成果を上げた"
+  },
+  {
+   "record_id": "P129",
+   "employee_id": "E065",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 100.0,
+   "key_project": "PFASフリー撥水コーティング開発",
+   "comment": "フッ素を使わない代替材料で顧客評価を達成"
+  },
+  {
+   "record_id": "P130",
+   "employee_id": "E065",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 100.0,
+   "key_project": "PFASフリー撥水コーティング開発",
+   "comment": "フッ素を使わない代替材料で顧客評価を達成"
+  },
+  {
+   "record_id": "P131",
+   "employee_id": "E066",
+   "fiscal_year": 2024,
+   "performance_rating": "S",
+   "point": 110.0,
+   "key_project": "ベテラン技術者のノウハウ集約",
+   "comment": "暗黙知を文書化し継承の仕組みを構築"
+  },
+  {
+   "record_id": "P132",
+   "employee_id": "E066",
+   "fiscal_year": 2025,
+   "performance_rating": "C",
+   "point": 80.0,
+   "key_project": "用途開発に関する改善プロジェクト",
+   "comment": "用途提案の課題に対し粘り強く取り組み達成"
+  },
+  {
+   "record_id": "P133",
+   "employee_id": "E067",
+   "fiscal_year": 2024,
+   "performance_rating": "C",
+   "point": 80.0,
+   "key_project": "自動車内装材の軽量化プロジェクト",
+   "comment": "比重を下げつつ強度を確保し量産採用"
+  },
+  {
+   "record_id": "P134",
+   "employee_id": "E067",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 104.0,
+   "key_project": "CFRP複合材の軽量化検証",
+   "comment": "軽量化目標を超過達成"
+  },
+  {
+   "record_id": "P135",
+   "employee_id": "E068",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 105.0,
+   "key_project": "CFRP複合材の軽量化検証",
+   "comment": "軽量化目標を超過達成"
+  },
+  {
+   "record_id": "P136",
+   "employee_id": "E068",
+   "fiscal_year": 2025,
+   "performance_rating": "C",
+   "point": 90.0,
+   "key_project": "ポリマーの社内標準化",
+   "comment": "重合の課題に対し粘り強く取り組み達成"
+  },
+  {
+   "record_id": "P137",
+   "employee_id": "E069",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 101.0,
+   "key_project": "引張の量産立上げ",
+   "comment": "耐久試験の検証を主導し成果を上げた"
+  },
+  {
+   "record_id": "P138",
+   "employee_id": "E069",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 110.0,
+   "key_project": "電子材料の評価手法の確立",
+   "comment": "電子材料で関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P139",
+   "employee_id": "E070",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 96.0,
+   "key_project": "高温に関する改善プロジェクト",
+   "comment": "ガラス転移の知見を共有し推進"
+  },
+  {
+   "record_id": "P140",
+   "employee_id": "E070",
+   "fiscal_year": 2025,
+   "performance_rating": "C",
+   "point": 80.0,
+   "key_project": "顧客要望に関する改善プロジェクト",
+   "comment": "共創の知見を共有し推進"
+  },
+  {
+   "record_id": "P141",
+   "employee_id": "E071",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 109.0,
+   "key_project": "研究所と事業部の連携会議の運営",
+   "comment": "部門間調整を主導しテーマの停滞を解消"
+  },
+  {
+   "record_id": "P142",
+   "employee_id": "E071",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 105.0,
+   "key_project": "自動車内装材の軽量化プロジェクト",
+   "comment": "比重を下げつつ強度を確保し量産採用"
+  },
+  {
+   "record_id": "P143",
+   "employee_id": "E072",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 105.0,
+   "key_project": "顧客課題に関する改善プロジェクト",
+   "comment": "顧客課題で関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P144",
+   "employee_id": "E072",
+   "fiscal_year": 2025,
+   "performance_rating": "C",
+   "point": 83.0,
+   "key_project": "自動車内装材の軽量化プロジェクト",
+   "comment": "比重を下げつつ強度を確保し量産採用"
+  },
+  {
+   "record_id": "P145",
+   "employee_id": "E073",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 98.0,
+   "key_project": "研究所と事業部の連携会議の運営",
+   "comment": "部門間調整を主導しテーマの停滞を解消"
+  },
+  {
+   "record_id": "P146",
+   "employee_id": "E073",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 94.0,
+   "key_project": "予測対応の顧客別検証",
+   "comment": "実験データの課題に対し粘り強く取り組み達成"
+  },
+  {
+   "record_id": "P147",
+   "employee_id": "E074",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 106.0,
+   "key_project": "射出成形の社内標準化",
+   "comment": "射出成形で関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P148",
+   "employee_id": "E074",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 95.0,
+   "key_project": "予測モデルの社内標準化",
+   "comment": "予知保全で関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P149",
+   "employee_id": "E075",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 100.0,
+   "key_project": "原料調達コストの変動分析",
+   "comment": "コスト削減策を提案し目標を達成"
+  },
+  {
+   "record_id": "P150",
+   "employee_id": "E075",
+   "fiscal_year": 2025,
+   "performance_rating": "D",
+   "point": 76.0,
+   "key_project": "品証の社内標準化",
+   "comment": "品証の検証を主導し成果を上げた"
+  },
+  {
+   "record_id": "P151",
+   "employee_id": "E076",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 110.0,
+   "key_project": "生産計画の量産立上げ",
+   "comment": "生産計画の検証を主導し成果を上げた"
+  },
+  {
+   "record_id": "P152",
+   "employee_id": "E076",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 101.0,
+   "key_project": "バリの量産立上げ",
+   "comment": "ひけで関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P153",
+   "employee_id": "E077",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 105.0,
+   "key_project": "パイロットの評価手法の確立",
+   "comment": "量産化に関して一部で遅延が出たが改善"
+  },
+  {
+   "record_id": "P154",
+   "employee_id": "E077",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 94.0,
+   "key_project": "原料調達の社内標準化",
+   "comment": "原料調達の知見を共有し推進"
+  },
+  {
+   "record_id": "P155",
+   "employee_id": "E078",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 100.0,
+   "key_project": "原料調達コストの変動分析",
+   "comment": "コスト削減策を提案し目標を達成"
+  },
+  {
+   "record_id": "P156",
+   "employee_id": "E078",
+   "fiscal_year": 2025,
+   "performance_rating": "C",
+   "point": 80.0,
+   "key_project": "成形条件対応の顧客別検証",
+   "comment": "バリの課題に対し粘り強く取り組み達成"
+  },
+  {
+   "record_id": "P157",
+   "employee_id": "E079",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 100.0,
+   "key_project": "原料調達コストの変動分析",
+   "comment": "コスト削減策を提案し目標を達成"
+  },
+  {
+   "record_id": "P158",
+   "employee_id": "E079",
+   "fiscal_year": 2025,
+   "performance_rating": "D",
+   "point": 71.0,
+   "key_project": "原料調達コストの変動分析",
+   "comment": "コスト削減策を提案し目標を達成"
+  },
+  {
+   "record_id": "P159",
+   "employee_id": "E080",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 99.0,
+   "key_project": "競合の社内標準化",
+   "comment": "市場調査の検証を主導し成果を上げた"
+  },
+  {
+   "record_id": "P160",
+   "employee_id": "E080",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 96.0,
+   "key_project": "市場調査対応の顧客別検証",
+   "comment": "市場分析で関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P161",
+   "employee_id": "E081",
+   "fiscal_year": 2024,
+   "performance_rating": "C",
+   "point": 86.0,
+   "key_project": "自動車内装材の新規受注",
+   "comment": "Tier1との技術折衝を主導し新規契約を獲得"
+  },
+  {
+   "record_id": "P162",
+   "employee_id": "E081",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 95.0,
+   "key_project": "半導体の社内標準化",
+   "comment": "半導体の知見を共有し推進"
+  },
+  {
+   "record_id": "P163",
+   "employee_id": "E082",
+   "fiscal_year": 2024,
+   "performance_rating": "C",
+   "point": 81.0,
+   "key_project": "価格交渉に関する改善プロジェクト",
+   "comment": "価格交渉の課題に対し粘り強く取り組み達成"
+  },
+  {
+   "record_id": "P164",
+   "employee_id": "E082",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 105.0,
+   "key_project": "大口顧客の社内標準化",
+   "comment": "顧客折衝の知見を共有し推進"
+  },
+  {
+   "record_id": "P165",
+   "employee_id": "E083",
+   "fiscal_year": 2024,
+   "performance_rating": "D",
+   "point": 74.0,
+   "key_project": "市場分析に関する改善プロジェクト",
+   "comment": "市場調査の検証を主導し成果を上げた"
+  },
+  {
+   "record_id": "P166",
+   "employee_id": "E083",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 104.0,
+   "key_project": "値引きの社内標準化",
+   "comment": "大口顧客に関して一部で遅延が出たが改善"
+  },
+  {
+   "record_id": "P167",
+   "employee_id": "E084",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 106.0,
+   "key_project": "東南アジア拠点との技術連携",
+   "comment": "現地顧客との折衝を主導し新規契約を獲得"
+  },
+  {
+   "record_id": "P168",
+   "employee_id": "E084",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 100.0,
+   "key_project": "輸出の評価手法の確立",
+   "comment": "海外の課題に対し粘り強く取り組み達成"
+  },
+  {
+   "record_id": "P169",
+   "employee_id": "E085",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 103.0,
+   "key_project": "東南アジア拠点との技術連携",
+   "comment": "現地顧客との折衝を主導し新規契約を獲得"
+  },
+  {
+   "record_id": "P170",
+   "employee_id": "E085",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 90.0,
+   "key_project": "化審法の届出業務の標準化",
+   "comment": "規制対応の手順書を整備し対応時間を短縮"
+  },
+  {
+   "record_id": "P171",
+   "employee_id": "E086",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 95.0,
+   "key_project": "翻訳に関する改善プロジェクト",
+   "comment": "通訳の課題に対し粘り強く取り組み達成"
+  },
+  {
+   "record_id": "P172",
+   "employee_id": "E086",
+   "fiscal_year": 2025,
+   "performance_rating": "C",
+   "point": 84.0,
+   "key_project": "現地の評価手法の確立",
+   "comment": "海外で関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P173",
+   "employee_id": "E087",
+   "fiscal_year": 2024,
+   "performance_rating": "C",
+   "point": 81.0,
+   "key_project": "大口顧客の量産立上げ",
+   "comment": "大口顧客の知見を共有し推進"
+  },
+  {
+   "record_id": "P174",
+   "employee_id": "E087",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 109.0,
+   "key_project": "翻訳の量産立上げ",
+   "comment": "英語で関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P175",
+   "employee_id": "E088",
+   "fiscal_year": 2024,
+   "performance_rating": "S",
+   "point": 110.0,
+   "key_project": "現地に関する改善プロジェクト",
+   "comment": "輸出に関して一部で遅延が出たが改善"
+  },
+  {
+   "record_id": "P176",
+   "employee_id": "E088",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 102.0,
+   "key_project": "海外対応の顧客別検証",
+   "comment": "海外に関して一部で遅延が出たが改善"
+  },
+  {
+   "record_id": "P177",
+   "employee_id": "E089",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 91.0,
+   "key_project": "規格の社内標準化",
+   "comment": "IATFの知見を共有し推進"
+  },
+  {
+   "record_id": "P178",
+   "employee_id": "E089",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 110.0,
+   "key_project": "認証の量産立上げ",
+   "comment": "IATFの課題に対し粘り強く取り組み達成"
+  },
+  {
+   "record_id": "P179",
+   "employee_id": "E090",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 96.0,
+   "key_project": "化審法の届出業務の標準化",
+   "comment": "規制対応の手順書を整備し対応時間を短縮"
+  },
+  {
+   "record_id": "P180",
+   "employee_id": "E090",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 90.0,
+   "key_project": "耐久試験対応の顧客別検証",
+   "comment": "物性分析の知見を共有し推進"
+  },
+  {
+   "record_id": "P181",
+   "employee_id": "E091",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 97.0,
+   "key_project": "REACH規制対応体制の構築",
+   "comment": "SDS整備と欧州顧客への説明を主導"
+  },
+  {
+   "record_id": "P182",
+   "employee_id": "E091",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 91.0,
+   "key_project": "開発テーマの事業部への引き渡し",
+   "comment": "役割分担を明確にし立ち上げを円滑化"
+  },
+  {
+   "record_id": "P183",
+   "employee_id": "E092",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 101.0,
+   "key_project": "化審法の届出業務の標準化",
+   "comment": "規制対応の手順書を整備し対応時間を短縮"
+  },
+  {
+   "record_id": "P184",
+   "employee_id": "E092",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 99.0,
+   "key_project": "ケミカルリサイクル実証プラント立上げ",
+   "comment": "解重合条件を最適化しモノマー回収率を向上"
+  },
+  {
+   "record_id": "P185",
+   "employee_id": "E093",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 92.0,
+   "key_project": "化審法の届出業務の標準化",
+   "comment": "規制対応の手順書を整備し対応時間を短縮"
+  },
+  {
+   "record_id": "P186",
+   "employee_id": "E093",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 94.0,
+   "key_project": "REACH規制対応体制の構築",
+   "comment": "SDS整備と欧州顧客への説明を主導"
+  },
+  {
+   "record_id": "P187",
+   "employee_id": "E094",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 96.0,
+   "key_project": "ケミカルリサイクル実証プラント立上げ",
+   "comment": "解重合条件を最適化しモノマー回収率を向上"
+  },
+  {
+   "record_id": "P188",
+   "employee_id": "E094",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 108.0,
+   "key_project": "研究所と事業部の連携会議の運営",
+   "comment": "部門間調整を主導しテーマの停滞を解消"
+  },
+  {
+   "record_id": "P189",
+   "employee_id": "E095",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 98.0,
+   "key_project": "化審法の届出業務の標準化",
+   "comment": "規制対応の手順書を整備し対応時間を短縮"
+  },
+  {
+   "record_id": "P190",
+   "employee_id": "E095",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 101.0,
+   "key_project": "知財対応の顧客別検証",
+   "comment": "知財の検証を主導し成果を上げた"
+  },
+  {
+   "record_id": "P191",
+   "employee_id": "E096",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 106.0,
+   "key_project": "特許の量産立上げ",
+   "comment": "特許で関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P192",
+   "employee_id": "E096",
+   "fiscal_year": 2025,
+   "performance_rating": "B",
+   "point": 94.0,
+   "key_project": "出願の量産立上げ",
+   "comment": "出願の検証を主導し成果を上げた"
+  },
+  {
+   "record_id": "P193",
+   "employee_id": "E097",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 95.0,
+   "key_project": "特許に関する改善プロジェクト",
+   "comment": "出願の検証を主導し成果を上げた"
+  },
+  {
+   "record_id": "P194",
+   "employee_id": "E097",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 104.0,
+   "key_project": "アライアンスの評価手法の確立",
+   "comment": "提携で関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P195",
+   "employee_id": "E098",
+   "fiscal_year": 2024,
+   "performance_rating": "B",
+   "point": 92.0,
+   "key_project": "精度の評価手法の確立",
+   "comment": "予測モデルで関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P196",
+   "employee_id": "E098",
+   "fiscal_year": 2025,
+   "performance_rating": "C",
+   "point": 86.0,
+   "key_project": "UXの量産立上げ",
+   "comment": "ユーザー体験に関して一部で遅延が出たが改善"
+  },
+  {
+   "record_id": "P197",
+   "employee_id": "E099",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 100.0,
+   "key_project": "KPIに関する改善プロジェクト",
+   "comment": "集計に関して一部で遅延が出たが改善"
+  },
+  {
+   "record_id": "P198",
+   "employee_id": "E099",
+   "fiscal_year": 2025,
+   "performance_rating": "A",
+   "point": 101.0,
+   "key_project": "シミュレーションの社内標準化",
+   "comment": "KPIで関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P199",
+   "employee_id": "E100",
+   "fiscal_year": 2024,
+   "performance_rating": "A",
+   "point": 101.0,
+   "key_project": "通信規格の量産立上げ",
+   "comment": "センサーで関係部署と連携し貢献"
+  },
+  {
+   "record_id": "P200",
+   "employee_id": "E100",
+   "fiscal_year": 2025,
+   "performance_rating": "C",
+   "point": 89.0,
+   "key_project": "通信規格の評価手法の確立",
+   "comment": "IoTに関して一部で遅延が出たが改善"
+  }
+ ],
+ "projects": [
+  {
+   "project_id": "PJ06",
+   "project_name": "再生PET繊維の強度向上プロジェクト",
+   "sponsor_department": "繊維事業部",
+   "status": "進行中",
+   "required_skills": "再生材配合設計;繊維加工技術;材料評価・分析",
+   "non_financial_assets_needed": "技術特許;顧客基盤",
+   "target_start_date": "2026-01-15",
+   "notes": "素材研究所と連携"
+  },
+  {
+   "project_id": "PJ07",
+   "project_name": "PFASフリー包装フィルムの開発",
+   "sponsor_department": "フィルム事業部",
+   "status": "進行中",
+   "required_skills": "PFAS代替材料開発;フィルム成形;化学物質規制対応",
+   "non_financial_assets_needed": "規制対応ノウハウ;顧客基盤",
+   "target_start_date": "2026-03-01",
+   "notes": "欧州規制に対応"
+  },
+  {
+   "project_id": "PJ08",
+   "project_name": "自動車内装材の軽量化プログラム",
+   "sponsor_department": "樹脂事業部",
+   "status": "進行中",
+   "required_skills": "軽量化設計;自動車向け技術営業;成形加工",
+   "non_financial_assets_needed": "OEM関係;技術特許",
+   "target_start_date": "2025-10-01",
+   "notes": "Tier1と共同"
+  },
+  {
+   "project_id": "PJ09",
+   "project_name": "難燃リサイクル樹脂の事業化検討",
+   "sponsor_department": "素材研究所",
+   "status": "立ち上げ準備",
+   "required_skills": "難燃材料開発;再生材配合設計;品質規格・認証",
+   "non_financial_assets_needed": "知財ポートフォリオ",
+   "target_start_date": "2026-11-01",
+   "notes": "規格取得が前提"
+  },
+  {
+   "project_id": "PJ10",
+   "project_name": "海外顧客向け機能性フィルムの展開",
+   "sponsor_department": "海外営業部",
+   "status": "進行中",
+   "required_skills": "海外顧客対応;電子材料向け提案;語学(英/中)",
+   "non_financial_assets_needed": "現地ネットワーク",
+   "target_start_date": "2026-02-01",
+   "notes": "東南アジア中心"
+  },
+  {
+   "project_id": "PJ11",
+   "project_name": "ケミカルリサイクル実証プラント",
+   "sponsor_department": "高分子研究所",
+   "status": "進行中",
+   "required_skills": "ケミカルリサイクル;スケールアップ;LCA・CO2算定",
+   "non_financial_assets_needed": "プロセス特許",
+   "target_start_date": "2025-12-01",
+   "notes": "環境推進部と連動"
+  },
+  {
+   "project_id": "PJ12",
+   "project_name": "LCA・CO2算定基盤の整備",
+   "sponsor_department": "環境・サステナビリティ推進部",
+   "status": "検討中",
+   "required_skills": "LCA・CO2算定;データ分析;脱炭素技術",
+   "non_financial_assets_needed": "データ基盤",
+   "target_start_date": "2027-01-01",
+   "notes": "全社展開を想定"
+  }
+ ],
+ "project_members": [
+  {
+   "project_id": "PJ06",
+   "employee_id": "E055",
+   "assigned_date": "2026-01-07"
+  },
+  {
+   "project_id": "PJ06",
+   "employee_id": "E037",
+   "assigned_date": "2026-01-09"
+  },
+  {
+   "project_id": "PJ06",
+   "employee_id": "E030",
+   "assigned_date": "2025-12-20"
+  },
+  {
+   "project_id": "PJ06",
+   "employee_id": "E027",
+   "assigned_date": "2025-12-30"
+  },
+  {
+   "project_id": "PJ06",
+   "employee_id": "E040",
+   "assigned_date": "2026-01-14"
+  },
+  {
+   "project_id": "PJ06",
+   "employee_id": "E028",
+   "assigned_date": "2026-01-02"
+  },
+  {
+   "project_id": "PJ06",
+   "employee_id": "E054",
+   "assigned_date": "2026-01-09"
+  },
+  {
+   "project_id": "PJ06",
+   "employee_id": "E026",
+   "assigned_date": "2026-01-12"
+  },
+  {
+   "project_id": "PJ07",
+   "employee_id": "E022",
+   "assigned_date": "2026-02-27"
+  },
+  {
+   "project_id": "PJ07",
+   "employee_id": "E065",
+   "assigned_date": "2026-01-31"
+  },
+  {
+   "project_id": "PJ07",
+   "employee_id": "E092",
+   "assigned_date": "2026-02-22"
+  },
+  {
+   "project_id": "PJ07",
+   "employee_id": "E093",
+   "assigned_date": "2026-01-30"
+  },
+  {
+   "project_id": "PJ07",
+   "employee_id": "E025",
+   "assigned_date": "2026-02-26"
+  },
+  {
+   "project_id": "PJ07",
+   "employee_id": "E027",
+   "assigned_date": "2026-02-22"
+  },
+  {
+   "project_id": "PJ07",
+   "employee_id": "E028",
+   "assigned_date": "2026-02-22"
+  },
+  {
+   "project_id": "PJ08",
+   "employee_id": "E044",
+   "assigned_date": "2025-09-16"
+  },
+  {
+   "project_id": "PJ08",
+   "employee_id": "E069",
+   "assigned_date": "2025-09-15"
+  },
+  {
+   "project_id": "PJ08",
+   "employee_id": "E072",
+   "assigned_date": "2025-09-24"
+  },
+  {
+   "project_id": "PJ08",
+   "employee_id": "E066",
+   "assigned_date": "2025-09-24"
+  },
+  {
+   "project_id": "PJ08",
+   "employee_id": "E067",
+   "assigned_date": "2025-09-12"
+  },
+  {
+   "project_id": "PJ08",
+   "employee_id": "E079",
+   "assigned_date": "2025-09-26"
+  },
+  {
+   "project_id": "PJ08",
+   "employee_id": "E048",
+   "assigned_date": "2025-09-17"
+  },
+  {
+   "project_id": "PJ08",
+   "employee_id": "E045",
+   "assigned_date": "2025-09-24"
+  },
+  {
+   "project_id": "PJ09",
+   "employee_id": "E048",
+   "assigned_date": "2026-11-01"
+  },
+  {
+   "project_id": "PJ09",
+   "employee_id": "E041",
+   "assigned_date": "2026-10-28"
+  },
+  {
+   "project_id": "PJ09",
+   "employee_id": "E095",
+   "assigned_date": "2026-10-19"
+  },
+  {
+   "project_id": "PJ09",
+   "employee_id": "E028",
+   "assigned_date": "2026-10-18"
+  },
+  {
+   "project_id": "PJ09",
+   "employee_id": "E096",
+   "assigned_date": "2026-10-09"
+  },
+  {
+   "project_id": "PJ09",
+   "employee_id": "E046",
+   "assigned_date": "2026-10-30"
+  },
+  {
+   "project_id": "PJ09",
+   "employee_id": "E021",
+   "assigned_date": "2026-10-27"
+  },
+  {
+   "project_id": "PJ09",
+   "employee_id": "E045",
+   "assigned_date": "2026-10-27"
+  },
+  {
+   "project_id": "PJ09",
+   "employee_id": "E090",
+   "assigned_date": "2026-10-06"
+  },
+  {
+   "project_id": "PJ10",
+   "employee_id": "E071",
+   "assigned_date": "2026-01-10"
+  },
+  {
+   "project_id": "PJ10",
+   "employee_id": "E086",
+   "assigned_date": "2026-01-10"
+  },
+  {
+   "project_id": "PJ10",
+   "employee_id": "E072",
+   "assigned_date": "2026-01-27"
+  },
+  {
+   "project_id": "PJ10",
+   "employee_id": "E082",
+   "assigned_date": "2026-01-14"
+  },
+  {
+   "project_id": "PJ10",
+   "employee_id": "E087",
+   "assigned_date": "2026-01-22"
+  },
+  {
+   "project_id": "PJ10",
+   "employee_id": "E066",
+   "assigned_date": "2026-01-27"
+  },
+  {
+   "project_id": "PJ10",
+   "employee_id": "E088",
+   "assigned_date": "2026-01-30"
+  },
+  {
+   "project_id": "PJ10",
+   "employee_id": "E069",
+   "assigned_date": "2026-01-12"
+  },
+  {
+   "project_id": "PJ10",
+   "employee_id": "E067",
+   "assigned_date": "2026-01-10"
+  },
+  {
+   "project_id": "PJ11",
+   "employee_id": "E039",
+   "assigned_date": "2025-11-08"
+  },
+  {
+   "project_id": "PJ11",
+   "employee_id": "E032",
+   "assigned_date": "2025-11-28"
+  },
+  {
+   "project_id": "PJ11",
+   "employee_id": "E077",
+   "assigned_date": "2025-11-03"
+  },
+  {
+   "project_id": "PJ11",
+   "employee_id": "E030",
+   "assigned_date": "2025-11-18"
+  },
+  {
+   "project_id": "PJ11",
+   "employee_id": "E076",
+   "assigned_date": "2025-11-07"
+  },
+  {
+   "project_id": "PJ11",
+   "employee_id": "E035",
+   "assigned_date": "2025-11-29"
+  },
+  {
+   "project_id": "PJ11",
+   "employee_id": "E074",
+   "assigned_date": "2025-11-01"
+  },
+  {
+   "project_id": "PJ12",
+   "employee_id": "E092",
+   "assigned_date": "2026-12-12"
+  },
+  {
+   "project_id": "PJ12",
+   "employee_id": "E093",
+   "assigned_date": "2026-12-18"
+  },
+  {
+   "project_id": "PJ12",
+   "employee_id": "E073",
+   "assigned_date": "2026-12-14"
+  },
+  {
+   "project_id": "PJ12",
+   "employee_id": "E100",
+   "assigned_date": "2026-12-25"
+  },
+  {
+   "project_id": "PJ12",
+   "employee_id": "E094",
+   "assigned_date": "2026-12-02"
+  },
+  {
+   "project_id": "PJ12",
+   "employee_id": "E091",
+   "assigned_date": "2026-12-11"
+  },
+  {
+   "project_id": "PJ12",
+   "employee_id": "E098",
+   "assigned_date": "2026-12-26"
+  },
+  {
+   "project_id": "PJ12",
+   "employee_id": "E099",
+   "assigned_date": "2026-12-26"
+  }
+ ],
+ "chat_logs": [
+  {
+   "log_id": "L2000",
+   "employee_id": "E049",
+   "department": "樹脂事業部",
+   "timestamp": "2026-08-17T00:47:58+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "再生PETを配合すると引張強度が低下する原因と対策を知りたい。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2001",
+   "employee_id": "E048",
+   "department": "樹脂事業部",
+   "timestamp": "2026-08-17T01:40:58+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "火が燃え広がりにくい樹脂を回収品から作る前例はあるか。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2002",
+   "employee_id": "E028",
+   "department": "素材研究所",
+   "timestamp": "2026-08-17T01:56:01+00:00",
+   "category_1": "他部署連携",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "新規案件で別の部署に同じ検討をしている人がいるのか知りたい。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2003",
+   "employee_id": "E067",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-08-17T02:54:20+00:00",
+   "category_1": "技術検討",
+   "category_2": "作業代行",
+   "issue_summary": "試作の段階で繊維の染色ムラの原因と対策を知りたい。社内に過去の事例がないか知りたい"
+  },
+  {
+   "log_id": "L2004",
+   "employee_id": "E031",
+   "department": "高分子研究所",
+   "timestamp": "2026-08-17T03:33:15+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "燃焼試験の結果が再生樹脂だとばらつく原因を知りたい。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2005",
+   "employee_id": "E045",
+   "department": "樹脂事業部",
+   "timestamp": "2026-08-17T04:32:29+00:00",
+   "category_1": "事業戦略",
+   "category_2": "情報が見つからない",
+   "issue_summary": "クルマの内装を軽くしたいという顧客依頼にどう答えるか。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2006",
+   "employee_id": "E029",
+   "department": "素材研究所",
+   "timestamp": "2026-08-17T07:52:58+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "顧客からの要望でリサイクル材を混ぜたときの強度低下を抑える相溶化剤の選び方が分からない。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2007",
+   "employee_id": "E029",
+   "department": "素材研究所",
+   "timestamp": "2026-08-18T00:15:24+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "試作の段階で文章の誤字を直してほしいという軽い依頼。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2008",
+   "employee_id": "E065",
+   "department": "フィルム事業部",
+   "timestamp": "2026-08-18T01:46:22+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "最近コスト試算で原料調達の変動をどう織り込むか知りたい。社内に過去の事例がないか知りたい"
+  },
+  {
+   "log_id": "L2009",
+   "employee_id": "E039",
+   "department": "高分子研究所",
+   "timestamp": "2026-08-18T03:47:13+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "悩み・不安",
+   "issue_summary": "定年が近い先輩の知識を後輩にどう引き継ぐか。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2010",
+   "employee_id": "E056",
+   "department": "繊維事業部",
+   "timestamp": "2026-08-18T04:20:40+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "量産前の検証でLCAの算定範囲をどう決めるか知りたい。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2011",
+   "employee_id": "E045",
+   "department": "樹脂事業部",
+   "timestamp": "2026-08-19T00:16:27+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "試作の段階でCFRPと樹脂の使い分けの判断基準を知りたい"
+  },
+  {
+   "log_id": "L2012",
+   "employee_id": "E040",
+   "department": "高分子研究所",
+   "timestamp": "2026-08-19T00:50:47+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "難燃グレードの再生樹脂でUL94 V-0を満たす配合が分からない。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2013",
+   "employee_id": "E075",
+   "department": "生産技術部",
+   "timestamp": "2026-08-19T03:57:24+00:00",
+   "category_1": "事業戦略",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "内装部品を軽くする要望がTier1からあり、類似案件を知りたい。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2014",
+   "employee_id": "E082",
+   "department": "営業本部",
+   "timestamp": "2026-08-19T06:46:51+00:00",
+   "category_1": "技術検討",
+   "category_2": "作業代行",
+   "issue_summary": "実験データの解析にAIを使えるか知りたい。社内に過去の事例がないか知りたい"
+  },
+  {
+   "log_id": "L2015",
+   "employee_id": "E044",
+   "department": "樹脂事業部",
+   "timestamp": "2026-08-20T00:21:34+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "先週から混ぜる原料のグレードで物性が変わる理由が整理できていない。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2016",
+   "employee_id": "E082",
+   "department": "営業本部",
+   "timestamp": "2026-08-20T00:52:01+00:00",
+   "category_1": "事業戦略",
+   "category_2": "情報が見つからない",
+   "issue_summary": "先週から海外の顧客から取扱い書類の様式を求められた。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2017",
+   "employee_id": "E058",
+   "department": "繊維事業部",
+   "timestamp": "2026-08-20T03:58:30+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "最近ベテランの技術継承が進まず、暗黙知が失われそうで心配。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2018",
+   "employee_id": "E077",
+   "department": "生産技術部",
+   "timestamp": "2026-08-20T05:02:18+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "手順がわからない",
+   "issue_summary": "顧客からの要望で来期の計画で人手が足りず、どこを削るか決められない。関連する資料が見つからない"
+  },
+  {
+   "log_id": "L2019",
+   "employee_id": "E066",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-08-20T06:02:43+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "量産前の検証でおすすめのランチを聞いただけ。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2020",
+   "employee_id": "E090",
+   "department": "品質保証部",
+   "timestamp": "2026-08-20T07:45:06+00:00",
+   "category_1": "事業戦略",
+   "category_2": "情報が見つからない",
+   "issue_summary": "最近海外の顧客から取扱い書類の様式を求められた。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2021",
+   "employee_id": "E036",
+   "department": "高分子研究所",
+   "timestamp": "2026-08-20T08:05:07+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "試作の段階で難燃剤を入れた樹脂をリサイクルすると物性が落ちる。UL94を維持する方法は。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2022",
+   "employee_id": "E046",
+   "department": "樹脂事業部",
+   "timestamp": "2026-08-21T00:54:41+00:00",
+   "category_1": "他部署連携",
+   "category_2": "作業代行",
+   "issue_summary": "会議の準備で品質不良の原因分析の手順が分からない"
+  },
+  {
+   "log_id": "L2023",
+   "employee_id": "E100",
+   "department": "DX推進部",
+   "timestamp": "2026-08-21T01:09:28+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "最近おすすめのランチを聞いただけ。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2024",
+   "employee_id": "E076",
+   "department": "生産技術部",
+   "timestamp": "2026-08-21T01:58:46+00:00",
+   "category_1": "働き方・職場環境",
+   "category_2": "悩み・不安",
+   "issue_summary": "評価面談の前に気持ちが落ち着かない。まず何から確認すべきか迷っている"
+  },
+  {
+   "log_id": "L2025",
+   "employee_id": "E040",
+   "department": "高分子研究所",
+   "timestamp": "2026-08-21T04:24:03+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "最近新人が実験でつまずく原因を教える時間が取れない"
+  },
+  {
+   "log_id": "L2026",
+   "employee_id": "E054",
+   "department": "繊維事業部",
+   "timestamp": "2026-08-21T08:18:28+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "量産前の検証でおすすめのランチを聞いただけ。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2027",
+   "employee_id": "E022",
+   "department": "素材研究所",
+   "timestamp": "2026-08-21T08:59:00+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "火が燃え広がりにくい樹脂を回収品から作る前例はあるか。関連する資料が見つからない"
+  },
+  {
+   "log_id": "L2028",
+   "employee_id": "E043",
+   "department": "樹脂事業部",
+   "timestamp": "2026-08-24T00:16:32+00:00",
+   "category_1": "他部署連携",
+   "category_2": "手順がわからない",
+   "issue_summary": "新規案件で品質不良の原因分析の手順が分からない。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2029",
+   "employee_id": "E038",
+   "department": "高分子研究所",
+   "timestamp": "2026-08-24T01:16:06+00:00",
+   "category_1": "他部署連携",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "顧客からの要望で開発側と営業側で納期の認識がずれて困っている。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2030",
+   "employee_id": "E053",
+   "department": "繊維事業部",
+   "timestamp": "2026-08-24T01:55:30+00:00",
+   "category_1": "事業戦略",
+   "category_2": "手順がわからない",
+   "issue_summary": "新しい用途の提案先を探している。電子材料向けの需要を知りたい"
+  },
+  {
+   "log_id": "L2031",
+   "employee_id": "E029",
+   "department": "素材研究所",
+   "timestamp": "2026-08-24T02:17:09+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "量産前の検証で難燃剤を入れた樹脂をリサイクルすると物性が落ちる。UL94を維持する方法は"
+  },
+  {
+   "log_id": "L2032",
+   "employee_id": "E044",
+   "department": "樹脂事業部",
+   "timestamp": "2026-08-24T02:30:09+00:00",
+   "category_1": "事業戦略",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "試作の段階でクルマの内装を軽くしたいという顧客依頼にどう答えるか。関連する資料が見つからない"
+  },
+  {
+   "log_id": "L2033",
+   "employee_id": "E035",
+   "department": "高分子研究所",
+   "timestamp": "2026-08-24T03:02:32+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "先週から文章の誤字を直してほしいという軽い依頼。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2034",
+   "employee_id": "E087",
+   "department": "海外営業部",
+   "timestamp": "2026-08-24T03:23:06+00:00",
+   "category_1": "事業戦略",
+   "category_2": "情報が見つからない",
+   "issue_summary": "新規案件で海外の顧客から取扱い書類の様式を求められた"
+  },
+  {
+   "log_id": "L2035",
+   "employee_id": "E058",
+   "department": "繊維事業部",
+   "timestamp": "2026-08-24T04:00:26+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "若手研究者のOJTの進め方に悩んでいる。関連する資料が見つからない"
+  },
+  {
+   "log_id": "L2036",
+   "employee_id": "E062",
+   "department": "フィルム事業部",
+   "timestamp": "2026-08-24T06:03:08+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "試作の段階で混ぜる原料のグレードで物性が変わる理由が整理できていない。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2037",
+   "employee_id": "E051",
+   "department": "繊維事業部",
+   "timestamp": "2026-08-24T08:16:08+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "先週から試作費の予算が不足しており、優先順位をつける判断基準が欲しい"
+  },
+  {
+   "log_id": "L2038",
+   "employee_id": "E038",
+   "department": "高分子研究所",
+   "timestamp": "2026-08-24T08:49:00+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "量産前の検証で再生材の比率を上げると強度低下が出るため、配合設計の見直し方法を知りたい。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2039",
+   "employee_id": "E082",
+   "department": "営業本部",
+   "timestamp": "2026-08-25T00:10:32+00:00",
+   "category_1": "他部署連携",
+   "category_2": "悩み・不安",
+   "issue_summary": "試作の段階で別の部署に同じ検討をしている人がいるのか知りたい。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2040",
+   "employee_id": "E034",
+   "department": "高分子研究所",
+   "timestamp": "2026-08-25T02:22:16+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "試作の段階で燃焼試験の結果が再生樹脂だとばらつく原因を知りたい。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2041",
+   "employee_id": "E065",
+   "department": "フィルム事業部",
+   "timestamp": "2026-08-25T02:55:03+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "射出成形のひけを減らす条件を知りたい。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2042",
+   "employee_id": "E051",
+   "department": "繊維事業部",
+   "timestamp": "2026-08-25T03:01:29+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "先週から使用済み原料の比率を上げたら引っ張りに弱くなってしまった。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2043",
+   "employee_id": "E031",
+   "department": "高分子研究所",
+   "timestamp": "2026-08-25T06:10:54+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "悩み・不安",
+   "issue_summary": "定年が近い先輩の知識を後輩にどう引き継ぐか。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2044",
+   "employee_id": "E064",
+   "department": "フィルム事業部",
+   "timestamp": "2026-08-26T03:16:28+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "会議室の予約方法を確認しただけ。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2045",
+   "employee_id": "E048",
+   "department": "樹脂事業部",
+   "timestamp": "2026-08-26T04:14:38+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "試作の段階で会議室の予約方法を確認しただけ"
+  },
+  {
+   "log_id": "L2046",
+   "employee_id": "E034",
+   "department": "高分子研究所",
+   "timestamp": "2026-08-26T05:01:45+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "難燃剤を入れた樹脂をリサイクルすると物性が落ちる。UL94を維持する方法は"
+  },
+  {
+   "log_id": "L2047",
+   "employee_id": "E079",
+   "department": "生産技術部",
+   "timestamp": "2026-08-26T05:13:40+00:00",
+   "category_1": "働き方・職場環境",
+   "category_2": "悩み・不安",
+   "issue_summary": "評価面談の前に気持ちが落ち着かない"
+  },
+  {
+   "log_id": "L2048",
+   "employee_id": "E068",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-08-26T05:32:51+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "会議の準備で難燃剤を入れた樹脂をリサイクルすると物性が落ちる。UL94を維持する方法は。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2049",
+   "employee_id": "E096",
+   "department": "知財・法務部",
+   "timestamp": "2026-08-26T07:50:56+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "先週から今日の天気を聞いただけ"
+  },
+  {
+   "log_id": "L2050",
+   "employee_id": "E058",
+   "department": "繊維事業部",
+   "timestamp": "2026-08-27T03:09:36+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "顧客からの要望で定年が近い先輩の知識を後輩にどう引き継ぐか。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2051",
+   "employee_id": "E044",
+   "department": "樹脂事業部",
+   "timestamp": "2026-08-27T03:17:20+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "手順がわからない",
+   "issue_summary": "来期の計画で人手が足りず、どこを削るか決められない。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2052",
+   "employee_id": "E090",
+   "department": "品質保証部",
+   "timestamp": "2026-08-27T08:40:35+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "会議の準備でハロゲンを含まない燃えにくい材料を再利用したい。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2053",
+   "employee_id": "E066",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-08-28T02:26:34+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "自動車内装材の軽量化提案で、比重を下げつつ強度を保つ材料を探している。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2054",
+   "employee_id": "E036",
+   "department": "高分子研究所",
+   "timestamp": "2026-08-28T03:26:17+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "新規案件で難燃性とリサイクル性を両立する材料設計の事例を探している。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2055",
+   "employee_id": "E030",
+   "department": "素材研究所",
+   "timestamp": "2026-08-28T03:40:43+00:00",
+   "category_1": "技術検討",
+   "category_2": "作業代行",
+   "issue_summary": "実験データの解析にAIを使えるか知りたい。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2056",
+   "employee_id": "E070",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-08-28T05:34:14+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "乗用車向けの部品を薄肉化して重量を減らす相談先を知りたい。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2057",
+   "employee_id": "E093",
+   "department": "環境・サステナビリティ推進部",
+   "timestamp": "2026-08-28T07:47:45+00:00",
+   "category_1": "事業戦略",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "海外の顧客から取扱い書類の様式を求められた。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2058",
+   "employee_id": "E047",
+   "department": "樹脂事業部",
+   "timestamp": "2026-08-28T08:43:47+00:00",
+   "category_1": "事業戦略",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "新規案件でクルマの内装を軽くしたいという顧客依頼にどう答えるか。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2059",
+   "employee_id": "E037",
+   "department": "高分子研究所",
+   "timestamp": "2026-08-31T00:04:37+00:00",
+   "category_1": "働き方・職場環境",
+   "category_2": "悩み・不安",
+   "issue_summary": "在宅勤務が続いて孤独を感じ、集中力が落ちている。まず何から確認すべきか迷っている"
+  },
+  {
+   "log_id": "L2060",
+   "employee_id": "E087",
+   "department": "海外営業部",
+   "timestamp": "2026-08-31T00:15:49+00:00",
+   "category_1": "他部署連携",
+   "category_2": "手順がわからない",
+   "issue_summary": "欧州向けでREACH規制の対応状況を顧客に説明する必要がある。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2061",
+   "employee_id": "E032",
+   "department": "高分子研究所",
+   "timestamp": "2026-08-31T00:45:24+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "会議の準備で燃焼試験の結果が再生樹脂だとばらつく原因を知りたい。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2062",
+   "employee_id": "E076",
+   "department": "生産技術部",
+   "timestamp": "2026-08-31T02:33:21+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "再生材の比率を上げると強度低下が出るため、配合設計の見直し方法を知りたい。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2063",
+   "employee_id": "E038",
+   "department": "高分子研究所",
+   "timestamp": "2026-08-31T02:38:15+00:00",
+   "category_1": "技術検討",
+   "category_2": "作業代行",
+   "issue_summary": "顧客からの要望で包装フィルムのバリア性を上げる方法を知りたい。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2064",
+   "employee_id": "E024",
+   "department": "素材研究所",
+   "timestamp": "2026-08-31T03:02:21+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "顧客からの要望で自動車内装材の軽量化提案で、比重を下げつつ強度を保つ材料を探している。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2065",
+   "employee_id": "E059",
+   "department": "フィルム事業部",
+   "timestamp": "2026-08-31T03:51:12+00:00",
+   "category_1": "他部署連携",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "研究所の成果を事業部に引き渡す手順が分からない。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2066",
+   "employee_id": "E025",
+   "department": "素材研究所",
+   "timestamp": "2026-08-31T04:33:08+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "悩み・不安",
+   "issue_summary": "定年が近い先輩の知識を後輩にどう引き継ぐか。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2067",
+   "employee_id": "E051",
+   "department": "繊維事業部",
+   "timestamp": "2026-08-31T05:23:41+00:00",
+   "category_1": "他部署連携",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "新規案件で研究所と事業部で優先順位が合わず、調整が進まない。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2068",
+   "employee_id": "E069",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-08-31T05:37:51+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "先週から燃焼試験の結果が再生樹脂だとばらつく原因を知りたい。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2069",
+   "employee_id": "E048",
+   "department": "樹脂事業部",
+   "timestamp": "2026-08-31T07:33:43+00:00",
+   "category_1": "働き方・職場環境",
+   "category_2": "悩み・不安",
+   "issue_summary": "評価面談の前に気持ちが落ち着かない"
+  },
+  {
+   "log_id": "L2070",
+   "employee_id": "E021",
+   "department": "素材研究所",
+   "timestamp": "2026-09-01T00:23:09+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "悩み・不安",
+   "issue_summary": "定年が近い先輩の知識を後輩にどう引き継ぐか"
+  },
+  {
+   "log_id": "L2071",
+   "employee_id": "E022",
+   "department": "素材研究所",
+   "timestamp": "2026-09-01T00:52:48+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "燃焼試験の結果が再生樹脂だとばらつく原因を知りたい。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2072",
+   "employee_id": "E032",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-01T03:50:38+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "最近今日の天気を聞いただけ。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2073",
+   "employee_id": "E026",
+   "department": "素材研究所",
+   "timestamp": "2026-09-01T08:02:06+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "量産前の検証で実験のノウハウを体系的に残す方法を知りたい。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2074",
+   "employee_id": "E089",
+   "department": "品質保証部",
+   "timestamp": "2026-09-01T08:03:22+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "会議の準備でラボからのスケールアップで収率が落ちる原因を知りたい。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2075",
+   "employee_id": "E083",
+   "department": "営業本部",
+   "timestamp": "2026-09-02T01:01:06+00:00",
+   "category_1": "技術検討",
+   "category_2": "作業代行",
+   "issue_summary": "会議の準備でLCAの算定範囲をどう決めるか知りたい。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2076",
+   "employee_id": "E031",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-02T01:05:31+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "顧客からの要望でおすすめのランチを聞いただけ。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2077",
+   "employee_id": "E070",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-09-02T01:38:15+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "難燃グレードの再生樹脂でUL94 V-0を満たす配合が分からない。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2078",
+   "employee_id": "E053",
+   "department": "繊維事業部",
+   "timestamp": "2026-09-02T03:49:42+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "最近試作費の予算が不足しており、優先順位をつける判断基準が欲しい。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2079",
+   "employee_id": "E021",
+   "department": "素材研究所",
+   "timestamp": "2026-09-02T04:01:47+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "使用済み原料の比率を上げたら引っ張りに弱くなってしまった"
+  },
+  {
+   "log_id": "L2080",
+   "employee_id": "E064",
+   "department": "フィルム事業部",
+   "timestamp": "2026-09-02T05:03:03+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "新規の設備投資について、採算のシミュレーションの作り方が分からない"
+  },
+  {
+   "log_id": "L2081",
+   "employee_id": "E023",
+   "department": "素材研究所",
+   "timestamp": "2026-09-02T05:05:08+00:00",
+   "category_1": "事業戦略",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "最近内装部品を軽くする要望がTier1からあり、類似案件を知りたい。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2082",
+   "employee_id": "E096",
+   "department": "知財・法務部",
+   "timestamp": "2026-09-03T01:21:55+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "量産前の検証でLCAの算定範囲をどう決めるか知りたい。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2083",
+   "employee_id": "E028",
+   "department": "素材研究所",
+   "timestamp": "2026-09-03T01:28:06+00:00",
+   "category_1": "働き方・職場環境",
+   "category_2": "悩み・不安",
+   "issue_summary": "在宅勤務が続いて孤独を感じ、集中力が落ちている。まず何から確認すべきか迷っている"
+  },
+  {
+   "log_id": "L2084",
+   "employee_id": "E027",
+   "department": "素材研究所",
+   "timestamp": "2026-09-03T01:38:33+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "先週からおすすめのランチを聞いただけ"
+  },
+  {
+   "log_id": "L2085",
+   "employee_id": "E076",
+   "department": "生産技術部",
+   "timestamp": "2026-09-03T01:49:33+00:00",
+   "category_1": "事業戦略",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "顧客からの要望で内装部品を軽くする要望がTier1からあり、類似案件を知りたい"
+  },
+  {
+   "log_id": "L2086",
+   "employee_id": "E027",
+   "department": "素材研究所",
+   "timestamp": "2026-09-03T02:03:09+00:00",
+   "category_1": "働き方・職場環境",
+   "category_2": "悩み・不安",
+   "issue_summary": "残業が増えて研究と家庭の両立が難しい。まず何から確認すべきか迷っている"
+  },
+  {
+   "log_id": "L2087",
+   "employee_id": "E085",
+   "department": "海外営業部",
+   "timestamp": "2026-09-03T02:27:59+00:00",
+   "category_1": "他部署連携",
+   "category_2": "手順がわからない",
+   "issue_summary": "新規案件で輸出先の化学物質のルールが変わるらしく、確認先が分からない。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2088",
+   "employee_id": "E044",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-03T03:35:29+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "手順がわからない",
+   "issue_summary": "量産前の検証で来期の計画で人手が足りず、どこを削るか決められない"
+  },
+  {
+   "log_id": "L2089",
+   "employee_id": "E023",
+   "department": "素材研究所",
+   "timestamp": "2026-09-03T06:03:52+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "顧客からの要望でリサイクル材を混ぜたときの強度低下を抑える相溶化剤の選び方が分からない。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2090",
+   "employee_id": "E030",
+   "department": "素材研究所",
+   "timestamp": "2026-09-03T06:38:14+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "量産前の検証で難燃グレードの再生樹脂でUL94 V-0を満たす配合が分からない。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2091",
+   "employee_id": "E092",
+   "department": "環境・サステナビリティ推進部",
+   "timestamp": "2026-09-03T07:03:09+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "文章の誤字を直してほしいという軽い依頼。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2092",
+   "employee_id": "E041",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-03T08:01:23+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "顧客からの要望で再生PET繊維の強度低下について、過去の類似検討を探している。社内に過去の事例がないか知りたい"
+  },
+  {
+   "log_id": "L2093",
+   "employee_id": "E058",
+   "department": "繊維事業部",
+   "timestamp": "2026-09-03T08:17:34+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "顧客からの要望で今日の天気を聞いただけ。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2094",
+   "employee_id": "E066",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-09-04T00:41:40+00:00",
+   "category_1": "事業戦略",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "内装部品を軽くする要望がTier1からあり、類似案件を知りたい。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2095",
+   "employee_id": "E081",
+   "department": "営業本部",
+   "timestamp": "2026-09-04T02:07:31+00:00",
+   "category_1": "事業戦略",
+   "category_2": "手順がわからない",
+   "issue_summary": "量産前の検証で欧州の顧客との価格交渉で、現地の相場情報が見つからない"
+  },
+  {
+   "log_id": "L2096",
+   "employee_id": "E063",
+   "department": "フィルム事業部",
+   "timestamp": "2026-09-04T06:02:31+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "顧客からの要望でリサイクル原料を混ぜるほど製品が割れやすくなる。誰に聞けばよいか"
+  },
+  {
+   "log_id": "L2097",
+   "employee_id": "E040",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-04T06:26:57+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "最近今日の天気を聞いただけ"
+  },
+  {
+   "log_id": "L2098",
+   "employee_id": "E081",
+   "department": "営業本部",
+   "timestamp": "2026-09-07T02:48:59+00:00",
+   "category_1": "他部署連携",
+   "category_2": "手順がわからない",
+   "issue_summary": "品質不良の原因分析の手順が分からない。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2099",
+   "employee_id": "E078",
+   "department": "生産技術部",
+   "timestamp": "2026-09-07T03:04:03+00:00",
+   "category_1": "事業戦略",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "量産前の検証で内装部品を軽くする要望がTier1からあり、類似案件を知りたい。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2100",
+   "employee_id": "E048",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-07T03:19:38+00:00",
+   "category_1": "他部署連携",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "先週から開発側と営業側で納期の認識がずれて困っている"
+  },
+  {
+   "log_id": "L2101",
+   "employee_id": "E090",
+   "department": "品質保証部",
+   "timestamp": "2026-09-07T03:41:05+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "試作の段階でハロゲンを含まない燃えにくい材料を再利用したい。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2102",
+   "employee_id": "E057",
+   "department": "繊維事業部",
+   "timestamp": "2026-09-07T05:51:17+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "悩み・不安",
+   "issue_summary": "実験のノウハウを体系的に残す方法を知りたい。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2103",
+   "employee_id": "E033",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-07T05:54:36+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "会議の準備でおすすめのランチを聞いただけ。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2104",
+   "employee_id": "E022",
+   "department": "素材研究所",
+   "timestamp": "2026-09-07T06:23:06+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "火が燃え広がりにくい樹脂を回収品から作る前例はあるか。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2105",
+   "employee_id": "E046",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-07T08:42:07+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "ハロゲンを含まない燃えにくい材料を再利用したい。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2106",
+   "employee_id": "E074",
+   "department": "生産技術部",
+   "timestamp": "2026-09-08T01:53:27+00:00",
+   "category_1": "働き方・職場環境",
+   "category_2": "悩み・不安",
+   "issue_summary": "在宅勤務が続いて孤独を感じ、集中力が落ちている"
+  },
+  {
+   "log_id": "L2107",
+   "employee_id": "E047",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-08T02:04:59+00:00",
+   "category_1": "他部署連携",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "試作の段階で海外顧客からSDSの提出を求められたが手順が分からない。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2108",
+   "employee_id": "E086",
+   "department": "海外営業部",
+   "timestamp": "2026-09-08T04:10:29+00:00",
+   "category_1": "事業戦略",
+   "category_2": "手順がわからない",
+   "issue_summary": "欧州の顧客との価格交渉で、現地の相場情報が見つからない。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2109",
+   "employee_id": "E038",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-08T05:14:05+00:00",
+   "category_1": "他部署連携",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "量産前の検証で開発側と営業側で納期の認識がずれて困っている。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2110",
+   "employee_id": "E042",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-08T06:01:36+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "先週からありがとう、助かりました。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2111",
+   "employee_id": "E082",
+   "department": "営業本部",
+   "timestamp": "2026-09-08T07:47:16+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "自動車内装材の軽量化提案で、比重を下げつつ強度を保つ材料を探している。まず何から確認すべきか迷っている"
+  },
+  {
+   "log_id": "L2112",
+   "employee_id": "E049",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-08T08:39:54+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "新規案件で再利用原料を使った試作品の耐久試験が基準を下回った。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2113",
+   "employee_id": "E089",
+   "department": "品質保証部",
+   "timestamp": "2026-09-09T00:31:44+00:00",
+   "category_1": "他部署連携",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "先週から輸出先の化学物質のルールが変わるらしく、確認先が分からない。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2114",
+   "employee_id": "E060",
+   "department": "フィルム事業部",
+   "timestamp": "2026-09-09T00:46:02+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "試作費の予算が不足しており、優先順位をつける判断基準が欲しい"
+  },
+  {
+   "log_id": "L2115",
+   "employee_id": "E038",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-09T04:49:53+00:00",
+   "category_1": "技術検討",
+   "category_2": "作業代行",
+   "issue_summary": "顧客からの要望で包装フィルムのバリア性を上げる方法を知りたい。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2116",
+   "employee_id": "E045",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-09T05:52:20+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "混ぜる原料のグレードで物性が変わる理由が整理できていない。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2117",
+   "employee_id": "E038",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-09T07:16:54+00:00",
+   "category_1": null,
+   "category_2": "エラー・障害",
+   "issue_summary": "試作の段階で議事録の要約を作ってほしい。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2118",
+   "employee_id": "E060",
+   "department": "フィルム事業部",
+   "timestamp": "2026-09-10T00:31:19+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "コスト試算で原料調達の変動をどう織り込むか知りたい。関連する資料が見つからない"
+  },
+  {
+   "log_id": "L2119",
+   "employee_id": "E030",
+   "department": "素材研究所",
+   "timestamp": "2026-09-10T00:45:05+00:00",
+   "category_1": "事業戦略",
+   "category_2": "情報が見つからない",
+   "issue_summary": "量産前の検証でクルマの内装を軽くしたいという顧客依頼にどう答えるか。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2120",
+   "employee_id": "E063",
+   "department": "フィルム事業部",
+   "timestamp": "2026-09-10T02:26:04+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "先週から再生PET繊維の強度低下について、過去の類似検討を探している。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2121",
+   "employee_id": "E025",
+   "department": "素材研究所",
+   "timestamp": "2026-09-10T02:30:33+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "ハロゲンを含まない燃えにくい材料を再利用したい"
+  },
+  {
+   "log_id": "L2122",
+   "employee_id": "E054",
+   "department": "繊維事業部",
+   "timestamp": "2026-09-10T04:21:30+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "ありがとう、助かりました。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2123",
+   "employee_id": "E088",
+   "department": "海外営業部",
+   "timestamp": "2026-09-10T07:28:46+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "最近ありがとう、助かりました"
+  },
+  {
+   "log_id": "L2124",
+   "employee_id": "E066",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-09-11T00:23:42+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "顧客からの要望で安全規格を満たしつつ循環利用できる素材の組み合わせを知りたい。社内に過去の事例がないか知りたい"
+  },
+  {
+   "log_id": "L2125",
+   "employee_id": "E097",
+   "department": "知財・法務部",
+   "timestamp": "2026-09-11T00:33:48+00:00",
+   "category_1": "事業戦略",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "新しい用途の提案先を探している。電子材料向けの需要を知りたい。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2126",
+   "employee_id": "E033",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-11T03:45:06+00:00",
+   "category_1": "他部署連携",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "開発側と営業側で納期の認識がずれて困っている。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2127",
+   "employee_id": "E054",
+   "department": "繊維事業部",
+   "timestamp": "2026-09-11T04:02:25+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "手順がわからない",
+   "issue_summary": "会議の準備で来期の計画で人手が足りず、どこを削るか決められない。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2128",
+   "employee_id": "E035",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-11T04:15:16+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "新規案件で文章の誤字を直してほしいという軽い依頼。関連する資料が見つからない"
+  },
+  {
+   "log_id": "L2129",
+   "employee_id": "E043",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-11T05:31:04+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "悩み・不安",
+   "issue_summary": "定年が近い先輩の知識を後輩にどう引き継ぐか。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2130",
+   "employee_id": "E035",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-11T06:10:48+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "悩み・不安",
+   "issue_summary": "試作の段階で実験のノウハウを体系的に残す方法を知りたい"
+  },
+  {
+   "log_id": "L2131",
+   "employee_id": "E076",
+   "department": "生産技術部",
+   "timestamp": "2026-09-11T06:46:32+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "先週からCFRPと樹脂の使い分けの判断基準を知りたい。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2132",
+   "employee_id": "E079",
+   "department": "生産技術部",
+   "timestamp": "2026-09-11T06:58:18+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "量産前の検証で再利用原料を使った試作品の耐久試験が基準を下回った。まず何から確認すべきか迷っている"
+  },
+  {
+   "log_id": "L2133",
+   "employee_id": "E090",
+   "department": "品質保証部",
+   "timestamp": "2026-09-11T08:05:48+00:00",
+   "category_1": null,
+   "category_2": "手順がわからない",
+   "issue_summary": "最近議事録の要約を作ってほしい。まず何から確認すべきか迷っている"
+  },
+  {
+   "log_id": "L2134",
+   "employee_id": "E048",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-14T00:25:57+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "悩み・不安",
+   "issue_summary": "若手研究者のOJTの進め方に悩んでいる"
+  },
+  {
+   "log_id": "L2135",
+   "employee_id": "E074",
+   "department": "生産技術部",
+   "timestamp": "2026-09-14T00:55:53+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "新規案件で新規の設備投資について、採算のシミュレーションの作り方が分からない"
+  },
+  {
+   "log_id": "L2136",
+   "employee_id": "E048",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-14T02:55:14+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "会議の準備で回収したペットボトル由来の原料で糸が切れやすくなる原因を知りたい"
+  },
+  {
+   "log_id": "L2137",
+   "employee_id": "E077",
+   "department": "生産技術部",
+   "timestamp": "2026-09-14T03:56:43+00:00",
+   "category_1": "他部署連携",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "量産前の検証で部門間の役割分担が曖昧で、テーマが停滞している。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2138",
+   "employee_id": "E071",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-09-14T04:32:24+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "先週から火が燃え広がりにくい樹脂を回収品から作る前例はあるか。関連する資料が見つからない"
+  },
+  {
+   "log_id": "L2139",
+   "employee_id": "E060",
+   "department": "フィルム事業部",
+   "timestamp": "2026-09-14T04:45:43+00:00",
+   "category_1": "事業戦略",
+   "category_2": "作業代行",
+   "issue_summary": "特許の先行技術調査の進め方を知りたい"
+  },
+  {
+   "log_id": "L2140",
+   "employee_id": "E068",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-09-14T05:14:36+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "顧客からの要望でありがとう、助かりました"
+  },
+  {
+   "log_id": "L2141",
+   "employee_id": "E031",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-14T05:49:15+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "新規案件で安全規格を満たしつつ循環利用できる素材の組み合わせを知りたい。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2142",
+   "employee_id": "E070",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-09-14T06:11:55+00:00",
+   "category_1": "他部署連携",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "顧客からの要望で研究所の成果を事業部に引き渡す手順が分からない。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2143",
+   "employee_id": "E032",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-14T06:20:52+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "リサイクル材を混ぜたときの強度低下を抑える相溶化剤の選び方が分からない。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2144",
+   "employee_id": "E066",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-09-14T08:19:52+00:00",
+   "category_1": null,
+   "category_2": "手順がわからない",
+   "issue_summary": "議事録の要約を作ってほしい。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2145",
+   "employee_id": "E026",
+   "department": "素材研究所",
+   "timestamp": "2026-09-15T02:38:19+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "試作の段階で再生材の比率を上げると強度低下が出るため、配合設計の見直し方法を知りたい。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2146",
+   "employee_id": "E029",
+   "department": "素材研究所",
+   "timestamp": "2026-09-15T03:17:15+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "悩み・不安",
+   "issue_summary": "量産前の検証で若手研究者のOJTの進め方に悩んでいる。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2147",
+   "employee_id": "E068",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-09-15T04:57:32+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "新規案件で難燃剤を入れた樹脂をリサイクルすると物性が落ちる。UL94を維持する方法は"
+  },
+  {
+   "log_id": "L2148",
+   "employee_id": "E031",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-15T07:24:33+00:00",
+   "category_1": null,
+   "category_2": "情報が見つからない",
+   "issue_summary": "議事録の要約を作ってほしい"
+  },
+  {
+   "log_id": "L2149",
+   "employee_id": "E051",
+   "department": "繊維事業部",
+   "timestamp": "2026-09-15T07:33:16+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "悩み・不安",
+   "issue_summary": "新規案件でベテランの技術継承が進まず、暗黙知が失われそうで心配。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2150",
+   "employee_id": "E038",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-15T07:59:46+00:00",
+   "category_1": "働き方・職場環境",
+   "category_2": "悩み・不安",
+   "issue_summary": "残業が増えて研究と家庭の両立が難しい"
+  },
+  {
+   "log_id": "L2151",
+   "employee_id": "E088",
+   "department": "海外営業部",
+   "timestamp": "2026-09-15T08:04:20+00:00",
+   "category_1": "他部署連携",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "量産前の検証で輸出先の化学物質のルールが変わるらしく、確認先が分からない"
+  },
+  {
+   "log_id": "L2152",
+   "employee_id": "E045",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-16T02:10:15+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "難燃グレードの再生樹脂でUL94 V-0を満たす配合が分からない。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2153",
+   "employee_id": "E071",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-09-16T04:43:03+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "最近こんにちは、今日はよろしくお願いします。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2154",
+   "employee_id": "E043",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-16T07:16:52+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "試作の段階で自動車内装材の軽量化提案で、比重を下げつつ強度を保つ材料を探している。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2155",
+   "employee_id": "E044",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-17T00:19:26+00:00",
+   "category_1": "他部署連携",
+   "category_2": "情報が見つからない",
+   "issue_summary": "量産前の検証で東南アジアの現地規制と化審法の違いを整理したい。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2156",
+   "employee_id": "E096",
+   "department": "知財・法務部",
+   "timestamp": "2026-09-17T02:23:39+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "会議室の予約方法を確認しただけ。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2157",
+   "employee_id": "E074",
+   "department": "生産技術部",
+   "timestamp": "2026-09-17T02:31:23+00:00",
+   "category_1": "働き方・職場環境",
+   "category_2": "悩み・不安",
+   "issue_summary": "メンタル面で不調を感じており、相談先が知りたい。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2158",
+   "employee_id": "E040",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-17T04:03:33+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "顧客からの要望でありがとう、助かりました。関連する資料が見つからない"
+  },
+  {
+   "log_id": "L2159",
+   "employee_id": "E085",
+   "department": "海外営業部",
+   "timestamp": "2026-09-17T04:08:28+00:00",
+   "category_1": "事業戦略",
+   "category_2": "情報が見つからない",
+   "issue_summary": "最近海外の顧客から取扱い書類の様式を求められた"
+  },
+  {
+   "log_id": "L2160",
+   "employee_id": "E046",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-17T05:12:33+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "回収したペットボトル由来の原料で糸が切れやすくなる原因を知りたい。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2161",
+   "employee_id": "E042",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-17T05:39:54+00:00",
+   "category_1": "事業戦略",
+   "category_2": "手順がわからない",
+   "issue_summary": "欧州の顧客との価格交渉で、現地の相場情報が見つからない。社内に過去の事例がないか知りたい"
+  },
+  {
+   "log_id": "L2162",
+   "employee_id": "E066",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-09-17T08:30:28+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "会議の準備で火が燃え広がりにくい樹脂を回収品から作る前例はあるか。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2163",
+   "employee_id": "E063",
+   "department": "フィルム事業部",
+   "timestamp": "2026-09-18T00:04:59+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "量産前の検証で再生PETを配合すると引張強度が低下する原因と対策を知りたい。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2164",
+   "employee_id": "E022",
+   "department": "素材研究所",
+   "timestamp": "2026-09-18T01:03:15+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "乗用車向けの部品を薄肉化して重量を減らす相談先を知りたい。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2165",
+   "employee_id": "E090",
+   "department": "品質保証部",
+   "timestamp": "2026-09-18T01:16:11+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "新規案件でマテリアルリサイクル品でロットごとに強度がばらつく理由を知りたい。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2166",
+   "employee_id": "E090",
+   "department": "品質保証部",
+   "timestamp": "2026-09-18T01:49:15+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "量産前の検証で火が燃え広がりにくい樹脂を回収品から作る前例はあるか。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2167",
+   "employee_id": "E047",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-18T02:24:43+00:00",
+   "category_1": null,
+   "category_2": "作業代行",
+   "issue_summary": "先週から議事録の要約を作ってほしい。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2168",
+   "employee_id": "E099",
+   "department": "DX推進部",
+   "timestamp": "2026-09-18T02:55:03+00:00",
+   "category_1": "技術検討",
+   "category_2": "作業代行",
+   "issue_summary": "先週から繊維の染色ムラの原因と対策を知りたい。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2169",
+   "employee_id": "E077",
+   "department": "生産技術部",
+   "timestamp": "2026-09-18T05:26:33+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "顧客からの要望で乗用車向けの部品を薄肉化して重量を減らす相談先を知りたい"
+  },
+  {
+   "log_id": "L2170",
+   "employee_id": "E063",
+   "department": "フィルム事業部",
+   "timestamp": "2026-09-18T07:34:38+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "来期の計画で人手が足りず、どこを削るか決められない"
+  },
+  {
+   "log_id": "L2171",
+   "employee_id": "E046",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-18T08:54:08+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "先週からマテリアルリサイクル品でロットごとに強度がばらつく理由を知りたい。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2172",
+   "employee_id": "E047",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-21T00:26:19+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "手順がわからない",
+   "issue_summary": "試作の段階で新規の設備投資について、採算のシミュレーションの作り方が分からない。まず何から確認すべきか迷っている"
+  },
+  {
+   "log_id": "L2173",
+   "employee_id": "E031",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-21T00:28:21+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "最近ベテランの技術継承が進まず、暗黙知が失われそうで心配。社内に過去の事例がないか知りたい"
+  },
+  {
+   "log_id": "L2174",
+   "employee_id": "E088",
+   "department": "海外営業部",
+   "timestamp": "2026-09-21T00:56:33+00:00",
+   "category_1": "他部署連携",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "顧客からの要望で欧州向けでREACH規制の対応状況を顧客に説明する必要がある。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2175",
+   "employee_id": "E079",
+   "department": "生産技術部",
+   "timestamp": "2026-09-21T03:50:09+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "顧客からの要望で今日の天気を聞いただけ"
+  },
+  {
+   "log_id": "L2176",
+   "employee_id": "E025",
+   "department": "素材研究所",
+   "timestamp": "2026-09-21T03:59:44+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "顧客からの要望で再利用原料を使った試作品の耐久試験が基準を下回った"
+  },
+  {
+   "log_id": "L2177",
+   "employee_id": "E035",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-21T05:17:08+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "試作の段階で再生PETを配合すると引張強度が低下する原因と対策を知りたい。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2178",
+   "employee_id": "E031",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-21T06:11:31+00:00",
+   "category_1": "他部署連携",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "開発側と営業側で納期の認識がずれて困っている。まず何から確認すべきか迷っている"
+  },
+  {
+   "log_id": "L2179",
+   "employee_id": "E030",
+   "department": "素材研究所",
+   "timestamp": "2026-09-21T06:21:34+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "先週から火が燃え広がりにくい樹脂を回収品から作る前例はあるか。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2180",
+   "employee_id": "E030",
+   "department": "素材研究所",
+   "timestamp": "2026-09-21T07:02:40+00:00",
+   "category_1": "事業戦略",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "内装部品を軽くする要望がTier1からあり、類似案件を知りたい。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2181",
+   "employee_id": "E047",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-21T07:50:27+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "マテリアルリサイクル品でロットごとに強度がばらつく理由を知りたい。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2182",
+   "employee_id": "E055",
+   "department": "繊維事業部",
+   "timestamp": "2026-09-21T08:48:24+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "手順がわからない",
+   "issue_summary": "先週から新規の設備投資について、採算のシミュレーションの作り方が分からない。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2183",
+   "employee_id": "E066",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-09-22T00:27:43+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "会議の準備でありがとう、助かりました"
+  },
+  {
+   "log_id": "L2184",
+   "employee_id": "E052",
+   "department": "繊維事業部",
+   "timestamp": "2026-09-22T00:44:54+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "新人が実験でつまずく原因を教える時間が取れない。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2185",
+   "employee_id": "E072",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-09-22T00:45:32+00:00",
+   "category_1": "事業戦略",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "新しい用途の提案先を探している。電子材料向けの需要を知りたい"
+  },
+  {
+   "log_id": "L2186",
+   "employee_id": "E036",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-22T01:24:59+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "最近燃焼試験の結果が再生樹脂だとばらつく原因を知りたい。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2187",
+   "employee_id": "E093",
+   "department": "環境・サステナビリティ推進部",
+   "timestamp": "2026-09-22T01:29:32+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "量産前の検証でありがとう、助かりました。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2188",
+   "employee_id": "E072",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-09-22T03:30:48+00:00",
+   "category_1": "事業戦略",
+   "category_2": "情報が見つからない",
+   "issue_summary": "顧客からの要望でクルマの内装を軽くしたいという顧客依頼にどう答えるか。社内に過去の事例がないか知りたい"
+  },
+  {
+   "log_id": "L2189",
+   "employee_id": "E062",
+   "department": "フィルム事業部",
+   "timestamp": "2026-09-22T03:50:02+00:00",
+   "category_1": null,
+   "category_2": "エラー・障害",
+   "issue_summary": "会議の準備で議事録の要約を作ってほしい。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2190",
+   "employee_id": "E076",
+   "department": "生産技術部",
+   "timestamp": "2026-09-22T03:55:03+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "使用済み原料の比率を上げたら引っ張りに弱くなってしまった。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2191",
+   "employee_id": "E031",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-22T04:29:44+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "量産前の検証でリサイクル材を混ぜたときの強度低下を抑える相溶化剤の選び方が分からない。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2192",
+   "employee_id": "E086",
+   "department": "海外営業部",
+   "timestamp": "2026-09-22T05:07:58+00:00",
+   "category_1": "他部署連携",
+   "category_2": "情報が見つからない",
+   "issue_summary": "試作の段階で欧州向けでREACH規制の対応状況を顧客に説明する必要がある。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2193",
+   "employee_id": "E051",
+   "department": "繊維事業部",
+   "timestamp": "2026-09-22T05:49:25+00:00",
+   "category_1": "他部署連携",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "研究所と事業部で優先順位が合わず、調整が進まない。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2194",
+   "employee_id": "E045",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-22T06:12:53+00:00",
+   "category_1": "他部署連携",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "会議の準備で部門間の役割分担が曖昧で、テーマが停滞している。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2195",
+   "employee_id": "E035",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-22T07:13:06+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "量産前の検証で回収したペットボトル由来の原料で糸が切れやすくなる原因を知りたい。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2196",
+   "employee_id": "E048",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-22T07:53:16+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "量産前の検証で乗用車向けの部品を薄肉化して重量を減らす相談先を知りたい。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2197",
+   "employee_id": "E030",
+   "department": "素材研究所",
+   "timestamp": "2026-09-22T08:49:19+00:00",
+   "category_1": "技術検討",
+   "category_2": "手順がわからない",
+   "issue_summary": "新規案件でラボからのスケールアップで収率が落ちる原因を知りたい。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2198",
+   "employee_id": "E023",
+   "department": "素材研究所",
+   "timestamp": "2026-09-23T00:04:01+00:00",
+   "category_1": "他部署連携",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "開発側と営業側で納期の認識がずれて困っている。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2199",
+   "employee_id": "E079",
+   "department": "生産技術部",
+   "timestamp": "2026-09-23T00:10:44+00:00",
+   "category_1": "働き方・職場環境",
+   "category_2": "悩み・不安",
+   "issue_summary": "メンタル面で不調を感じており、相談先が知りたい。まず何から確認すべきか迷っている"
+  },
+  {
+   "log_id": "L2200",
+   "employee_id": "E026",
+   "department": "素材研究所",
+   "timestamp": "2026-09-23T00:49:07+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "量産前の検証でPFAS規制に対応するフッ素フリーの代替材料を探している。社内に過去の事例がないか知りたい"
+  },
+  {
+   "log_id": "L2201",
+   "employee_id": "E057",
+   "department": "繊維事業部",
+   "timestamp": "2026-09-23T01:51:56+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "量産前の検証で再利用原料を使った試作品の耐久試験が基準を下回った。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2202",
+   "employee_id": "E027",
+   "department": "素材研究所",
+   "timestamp": "2026-09-23T04:24:07+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "会議の準備で回収したペットボトル由来の原料で糸が切れやすくなる原因を知りたい。社内に過去の事例がないか知りたい"
+  },
+  {
+   "log_id": "L2203",
+   "employee_id": "E092",
+   "department": "環境・サステナビリティ推進部",
+   "timestamp": "2026-09-23T05:36:07+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "おすすめのランチを聞いただけ。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2204",
+   "employee_id": "E048",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-23T06:48:39+00:00",
+   "category_1": "事業戦略",
+   "category_2": "手順がわからない",
+   "issue_summary": "海外の顧客から取扱い書類の様式を求められた"
+  },
+  {
+   "log_id": "L2205",
+   "employee_id": "E038",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-23T07:34:48+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "会議の準備でベテランの技術継承が進まず、暗黙知が失われそうで心配。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2206",
+   "employee_id": "E024",
+   "department": "素材研究所",
+   "timestamp": "2026-09-23T08:59:17+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "先週からフッ素系の撥水剤を使わない代替材料の事例を知りたい。社内に過去の事例がないか知りたい"
+  },
+  {
+   "log_id": "L2207",
+   "employee_id": "E089",
+   "department": "品質保証部",
+   "timestamp": "2026-09-24T00:53:04+00:00",
+   "category_1": "他部署連携",
+   "category_2": "情報が見つからない",
+   "issue_summary": "欧州向けでREACH規制の対応状況を顧客に説明する必要がある"
+  },
+  {
+   "log_id": "L2208",
+   "employee_id": "E067",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-09-24T02:00:41+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "量産前の検証で燃焼試験の結果が再生樹脂だとばらつく原因を知りたい。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2209",
+   "employee_id": "E052",
+   "department": "繊維事業部",
+   "timestamp": "2026-09-24T02:04:56+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "量産前の検証で再生PETを配合すると引張強度が低下する原因と対策を知りたい。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2210",
+   "employee_id": "E046",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-24T04:12:42+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "会議の準備で来期の計画で人手が足りず、どこを削るか決められない"
+  },
+  {
+   "log_id": "L2211",
+   "employee_id": "E071",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-09-24T04:13:56+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "先週からPFASフリーのコーティング材の性能評価基準が分からない。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2212",
+   "employee_id": "E042",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-24T05:19:52+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "量産前の検証で再生PETを配合すると引張強度が低下する原因と対策を知りたい。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2213",
+   "employee_id": "E042",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-24T08:25:20+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "会議の準備で再利用原料を使った試作品の耐久試験が基準を下回った。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2214",
+   "employee_id": "E072",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-09-25T00:12:49+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "量産前の検証で撥水撥油をフッ素なしで実現した過去の案件はあるか。関連する資料が見つからない"
+  },
+  {
+   "log_id": "L2215",
+   "employee_id": "E021",
+   "department": "素材研究所",
+   "timestamp": "2026-09-25T01:46:56+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "量産前の検証でCFRPと樹脂の使い分けの判断基準を知りたい"
+  },
+  {
+   "log_id": "L2216",
+   "employee_id": "E059",
+   "department": "フィルム事業部",
+   "timestamp": "2026-09-25T02:17:00+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "手順がわからない",
+   "issue_summary": "試作費の予算が不足しており、優先順位をつける判断基準が欲しい"
+  },
+  {
+   "log_id": "L2217",
+   "employee_id": "E082",
+   "department": "営業本部",
+   "timestamp": "2026-09-25T02:22:05+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "先週から乗用車向けの部品を薄肉化して重量を減らす相談先を知りたい。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2218",
+   "employee_id": "E022",
+   "department": "素材研究所",
+   "timestamp": "2026-09-25T02:26:22+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "量産前の検証で繊維の染色ムラの原因と対策を知りたい"
+  },
+  {
+   "log_id": "L2219",
+   "employee_id": "E029",
+   "department": "素材研究所",
+   "timestamp": "2026-09-25T04:29:15+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "火が燃え広がりにくい樹脂を回収品から作る前例はあるか。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2220",
+   "employee_id": "E066",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-09-25T05:10:30+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "量産前の検証で難燃剤を入れた樹脂をリサイクルすると物性が落ちる。UL94を維持する方法は。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2221",
+   "employee_id": "E025",
+   "department": "素材研究所",
+   "timestamp": "2026-09-25T05:46:28+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "難燃性とリサイクル性を両立する材料設計の事例を探している。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2222",
+   "employee_id": "E096",
+   "department": "知財・法務部",
+   "timestamp": "2026-09-25T08:39:19+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "欧州の新しい有機フッ素化合物の規制に間に合う代替素材の候補を知りたい。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2223",
+   "employee_id": "E046",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-28T00:16:16+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "先週からベテランの技術継承が進まず、暗黙知が失われそうで心配。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2224",
+   "employee_id": "E026",
+   "department": "素材研究所",
+   "timestamp": "2026-09-28T01:18:37+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "先週から火が燃え広がりにくい樹脂を回収品から作る前例はあるか。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2225",
+   "employee_id": "E065",
+   "department": "フィルム事業部",
+   "timestamp": "2026-09-28T03:18:03+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "PFAS規制に対応するフッ素フリーの代替材料を探している"
+  },
+  {
+   "log_id": "L2226",
+   "employee_id": "E068",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-09-28T04:15:23+00:00",
+   "category_1": "他部署連携",
+   "category_2": "悩み・不安",
+   "issue_summary": "試作の段階で研究所の成果を事業部に引き渡す手順が分からない"
+  },
+  {
+   "log_id": "L2227",
+   "employee_id": "E094",
+   "department": "環境・サステナビリティ推進部",
+   "timestamp": "2026-09-28T05:39:36+00:00",
+   "category_1": "技術検討",
+   "category_2": "手順がわからない",
+   "issue_summary": "試作の段階でLCAの算定範囲をどう決めるか知りたい。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2228",
+   "employee_id": "E042",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-28T06:13:56+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "最近燃焼試験の結果が再生樹脂だとばらつく原因を知りたい。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2229",
+   "employee_id": "E089",
+   "department": "品質保証部",
+   "timestamp": "2026-09-28T06:18:29+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "回収したペットボトル由来の原料で糸が切れやすくなる原因を知りたい"
+  },
+  {
+   "log_id": "L2230",
+   "employee_id": "E075",
+   "department": "生産技術部",
+   "timestamp": "2026-09-28T06:22:55+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "再生PETを配合すると引張強度が低下する原因と対策を知りたい。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2231",
+   "employee_id": "E034",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-28T08:19:06+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "量産前の検証で再生材の比率を上げると強度低下が出るため、配合設計の見直し方法を知りたい。社内に過去の事例がないか知りたい"
+  },
+  {
+   "log_id": "L2232",
+   "employee_id": "E080",
+   "department": "営業本部",
+   "timestamp": "2026-09-28T08:28:18+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "実験データの解析にAIを使えるか知りたい。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2233",
+   "employee_id": "E028",
+   "department": "素材研究所",
+   "timestamp": "2026-09-29T00:39:27+00:00",
+   "category_1": "他部署連携",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "新規案件で開発側と営業側で納期の認識がずれて困っている。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2234",
+   "employee_id": "E050",
+   "department": "繊維事業部",
+   "timestamp": "2026-09-29T02:03:00+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "会議の準備で再生材の比率を上げると強度低下が出るため、配合設計の見直し方法を知りたい。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2235",
+   "employee_id": "E038",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-29T02:34:25+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "先週から再生PETを配合すると引張強度が低下する原因と対策を知りたい。まず何から確認すべきか迷っている"
+  },
+  {
+   "log_id": "L2236",
+   "employee_id": "E046",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-29T03:43:57+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "新規案件で新規の設備投資について、採算のシミュレーションの作り方が分からない。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2237",
+   "employee_id": "E049",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-29T03:49:31+00:00",
+   "category_1": "他部署連携",
+   "category_2": "手順がわからない",
+   "issue_summary": "先週から輸出先の化学物質のルールが変わるらしく、確認先が分からない。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2238",
+   "employee_id": "E076",
+   "department": "生産技術部",
+   "timestamp": "2026-09-29T03:56:24+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "顧客からの要望で再生PET繊維の強度低下について、過去の類似検討を探している。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2239",
+   "employee_id": "E091",
+   "department": "環境・サステナビリティ推進部",
+   "timestamp": "2026-09-29T04:21:22+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "試作の段階で欧州の新しい有機フッ素化合物の規制に間に合う代替素材の候補を知りたい。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2240",
+   "employee_id": "E084",
+   "department": "海外営業部",
+   "timestamp": "2026-09-29T04:49:21+00:00",
+   "category_1": "事業戦略",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "海外の顧客から取扱い書類の様式を求められた"
+  },
+  {
+   "log_id": "L2241",
+   "employee_id": "E045",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-29T06:41:43+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "新規案件でありがとう、助かりました"
+  },
+  {
+   "log_id": "L2242",
+   "employee_id": "E098",
+   "department": "DX推進部",
+   "timestamp": "2026-09-29T07:18:47+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "先週から文章の誤字を直してほしいという軽い依頼。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2243",
+   "employee_id": "E097",
+   "department": "知財・法務部",
+   "timestamp": "2026-09-29T07:29:13+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "最近撥水撥油をフッ素なしで実現した過去の案件はあるか。社内に過去の事例がないか知りたい"
+  },
+  {
+   "log_id": "L2244",
+   "employee_id": "E048",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-29T07:47:04+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "量産前の検証で会議室の予約方法を確認しただけ。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2245",
+   "employee_id": "E074",
+   "department": "生産技術部",
+   "timestamp": "2026-09-29T08:13:39+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "試作の段階でリサイクル原料を混ぜるほど製品が割れやすくなる。誰に聞けばよいか。まず何から確認すべきか迷っている"
+  },
+  {
+   "log_id": "L2246",
+   "employee_id": "E039",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-29T08:15:28+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "顧客からの要望で回収したペットボトル由来の原料で糸が切れやすくなる原因を知りたい。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2247",
+   "employee_id": "E043",
+   "department": "樹脂事業部",
+   "timestamp": "2026-09-30T00:03:58+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "リサイクル原料を混ぜるほど製品が割れやすくなる。誰に聞けばよいか。関連する資料が見つからない"
+  },
+  {
+   "log_id": "L2248",
+   "employee_id": "E034",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-30T02:28:42+00:00",
+   "category_1": "働き方・職場環境",
+   "category_2": "悩み・不安",
+   "issue_summary": "評価面談の前に気持ちが落ち着かない"
+  },
+  {
+   "log_id": "L2249",
+   "employee_id": "E038",
+   "department": "高分子研究所",
+   "timestamp": "2026-09-30T05:07:51+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "悩み・不安",
+   "issue_summary": "新規案件で若手研究者のOJTの進め方に悩んでいる。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2250",
+   "employee_id": "E093",
+   "department": "環境・サステナビリティ推進部",
+   "timestamp": "2026-09-30T06:27:17+00:00",
+   "category_1": null,
+   "category_2": "判断基準が分からない",
+   "issue_summary": "顧客からの要望で議事録の要約を作ってほしい。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2251",
+   "employee_id": "E030",
+   "department": "素材研究所",
+   "timestamp": "2026-09-30T06:53:28+00:00",
+   "category_1": "事業戦略",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "顧客からの要望で車載向けの軽量化ニーズに対する提案資料を作りたい"
+  },
+  {
+   "log_id": "L2252",
+   "employee_id": "E022",
+   "department": "素材研究所",
+   "timestamp": "2026-09-30T07:19:40+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "会議の準備でフッ素系の撥水剤を使わない代替材料の事例を知りたい"
+  },
+  {
+   "log_id": "L2253",
+   "employee_id": "E089",
+   "department": "品質保証部",
+   "timestamp": "2026-09-30T07:30:11+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "会議の準備で難燃性とリサイクル性を両立する材料設計の事例を探している"
+  },
+  {
+   "log_id": "L2254",
+   "employee_id": "E072",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-09-30T08:28:02+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "顧客からの要望で欧州の新しい有機フッ素化合物の規制に間に合う代替素材の候補を知りたい"
+  },
+  {
+   "log_id": "L2255",
+   "employee_id": "E073",
+   "department": "技術本部",
+   "timestamp": "2026-10-01T00:19:17+00:00",
+   "category_1": "他部署連携",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "開発側と営業側で納期の認識がずれて困っている。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2256",
+   "employee_id": "E080",
+   "department": "営業本部",
+   "timestamp": "2026-10-01T00:48:46+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "新規案件で乗用車向けの部品を薄肉化して重量を減らす相談先を知りたい。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2257",
+   "employee_id": "E081",
+   "department": "営業本部",
+   "timestamp": "2026-10-01T01:04:13+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "先週から乗用車向けの部品を薄肉化して重量を減らす相談先を知りたい。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2258",
+   "employee_id": "E054",
+   "department": "繊維事業部",
+   "timestamp": "2026-10-01T01:11:56+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "量産前の検証でマテリアルリサイクル品でロットごとに強度がばらつく理由を知りたい。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2259",
+   "employee_id": "E094",
+   "department": "環境・サステナビリティ推進部",
+   "timestamp": "2026-10-01T02:13:27+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "先週から今日の天気を聞いただけ"
+  },
+  {
+   "log_id": "L2260",
+   "employee_id": "E043",
+   "department": "樹脂事業部",
+   "timestamp": "2026-10-01T03:16:34+00:00",
+   "category_1": "他部署連携",
+   "category_2": "手順がわからない",
+   "issue_summary": "輸出先の化学物質のルールが変わるらしく、確認先が分からない。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2261",
+   "employee_id": "E042",
+   "department": "樹脂事業部",
+   "timestamp": "2026-10-01T03:18:17+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "実験のノウハウを体系的に残す方法を知りたい。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2262",
+   "employee_id": "E044",
+   "department": "樹脂事業部",
+   "timestamp": "2026-10-01T04:27:26+00:00",
+   "category_1": "他部署連携",
+   "category_2": "手順がわからない",
+   "issue_summary": "量産前の検証で東南アジアの現地規制と化審法の違いを整理したい"
+  },
+  {
+   "log_id": "L2263",
+   "employee_id": "E057",
+   "department": "繊維事業部",
+   "timestamp": "2026-10-01T04:41:49+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "新規案件で射出成形のひけを減らす条件を知りたい"
+  },
+  {
+   "log_id": "L2264",
+   "employee_id": "E063",
+   "department": "フィルム事業部",
+   "timestamp": "2026-10-01T05:04:50+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "手順がわからない",
+   "issue_summary": "量産前の検証でコスト試算で原料調達の変動をどう織り込むか知りたい。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2265",
+   "employee_id": "E054",
+   "department": "繊維事業部",
+   "timestamp": "2026-10-01T05:07:21+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "顧客からの要望でリサイクル原料を混ぜるほど製品が割れやすくなる。誰に聞けばよいか"
+  },
+  {
+   "log_id": "L2266",
+   "employee_id": "E022",
+   "department": "素材研究所",
+   "timestamp": "2026-10-01T05:59:40+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "先週から難燃剤を入れた樹脂をリサイクルすると物性が落ちる。UL94を維持する方法は。関連する資料が見つからない"
+  },
+  {
+   "log_id": "L2267",
+   "employee_id": "E076",
+   "department": "生産技術部",
+   "timestamp": "2026-10-01T06:29:05+00:00",
+   "category_1": "他部署連携",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "会議の準備で研究所の成果を事業部に引き渡す手順が分からない。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2268",
+   "employee_id": "E061",
+   "department": "フィルム事業部",
+   "timestamp": "2026-10-01T07:32:06+00:00",
+   "category_1": "他部署連携",
+   "category_2": "悩み・不安",
+   "issue_summary": "会議の準備で開発側と営業側で納期の認識がずれて困っている。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2269",
+   "employee_id": "E091",
+   "department": "環境・サステナビリティ推進部",
+   "timestamp": "2026-10-01T07:58:45+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "会議の準備でPFAS規制に対応するフッ素フリーの代替材料を探している。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2270",
+   "employee_id": "E082",
+   "department": "営業本部",
+   "timestamp": "2026-10-01T08:46:01+00:00",
+   "category_1": "働き方・職場環境",
+   "category_2": "悩み・不安",
+   "issue_summary": "在宅勤務が続いて孤独を感じ、集中力が落ちている"
+  },
+  {
+   "log_id": "L2271",
+   "employee_id": "E034",
+   "department": "高分子研究所",
+   "timestamp": "2026-10-02T00:38:10+00:00",
+   "category_1": "他部署連携",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "量産前の検証で顧客から使用禁止物質の切り替え時期を問われて困っている"
+  },
+  {
+   "log_id": "L2272",
+   "employee_id": "E054",
+   "department": "繊維事業部",
+   "timestamp": "2026-10-02T01:08:15+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "量産前の検証でリサイクル原料を混ぜるほど製品が割れやすくなる。誰に聞けばよいか。まず何から確認すべきか迷っている"
+  },
+  {
+   "log_id": "L2273",
+   "employee_id": "E058",
+   "department": "繊維事業部",
+   "timestamp": "2026-10-02T02:06:50+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "会議の準備でマテリアルリサイクル品でロットごとに強度がばらつく理由を知りたい。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2274",
+   "employee_id": "E090",
+   "department": "品質保証部",
+   "timestamp": "2026-10-02T02:23:02+00:00",
+   "category_1": "他部署連携",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "顧客からの要望で海外顧客からSDSの提出を求められたが手順が分からない"
+  },
+  {
+   "log_id": "L2275",
+   "employee_id": "E068",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-10-02T02:35:21+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "フッ素系の撥水剤を使わない代替材料の事例を知りたい。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2276",
+   "employee_id": "E046",
+   "department": "樹脂事業部",
+   "timestamp": "2026-10-02T02:55:33+00:00",
+   "category_1": "他部署連携",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "研究所の成果を事業部に引き渡す手順が分からない"
+  },
+  {
+   "log_id": "L2277",
+   "employee_id": "E070",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-10-02T03:53:13+00:00",
+   "category_1": "他部署連携",
+   "category_2": "作業代行",
+   "issue_summary": "量産前の検証で品質不良の原因分析の手順が分からない"
+  },
+  {
+   "log_id": "L2278",
+   "employee_id": "E070",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-10-02T04:05:01+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "会議の準備でハロゲンを含まない燃えにくい材料を再利用したい。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2279",
+   "employee_id": "E079",
+   "department": "生産技術部",
+   "timestamp": "2026-10-02T04:15:44+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "最近再生材の比率を上げると強度低下が出るため、配合設計の見直し方法を知りたい"
+  },
+  {
+   "log_id": "L2280",
+   "employee_id": "E024",
+   "department": "素材研究所",
+   "timestamp": "2026-10-02T06:06:17+00:00",
+   "category_1": "技術検討",
+   "category_2": "手順がわからない",
+   "issue_summary": "先週からLCAの算定範囲をどう決めるか知りたい。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2281",
+   "employee_id": "E067",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-10-02T06:24:20+00:00",
+   "category_1": "他部署連携",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "量産前の検証でPFAS代替の規制対応について、他部署に詳しい人がいるか知りたい。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2282",
+   "employee_id": "E092",
+   "department": "環境・サステナビリティ推進部",
+   "timestamp": "2026-10-02T06:26:58+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "量産前の検証で欧州の新しい有機フッ素化合物の規制に間に合う代替素材の候補を知りたい。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2283",
+   "employee_id": "E053",
+   "department": "繊維事業部",
+   "timestamp": "2026-10-02T07:14:40+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "試作の段階でこんにちは、今日はよろしくお願いします"
+  },
+  {
+   "log_id": "L2284",
+   "employee_id": "E022",
+   "department": "素材研究所",
+   "timestamp": "2026-10-02T07:21:12+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "最近フッ素系の撥水剤を使わない代替材料の事例を知りたい。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2285",
+   "employee_id": "E054",
+   "department": "繊維事業部",
+   "timestamp": "2026-10-02T08:44:32+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "新規案件で実験のノウハウを体系的に残す方法を知りたい。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2286",
+   "employee_id": "E066",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-10-05T00:14:36+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "会議の準備で難燃グレードの再生樹脂でUL94 V-0を満たす配合が分からない。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2287",
+   "employee_id": "E075",
+   "department": "生産技術部",
+   "timestamp": "2026-10-05T00:45:44+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "自動車内装材の軽量化提案で、比重を下げつつ強度を保つ材料を探している。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2288",
+   "employee_id": "E068",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-10-05T01:34:35+00:00",
+   "category_1": "他部署連携",
+   "category_2": "情報が見つからない",
+   "issue_summary": "顧客からの要望でPFAS代替の規制対応について、他部署に詳しい人がいるか知りたい"
+  },
+  {
+   "log_id": "L2289",
+   "employee_id": "E052",
+   "department": "繊維事業部",
+   "timestamp": "2026-10-05T02:11:29+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "最近新規の設備投資について、採算のシミュレーションの作り方が分からない"
+  },
+  {
+   "log_id": "L2290",
+   "employee_id": "E034",
+   "department": "高分子研究所",
+   "timestamp": "2026-10-05T03:26:39+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "量産前の検証でPFAS規制に対応するフッ素フリーの代替材料を探している。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2291",
+   "employee_id": "E035",
+   "department": "高分子研究所",
+   "timestamp": "2026-10-05T05:49:15+00:00",
+   "category_1": "他部署連携",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "試作の段階で部門間の役割分担が曖昧で、テーマが停滞している。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2292",
+   "employee_id": "E059",
+   "department": "フィルム事業部",
+   "timestamp": "2026-10-05T06:18:48+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "混ぜる原料のグレードで物性が変わる理由が整理できていない。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2293",
+   "employee_id": "E049",
+   "department": "樹脂事業部",
+   "timestamp": "2026-10-05T06:39:12+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "会議の準備で回収したペットボトル由来の原料で糸が切れやすくなる原因を知りたい。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2294",
+   "employee_id": "E091",
+   "department": "環境・サステナビリティ推進部",
+   "timestamp": "2026-10-05T07:10:35+00:00",
+   "category_1": "事業戦略",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "欧州の顧客との価格交渉で、現地の相場情報が見つからない"
+  },
+  {
+   "log_id": "L2295",
+   "employee_id": "E049",
+   "department": "樹脂事業部",
+   "timestamp": "2026-10-05T07:15:15+00:00",
+   "category_1": "他部署連携",
+   "category_2": "悩み・不安",
+   "issue_summary": "開発側と営業側で納期の認識がずれて困っている"
+  },
+  {
+   "log_id": "L2296",
+   "employee_id": "E061",
+   "department": "フィルム事業部",
+   "timestamp": "2026-10-05T07:41:04+00:00",
+   "category_1": "他部署連携",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "顧客からの要望で研究所と事業部で優先順位が合わず、調整が進まない。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2297",
+   "employee_id": "E031",
+   "department": "高分子研究所",
+   "timestamp": "2026-10-05T08:25:37+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "量産前の検証で回収したペットボトル由来の原料で糸が切れやすくなる原因を知りたい。社内に過去の事例がないか知りたい"
+  },
+  {
+   "log_id": "L2298",
+   "employee_id": "E054",
+   "department": "繊維事業部",
+   "timestamp": "2026-10-05T08:36:27+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "リサイクル材を混ぜたときの強度低下を抑える相溶化剤の選び方が分からない。関連する資料が見つからない"
+  },
+  {
+   "log_id": "L2299",
+   "employee_id": "E085",
+   "department": "海外営業部",
+   "timestamp": "2026-10-06T00:30:00+00:00",
+   "category_1": "事業戦略",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "海外の顧客から取扱い書類の様式を求められた。関連する資料が見つからない"
+  },
+  {
+   "log_id": "L2300",
+   "employee_id": "E071",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-10-06T00:38:03+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "欧州の新しい有機フッ素化合物の規制に間に合う代替素材の候補を知りたい"
+  },
+  {
+   "log_id": "L2301",
+   "employee_id": "E053",
+   "department": "繊維事業部",
+   "timestamp": "2026-10-06T01:03:22+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "会議の準備で混ぜる原料のグレードで物性が変わる理由が整理できていない。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2302",
+   "employee_id": "E099",
+   "department": "DX推進部",
+   "timestamp": "2026-10-06T01:15:52+00:00",
+   "category_1": null,
+   "category_2": "判断基準が分からない",
+   "issue_summary": "議事録の要約を作ってほしい"
+  },
+  {
+   "log_id": "L2303",
+   "employee_id": "E093",
+   "department": "環境・サステナビリティ推進部",
+   "timestamp": "2026-10-06T01:56:03+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "PFAS規制に対応するフッ素フリーの代替材料を探している。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2304",
+   "employee_id": "E082",
+   "department": "営業本部",
+   "timestamp": "2026-10-06T01:59:16+00:00",
+   "category_1": "働き方・職場環境",
+   "category_2": "悩み・不安",
+   "issue_summary": "在宅勤務が続いて孤独を感じ、集中力が落ちている。まず何から確認すべきか迷っている"
+  },
+  {
+   "log_id": "L2305",
+   "employee_id": "E083",
+   "department": "営業本部",
+   "timestamp": "2026-10-06T02:00:12+00:00",
+   "category_1": null,
+   "category_2": "作業代行",
+   "issue_summary": "顧客からの要望で議事録の要約を作ってほしい。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2306",
+   "employee_id": "E067",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-10-06T02:28:50+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "新規案件でフッ素系の撥水剤を使わない代替材料の事例を知りたい。社内に過去の事例がないか知りたい"
+  },
+  {
+   "log_id": "L2307",
+   "employee_id": "E060",
+   "department": "フィルム事業部",
+   "timestamp": "2026-10-06T02:38:02+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "会議の準備で撥水撥油をフッ素なしで実現した過去の案件はあるか"
+  },
+  {
+   "log_id": "L2308",
+   "employee_id": "E039",
+   "department": "高分子研究所",
+   "timestamp": "2026-10-06T03:07:50+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "量産前の検証で実験のノウハウを体系的に残す方法を知りたい。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2309",
+   "employee_id": "E025",
+   "department": "素材研究所",
+   "timestamp": "2026-10-06T03:19:04+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "先週から会議室の予約方法を確認しただけ"
+  },
+  {
+   "log_id": "L2310",
+   "employee_id": "E084",
+   "department": "海外営業部",
+   "timestamp": "2026-10-06T04:19:37+00:00",
+   "category_1": "事業戦略",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "会議の準備で海外の顧客から取扱い書類の様式を求められた。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2311",
+   "employee_id": "E097",
+   "department": "知財・法務部",
+   "timestamp": "2026-10-06T05:17:29+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "繊維の染色ムラの原因と対策を知りたい"
+  },
+  {
+   "log_id": "L2312",
+   "employee_id": "E037",
+   "department": "高分子研究所",
+   "timestamp": "2026-10-06T05:43:36+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "量産前の検証でPFASフリーのコーティング材の性能評価基準が分からない。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2313",
+   "employee_id": "E042",
+   "department": "樹脂事業部",
+   "timestamp": "2026-10-06T05:49:19+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "量産前の検証で安全規格を満たしつつ循環利用できる素材の組み合わせを知りたい。関連する資料が見つからない"
+  },
+  {
+   "log_id": "L2314",
+   "employee_id": "E045",
+   "department": "樹脂事業部",
+   "timestamp": "2026-10-06T06:01:02+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "新規案件で試作費の予算が不足しており、優先順位をつける判断基準が欲しい"
+  },
+  {
+   "log_id": "L2315",
+   "employee_id": "E063",
+   "department": "フィルム事業部",
+   "timestamp": "2026-10-06T06:47:05+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "新規案件で再利用原料を使った試作品の耐久試験が基準を下回った"
+  },
+  {
+   "log_id": "L2316",
+   "employee_id": "E024",
+   "department": "素材研究所",
+   "timestamp": "2026-10-06T07:01:25+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "最近PFAS規制に対応するフッ素フリーの代替材料を探している"
+  },
+  {
+   "log_id": "L2317",
+   "employee_id": "E064",
+   "department": "フィルム事業部",
+   "timestamp": "2026-10-06T07:31:56+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "会議の準備でPFAS規制に対応するフッ素フリーの代替材料を探している"
+  },
+  {
+   "log_id": "L2318",
+   "employee_id": "E023",
+   "department": "素材研究所",
+   "timestamp": "2026-10-06T07:51:51+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "フッ素系の撥水剤を使わない代替材料の事例を知りたい。関連する資料が見つからない"
+  },
+  {
+   "log_id": "L2319",
+   "employee_id": "E051",
+   "department": "繊維事業部",
+   "timestamp": "2026-10-06T08:24:54+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "新規案件でマテリアルリサイクル品でロットごとに強度がばらつく理由を知りたい"
+  },
+  {
+   "log_id": "L2320",
+   "employee_id": "E023",
+   "department": "素材研究所",
+   "timestamp": "2026-10-06T08:30:33+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "回収したペットボトル由来の原料で糸が切れやすくなる原因を知りたい。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2321",
+   "employee_id": "E030",
+   "department": "素材研究所",
+   "timestamp": "2026-10-06T08:39:47+00:00",
+   "category_1": "他部署連携",
+   "category_2": "情報が見つからない",
+   "issue_summary": "顧客から使用禁止物質の切り替え時期を問われて困っている"
+  },
+  {
+   "log_id": "L2322",
+   "employee_id": "E033",
+   "department": "高分子研究所",
+   "timestamp": "2026-10-06T08:46:48+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "量産前の検証で撥水撥油をフッ素なしで実現した過去の案件はあるか。関連する資料が見つからない"
+  },
+  {
+   "log_id": "L2323",
+   "employee_id": "E023",
+   "department": "素材研究所",
+   "timestamp": "2026-10-07T01:00:47+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "試作の段階で定年が近い先輩の知識を後輩にどう引き継ぐか。まず何から確認すべきか迷っている"
+  },
+  {
+   "log_id": "L2324",
+   "employee_id": "E046",
+   "department": "樹脂事業部",
+   "timestamp": "2026-10-07T01:30:06+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "会議室の予約方法を確認しただけ。関連する資料が見つからない"
+  },
+  {
+   "log_id": "L2325",
+   "employee_id": "E089",
+   "department": "品質保証部",
+   "timestamp": "2026-10-07T01:34:39+00:00",
+   "category_1": "他部署連携",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "会議の準備で輸出先の化学物質のルールが変わるらしく、確認先が分からない"
+  },
+  {
+   "log_id": "L2326",
+   "employee_id": "E023",
+   "department": "素材研究所",
+   "timestamp": "2026-10-07T01:48:00+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "最近撥水撥油をフッ素なしで実現した過去の案件はあるか"
+  },
+  {
+   "log_id": "L2327",
+   "employee_id": "E055",
+   "department": "繊維事業部",
+   "timestamp": "2026-10-07T02:10:59+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "顧客からの要望でリサイクル材を混ぜたときの強度低下を抑える相溶化剤の選び方が分からない。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2328",
+   "employee_id": "E089",
+   "department": "品質保証部",
+   "timestamp": "2026-10-07T02:40:26+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "顧客からの要望でPFAS規制に対応するフッ素フリーの代替材料を探している"
+  },
+  {
+   "log_id": "L2329",
+   "employee_id": "E022",
+   "department": "素材研究所",
+   "timestamp": "2026-10-07T03:05:18+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "会議の準備でこんにちは、今日はよろしくお願いします"
+  },
+  {
+   "log_id": "L2330",
+   "employee_id": "E039",
+   "department": "高分子研究所",
+   "timestamp": "2026-10-07T03:31:23+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "先週から安全規格を満たしつつ循環利用できる素材の組み合わせを知りたい。まず何から確認すべきか迷っている"
+  },
+  {
+   "log_id": "L2331",
+   "employee_id": "E041",
+   "department": "樹脂事業部",
+   "timestamp": "2026-10-07T03:45:22+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "リサイクル材を混ぜたときの強度低下を抑える相溶化剤の選び方が分からない。社内に過去の事例がないか知りたい"
+  },
+  {
+   "log_id": "L2332",
+   "employee_id": "E076",
+   "department": "生産技術部",
+   "timestamp": "2026-10-07T03:45:24+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "先週から再生PETを配合すると引張強度が低下する原因と対策を知りたい。関連する資料が見つからない"
+  },
+  {
+   "log_id": "L2333",
+   "employee_id": "E033",
+   "department": "高分子研究所",
+   "timestamp": "2026-10-07T03:59:31+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "先週から再利用原料を使った試作品の耐久試験が基準を下回った。同僚にも聞いたが意見が分かれた"
+  },
+  {
+   "log_id": "L2334",
+   "employee_id": "E029",
+   "department": "素材研究所",
+   "timestamp": "2026-10-07T04:22:06+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "最近再生材の比率を上げると強度低下が出るため、配合設計の見直し方法を知りたい。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2335",
+   "employee_id": "E031",
+   "department": "高分子研究所",
+   "timestamp": "2026-10-07T04:34:37+00:00",
+   "category_1": "他部署連携",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "研究所の成果を事業部に引き渡す手順が分からない"
+  },
+  {
+   "log_id": "L2336",
+   "employee_id": "E066",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-10-07T05:20:22+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "火が燃え広がりにくい樹脂を回収品から作る前例はあるか。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2337",
+   "employee_id": "E050",
+   "department": "繊維事業部",
+   "timestamp": "2026-10-07T06:05:27+00:00",
+   "category_1": null,
+   "category_2": "手順がわからない",
+   "issue_summary": "試作の段階で議事録の要約を作ってほしい"
+  },
+  {
+   "log_id": "L2338",
+   "employee_id": "E025",
+   "department": "素材研究所",
+   "timestamp": "2026-10-07T07:01:31+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "顧客からの要望で自動車内装材の軽量化提案で、比重を下げつつ強度を保つ材料を探している。納期が迫っていて焦っている"
+  },
+  {
+   "log_id": "L2339",
+   "employee_id": "E088",
+   "department": "海外営業部",
+   "timestamp": "2026-10-07T07:39:42+00:00",
+   "category_1": "事業戦略",
+   "category_2": "手順がわからない",
+   "issue_summary": "先週から海外の顧客から取扱い書類の様式を求められた。担当者が異動してしまい引き継ぎが不十分"
+  },
+  {
+   "log_id": "L2340",
+   "employee_id": "E099",
+   "department": "DX推進部",
+   "timestamp": "2026-10-07T07:52:59+00:00",
+   "category_1": null,
+   "category_2": "課題ではない",
+   "issue_summary": "こんにちは、今日はよろしくお願いします。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2341",
+   "employee_id": "E063",
+   "department": "フィルム事業部",
+   "timestamp": "2026-10-07T08:41:12+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "量産前の検証で混ぜる原料のグレードで物性が変わる理由が整理できていない。社内に過去の事例がないか知りたい"
+  },
+  {
+   "log_id": "L2342",
+   "employee_id": "E043",
+   "department": "樹脂事業部",
+   "timestamp": "2026-10-08T00:02:17+00:00",
+   "category_1": "他部署連携",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "先週から東南アジアの現地規制と化審法の違いを整理したい。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2343",
+   "employee_id": "E032",
+   "department": "高分子研究所",
+   "timestamp": "2026-10-08T00:45:49+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "試作の段階で難燃剤を入れた樹脂をリサイクルすると物性が落ちる。UL94を維持する方法は。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2344",
+   "employee_id": "E030",
+   "department": "素材研究所",
+   "timestamp": "2026-10-08T00:58:08+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "欧州の新しい有機フッ素化合物の規制に間に合う代替素材の候補を知りたい"
+  },
+  {
+   "log_id": "L2345",
+   "employee_id": "E041",
+   "department": "樹脂事業部",
+   "timestamp": "2026-10-08T01:33:26+00:00",
+   "category_1": "事業戦略",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "新規案件でクルマの内装を軽くしたいという顧客依頼にどう答えるか。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2346",
+   "employee_id": "E049",
+   "department": "樹脂事業部",
+   "timestamp": "2026-10-08T02:24:19+00:00",
+   "category_1": "技術検討",
+   "category_2": "判断基準が分からない",
+   "issue_summary": "回収したペットボトル由来の原料で糸が切れやすくなる原因を知りたい。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2347",
+   "employee_id": "E022",
+   "department": "素材研究所",
+   "timestamp": "2026-10-08T03:34:03+00:00",
+   "category_1": "他部署連携",
+   "category_2": "情報が見つからない",
+   "issue_summary": "最近PFAS代替の規制対応について、他部署に詳しい人がいるか知りたい。関連する資料が見つからない"
+  },
+  {
+   "log_id": "L2348",
+   "employee_id": "E068",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-10-08T03:35:08+00:00",
+   "category_1": "技術検討",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "試作の段階で欧州の新しい有機フッ素化合物の規制に間に合う代替素材の候補を知りたい。関連する資料が見つからない"
+  },
+  {
+   "log_id": "L2349",
+   "employee_id": "E042",
+   "department": "樹脂事業部",
+   "timestamp": "2026-10-08T03:56:53+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "手順がわからない",
+   "issue_summary": "最近来期の計画で人手が足りず、どこを削るか決められない。来月の顧客との打ち合わせまでに答えが必要"
+  },
+  {
+   "log_id": "L2350",
+   "employee_id": "E021",
+   "department": "素材研究所",
+   "timestamp": "2026-10-08T04:12:31+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "再生PET繊維の強度低下について、過去の類似検討を探している。関連する資料が見つからない"
+  },
+  {
+   "log_id": "L2351",
+   "employee_id": "E093",
+   "department": "環境・サステナビリティ推進部",
+   "timestamp": "2026-10-08T04:15:34+00:00",
+   "category_1": "他部署連携",
+   "category_2": "情報が見つからない",
+   "issue_summary": "先週からPFAS代替の規制対応について、他部署に詳しい人がいるか知りたい。手元の評価では再現できている"
+  },
+  {
+   "log_id": "L2352",
+   "employee_id": "E021",
+   "department": "素材研究所",
+   "timestamp": "2026-10-08T04:17:05+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "回収したペットボトル由来の原料で糸が切れやすくなる原因を知りたい。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2353",
+   "employee_id": "E031",
+   "department": "高分子研究所",
+   "timestamp": "2026-10-08T06:51:12+00:00",
+   "category_1": "働き方・職場環境",
+   "category_2": "悩み・不安",
+   "issue_summary": "在宅勤務が続いて孤独を感じ、集中力が落ちている。上司には口頭で伝えてある"
+  },
+  {
+   "log_id": "L2354",
+   "employee_id": "E052",
+   "department": "繊維事業部",
+   "timestamp": "2026-10-08T06:53:28+00:00",
+   "category_1": "技術検討",
+   "category_2": "エラー・障害",
+   "issue_summary": "再生PETを配合すると引張強度が低下する原因と対策を知りたい"
+  },
+  {
+   "log_id": "L2355",
+   "employee_id": "E059",
+   "department": "フィルム事業部",
+   "timestamp": "2026-10-08T06:58:45+00:00",
+   "category_1": "他部署連携",
+   "category_2": "情報が見つからない",
+   "issue_summary": "会議の準備で顧客から使用禁止物質の切り替え時期を問われて困っている。社内に過去の事例がないか知りたい"
+  },
+  {
+   "log_id": "L2356",
+   "employee_id": "E050",
+   "department": "繊維事業部",
+   "timestamp": "2026-10-08T08:28:14+00:00",
+   "category_1": "予算・リソース配分",
+   "category_2": "手順がわからない",
+   "issue_summary": "会議の準備で来期の計画で人手が足りず、どこを削るか決められない。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2357",
+   "employee_id": "E036",
+   "department": "高分子研究所",
+   "timestamp": "2026-10-09T01:07:15+00:00",
+   "category_1": "技術検討",
+   "category_2": "情報が見つからない",
+   "issue_summary": "撥水撥油をフッ素なしで実現した過去の案件はあるか。他の拠点でも同じ状況か気になる"
+  },
+  {
+   "log_id": "L2358",
+   "employee_id": "E066",
+   "department": "機能性材料事業部",
+   "timestamp": "2026-10-09T01:50:34+00:00",
+   "category_1": "他部署連携",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "部門間の役割分担が曖昧で、テーマが停滞している。社外の文献も調べたが決め手がない"
+  },
+  {
+   "log_id": "L2359",
+   "employee_id": "E039",
+   "department": "高分子研究所",
+   "timestamp": "2026-10-09T02:02:54+00:00",
+   "category_1": "人材・スキル",
+   "category_2": "誰に聞くか分からない",
+   "issue_summary": "量産前の検証で若手研究者のOJTの進め方に悩んでいる"
+  }
+ ]
+}
