@@ -6,3 +6,4 @@ python-dotenv
 openai>=1.66.0      # 相談AIの client.responses.parse（1.65以前には無い）
 pydantic>=2
 supabase
+scikit-learn      # matching_engine の経験一致（文字N-gramのTF-IDF）

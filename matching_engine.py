@@ -3,82 +3,90 @@ matching_engine.py
 -------------------
 FEATURE 02「人材マッチング」の中核ロジック。
 
-蓄積された相談ログから抽出された課題（category_1 / issue_summary）に対して、
-人事マスタ・業績データ・プロジェクトの稼働状況と突合し、対応に適した人材を
-スコア順に提案する。
+マネージャーが選んだ課題（相談ログの issue_summary）に対して、課題に詳しそうな社員を探して提示する。
 
-データは Supabase の各テーブル（employees / skill_master / performance_records /
-project_members / extracted_issues など）から読む。.env の SUPABASE_URL / SUPABASE_KEY が必要。
-「データ取得(_fetch / load_*)」と「スコアリング(_*_score)」は分離してある。
+【仕様（2026-10 会議で決定）】
+  match_score = 0.8 × スキル一致 + 0.2 × 経験一致
+    スキル一致 : 社員の skill1 / skill2 / 資格（certifications）のどれかが、課題文の語（辞書）に一致するか
+    経験一致   : 過去の業績（key_project・comment）が、課題に関連するか
+  ・評価ランク（S/A/B…）や評価コメントの論調は、マッチングにも並び順にも使わない。
+  ・並び順はマッチングのスコアではなく「ソート」で決める:
+      ①スキル（skill1/2）に一致した人 … 課題文と一致した語の種類数（最大3）→ スキルのレベル → 経験年数の高い順
+      ②資格だけ一致した人            … 一致した語の種類数 → 社会人経験年数の長い順
+      ③経験だけ一致した人            … 経験一致の高い順
+    （「引張」の1語だけ当たった高レベルの人が、語がよく当たる専門家より上に来ないよう、語の種類数を先に見る）
+  ・年代・部署・役職・経験年数・参加案件数・資格を「タグ」として付け、最終的に選ぶのは人間（マネージャー）。
+  ・なぜその人が出たのかを、explanation（判断根拠）として返す。
 
-接続情報（.env）の読み込みは utils/service.py に任せている。
+【一致の判定】
+  辞書方式（skill_master.keywords と資格の辞書 CERT_KEYWORDS）で、「課題文にこの語が含まれるか」を調べる。
+  経験は自由文なので、辞書の語に加えて、文字N-gram の TF-IDF 類似度（streamlit_4 の方式）でも拾う。
 
-起動方法（動作確認用。どのフォルダからでも実行できる）:
+データは Supabase の各テーブルから読む（.env の SUPABASE_URL / SUPABASE_KEY が必要）。
+「データ取得(_fetch / load_*)」と「スコアリング」は分離してある。
+
+動作確認用（DBに繋ぐ）:
     python matching_engine.py
 """
 
 from __future__ import annotations
 
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Optional
 
 # ----------------------------------------------------------------------------
-# スコアリングの重み・パラメータ（チームで調整しやすいよう定数化）
+# パラメータ（チームで調整しやすいよう定数化）
 # ----------------------------------------------------------------------------
-#   match_score = W_SKILL * スキル + W_PERFORMANCE * 業績   （合計1.0。稼働状況は含めない）
-W_SKILL = 0.6
-W_PERFORMANCE = 0.4
+W_SKILL = 0.8
+W_EXPERIENCE = 0.2
 
-# スキルスコアの内訳（合計1.0）。「課題との一致度」に、スキルのレベルと経験年数を掛け合わせる。
-#   skill_score = 一致度 × (SKILL_BASE + SKILL_LEVEL_WEIGHT × レベル/5 + SKILL_YEAR_WEIGHT × 年数/SKILL_YEARS_CAP)
-# 一致度が同じなら、レベルが高く経験年数が長い人ほど上位になる。
-SKILL_BASE = 0.4
-SKILL_LEVEL_WEIGHT = 0.4
-SKILL_YEAR_WEIGHT = 0.2
-SKILL_YEARS_CAP = 10  # このスキル年数以上は満点扱い
+# 一致の強さ: 課題文に含まれる「一致した語」の種類数で決める（1種類 0.7 / 2種類 0.85 / 3種類以上 1.0）
+STRENGTH_BY_HITS = {1: 0.7, 2: 0.85}
+STRENGTH_MAX = 1.0
+# ジャンル（category_1）が、そのスキルの関連ジャンルと同じなら少しだけ加点（語が一致したスキルのみ。ジャンルだけでは候補にならない）
+GENRE_BONUS = 0.1
 
-# 稼働状況（availability）はスコアには反映せず、画面表示用の参考情報としてのみ算出する。
-# 実績（assignment_type="実績"）としてこの件数以上プロジェクトを抱えていたら「稼働に余裕なし」。
-# ※ "AI推薦" は過去にこのマッチングエンジンが提案しただけの候補であり、
-#    確定した稼働ではないため稼働率には含めない。
-MAX_ACTIVE_ASSIGNMENTS = 3
+# 経験の類似度（TF-IDF・文字N-gram）。この値未満は「無関係」とみなし、満点はFULL_SIM
+EXPERIENCE_MIN_SIM = 0.15
+EXPERIENCE_FULL_SIM = 0.40
 
-# 業績スコア（0〜1にクリップ）= 直近年度の評価ランク + 評価コメントの論調 + 課題に関連する過去実績
-#   1) 評価ランク（S/A/B/C/D）を点数化したもの
-RATING_SCORE = {"S": 1.0, "A": 0.8, "B": 0.6, "C": 0.4, "D": 0.2}
-#   2) 直近年度の評価コメントに含まれる肯定語/否定語の数の差 × TONE_STEP を加減点（±TONE_CAPまで）
-TONE_STEP = 0.05
-TONE_CAP = 0.10
-POSITIVE_TERMS = ["高評価", "高く評価", "成功", "達成", "貢献", "主導", "リーダーシップ", "超過",
-                  "スムーズ", "牽引", "発揮", "向上", "良好", "推進", "発掘", "新規契約"]
-NEGATIVE_TERMS = ["課題", "遅延", "苦労", "難航", "やり直し", "不足", "改善余地", "時間を要", "苦戦"]
-#   3) 課題文に出てくる語（スキルのキーワード）が、過去の実績（案件名・評価コメント。全年度分）にも
-#      出てくる場合、その語1つにつき EVIDENCE_STEP を加点（+EVIDENCE_CAPまで）
-EVIDENCE_STEP = 0.05
-EVIDENCE_CAP = 0.15
+# 並び順で「一致した語の種類数」を比べるときの上限（これ以上は同じ扱い）
+SORT_HIT_CAP = 3
 
-# スキル関連度（_skill_relevance）。
-#   カテゴリ一致                 : RELEVANCE_CATEGORY_MATCH
-#   カテゴリ一致 + 課題文にキーワード : RELEVANCE_CATEGORY_MATCH + RELEVANCE_TEXT_BONUS（= 1.0）
-#   課題文にキーワードのみ         : RELEVANCE_TEXT_ONLY
-# 「キーワードのみ」はカテゴリ一致より低くしておく。同じ水準にすると、一般的な語が偶然含まれるだけで
-# 全く畑違いの社員が上位に紛れ込んでしまう（例: 技術検討の課題に人事担当者が浮上する）。
-RELEVANCE_CATEGORY_MATCH = 0.8
-RELEVANCE_TEXT_BONUS = 0.2
-RELEVANCE_TEXT_ONLY = 0.6
+# 参加案件として数えない案件の状態
+EXCLUDED_PROJECT_STATUSES = {"完了", "中止", "終了"}
 
-# skill_master にキーワードが登録されていないスキルのための代替として、スキル名から
-# 末尾の「〜開発」「〜設計」等を取り除いた語幹（stem）をキーワードとして使う。
-# 長い接尾辞から順に判定する。
+# 資格 → 課題文でその資格が関連するとみなす語
+CERT_KEYWORDS: dict[str, list[str]] = {
+    "技術士（化学）": ["化学プロセス", "プラント", "高分子", "反応"],
+    "技術士（繊維）": ["繊維", "紡糸", "高分子"],
+    "技術士": ["技術士", "化学プロセス", "プラント"],
+    "公害防止管理者": ["排水", "排ガス", "環境規制", "環境対応"],
+    "危険物取扱者（甲種）": ["危険物", "溶剤", "火災"],
+    "高圧ガス製造保安責任者": ["高圧ガス", "設備保安"],
+    "毒物劇物取扱責任者": ["毒物", "劇物", "化学物質管理"],
+    "衛生管理者": ["労働衛生", "職場環境", "メンタル"],
+    "QC検定1級": ["品質管理", "不良", "工程能力"],
+    "弁理士": ["特許", "知財", "出願"],
+    "知的財産管理技能士": ["特許", "知財", "出願"],
+    "TOEIC900": ["海外", "英語"],
+    "中国語検定": ["中国語", "海外"],
+    "統計検定1級": ["統計", "データ分析"],
+    "統計検定2級": ["統計", "データ分析"],
+    "MBA": ["事業戦略", "経営", "新規事業"],
+    "中小企業診断士": ["事業戦略", "経営", "新規事業"],
+    "電気主任技術者": ["電気", "受変電"],
+}
+
+# skill_master にキーワードが登録されていないスキルのための代替: スキル名から末尾の「〜開発」等を除いた語幹
 _SKILL_SUFFIXES = sorted(
     ["モデル設計", "マネジメント", "開発", "設計", "戦略", "分析", "交渉", "育成", "開拓", "折衝", "調査"],
     key=len,
     reverse=True,
 )
 
-# 自由記述の相談文からカテゴリ（category_1）を推定するための簡易キーワード辞書。
-# 本来はai_advisor.py側でLLMによる意図解析に置き換わる想定の、暫定ヒューリスティック。
+# 自由記述の相談文からカテゴリ（category_1）を推定するための簡易キーワード辞書（match_for_query 用）
 CATEGORY_HINT_KEYWORDS = {
     "技術検討": ["技術", "開発", "設計", "システム", "IoT", "AI", "センサー", "精度", "素材", "検証"],
     "人材・スキル": ["人材", "育成", "スキル", "組織", "キャリア", "教育", "継承"],
@@ -97,13 +105,22 @@ class Candidate:
     department: str
     position: str
     manager_name: Optional[str]
-    match_score: float
-    feature: str  # UIにそのまま出せる説明文（app.pyのCANDIDATES["feature"]相当）
-    matched_skill: Optional[str]
+    match_score: float  # 0.8×skill_score + 0.2×experience_score（表示用。並び順には使わない）
     skill_score: float
-    performance_score: float
-    availability_score: float  # 表示用。match_score には含めない
-    availability_note: str  # 例:「稼働に余裕あり」
+    experience_score: float
+    match_type: str  # "スキル一致" / "資格のみ" / "経験のみ"
+    matched_skill: Optional[str]  # 一致したskill（無ければNone）
+    matched_skill_level: Optional[int]
+    matched_skill_years: Optional[int]
+    matched_skill_terms: list[str]  # 上のスキルが一致した語（並び順で種類数を見る）
+    matched_terms: list[str]  # 課題文に出ていて、一致の根拠になった語
+    tags: list[str]  # 年代・部署・役職・経験年数・参加案件数・資格
+    tag_groups: dict  # タグを種類別にしたもの（画面の絞り込み用）。{"年代": "40代", "部署": …, "資格": [..]}
+    active_projects: int
+    availability_note: str
+    explanation: list[str]  # 「なぜこの人が出たか」の判断根拠（1行ずつ）
+    feature: str = ""  # explanation を1つの文にしたもの（従来のUI向け）
+    extra: dict = field(default_factory=dict)
 
 
 # ----------------------------------------------------------------------------
@@ -111,14 +128,15 @@ class Candidate:
 # ----------------------------------------------------------------------------
 
 # 同じテーブルを何度も取りに行かないよう、短時間だけ結果を使い回す。
-# ログが増えたことを反映したいときは clear_cache() を呼ぶ。
 CACHE_TTL_SECONDS = 60
 _PAGE_SIZE = 1000  # Supabase(PostgREST) は1回の取得上限が1000行なので、ページ分割して全件取る
 _cache: dict[str, tuple[float, list[dict]]] = {}
+_tfidf_cache: dict[str, object] = {}
 
 
 def clear_cache() -> None:
     _cache.clear()
+    _tfidf_cache.clear()
 
 
 def _read_supabase(table: str) -> list[dict]:
@@ -173,33 +191,30 @@ def load_performance() -> dict[str, list[dict]]:
     return by_employee
 
 
-def load_active_assignment_counts() -> dict[str, int]:
-    """employee_id -> 実績（確定）ベースの現在のプロジェクト稼働数"""
+def load_active_project_counts() -> dict[str, int]:
+    """employee_id -> 今参加している案件の数（完了・中止の案件は数えない）。"""
+    status_by_project = {row["project_id"]: row.get("status") for row in _fetch("projects")}
     counts: dict[str, int] = {}
     for row in _fetch("project_members"):
-        if row.get("assignment_type") == "実績":
-            counts[row["employee_id"]] = counts.get(row["employee_id"], 0) + 1
+        if status_by_project.get(row["project_id"]) in EXCLUDED_PROJECT_STATUSES:
+            continue
+        counts[row["employee_id"]] = counts.get(row["employee_id"], 0) + 1
     return counts
 
 
 def load_extracted_issues() -> dict[str, dict]:
-    """issue_id -> 課題ログ（extracted_issuesの1行）。issue_id順に並べて返す。"""
+    """issue_id -> 課題ログ（extracted_issuesの1行）。"""
     rows = _fetch("extracted_issues")
     return {row["issue_id"]: row for row in sorted(rows, key=lambda r: r["issue_id"])}
 
 
-def load_category1_values() -> set[str]:
-    """ジャンル（category_1）マスタに定義されている値の集合"""
-    return {row["category_1"] for row in _fetch("category1_master") if row.get("category_1")}
-
-
 # ----------------------------------------------------------------------------
-# スコアリング（_*_score）
+# 一致の判定
 # ----------------------------------------------------------------------------
 
-def _to_float(value, default: float = 0.0) -> float:
+def _to_int(value, default: int = 0) -> int:
     try:
-        return float(value)
+        return int(value)
     except (TypeError, ValueError):
         return default
 
@@ -210,10 +225,7 @@ def _core_name(skill_name: str) -> str:
 
 
 def _skill_stem(skill_name: str) -> str:
-    """
-    スキル名から末尾の接尾辞（開発/設計/戦略...）を1つ取り除いた語幹を返す。
-    例: 「IoTセンサー開発」→「IoTセンサー」。相談文との部分一致判定に使う。
-    """
+    """スキル名から末尾の接尾辞（開発/設計/戦略...）を1つ取り除いた語幹。例: 「IoTセンサー開発」→「IoTセンサー」"""
     base = _core_name(skill_name)
     for suffix in _SKILL_SUFFIXES:
         if base.endswith(suffix) and len(base) > len(suffix):
@@ -230,250 +242,354 @@ def _skill_terms(skill_name: str, skill_keywords: dict[str, list[str]]) -> list[
     return [stem] if stem else []
 
 
-def _issue_terms(issue_text: str, skill_keywords: dict[str, list[str]]) -> list[str]:
-    """課題文に出てくる、全スキルのキーワード（重複なし）。過去実績との照合に使う。"""
-    if not issue_text:
+def _cert_names(certifications: Optional[str]) -> list[str]:
+    """資格欄（「MBA、TOEIC900」など）を1つずつの資格名に分ける。「なし」は空。"""
+    if not certifications or certifications.strip() in ("なし", "無し", "-"):
         return []
-    found: dict[str, None] = {}
+    for sep in ("、", "／", "/", ",", "，", ";", "；"):
+        certifications = certifications.replace(sep, "、")
+    return [c.strip() for c in certifications.split("、") if c.strip()]
+
+
+def _cert_terms(cert_name: str) -> list[str]:
+    """資格名に対応する語。辞書に完全一致が無ければ、名前が互いに含まれる辞書項目を使う。"""
+    if cert_name in CERT_KEYWORDS:
+        return CERT_KEYWORDS[cert_name]
+    for key, terms in CERT_KEYWORDS.items():
+        if key in cert_name or cert_name in key:
+            return terms
+    return []
+
+
+def _hits(terms: list[str], issue_text: str) -> list[str]:
+    """課題文に含まれている語（重複なし、辞書の順）"""
+    seen: dict[str, None] = {}
+    lowered = issue_text.casefold()
+    for term in terms:
+        if term and term.casefold() in lowered:
+            seen[term] = None
+    return list(seen)
+
+
+def _strength(hit_count: int) -> float:
+    """一致した語の種類数 → 一致の強さ（0〜1）"""
+    if hit_count <= 0:
+        return 0.0
+    return STRENGTH_BY_HITS.get(hit_count, STRENGTH_MAX)
+
+
+def _issue_dictionary_terms(issue_text: str, skill_keywords: dict[str, list[str]]) -> list[str]:
+    """課題文に出てくる、辞書（全スキルのキーワード＋資格の語）の語。経験の一致判定に使う。"""
+    all_terms: dict[str, None] = {}
     for skill_name in skill_keywords:
         for term in _skill_terms(skill_name, skill_keywords):
-            if term in issue_text:
-                found[term] = None
-    return list(found)
+            all_terms[term] = None
+    for terms in CERT_KEYWORDS.values():
+        for term in terms:
+            all_terms[term] = None
+    return _hits(list(all_terms), issue_text)
 
 
-def _skill_relevance(
-    skill_name: str,
-    category_1: Optional[str],
-    issue_text: str,
-    skill_master: dict[str, str],
-    skill_keywords: dict[str, list[str]],
-) -> float:
+def _skill_match(
+    employee: dict, category_1: Optional[str], issue_text: str,
+    skill_master: dict[str, str], skill_keywords: dict[str, list[str]],
+) -> tuple[float, list[dict], list[dict]]:
     """
-    1つのスキルが、指定の課題（カテゴリ・相談文）にどれだけ関連するかを0-1で返す。
-
-      カテゴリ一致 + 課題文にキーワード → RELEVANCE_CATEGORY_MATCH + RELEVANCE_TEXT_BONUS
-      カテゴリ一致のみ                  → RELEVANCE_CATEGORY_MATCH
-      課題文にキーワードのみ             → RELEVANCE_TEXT_ONLY（カテゴリ不一致/未指定でも拾える補助シグナル）
-      どちらも無し                      → 0.0（関連スキルなし）
+    スキルと資格の一致を調べる。
+    戻り値: (skill_score, 一致したスキルのリスト, 一致した資格のリスト)
+      skill_score = 一致したもののうち最大の「強さ」（スキルはジャンル一致で+GENRE_BONUS、上限1.0）
     """
-    category_hit = bool(category_1 and skill_master.get(skill_name) == category_1)
-    text_hit = bool(issue_text) and any(term in issue_text for term in _skill_terms(skill_name, skill_keywords))
-
-    if category_hit:
-        return RELEVANCE_CATEGORY_MATCH + (RELEVANCE_TEXT_BONUS if text_hit else 0.0)
-    if text_hit:
-        return RELEVANCE_TEXT_ONLY
-    return 0.0
-
-
-def _skill_score(
-    employee: dict,
-    category_1: Optional[str],
-    issue_text: str,
-    skill_master: dict[str, str],
-    skill_keywords: dict[str, list[str]],
-) -> tuple[float, Optional[str]]:
-    """
-    社員のskill1/skill2のうち課題に最も関連するものを1つ選び、
-    (0-1のスコア, 採用したスキル名) を返す。レベル・経験年数を上乗せ要素として使う。
-    """
-    best_score = 0.0
-    best_skill: Optional[str] = None
-
+    skill_hits: list[dict] = []
     for slot in ("skill1", "skill2"):
         name = (employee.get(slot) or "").strip()
         if not name:
             continue
+        terms = _hits(_skill_terms(name, skill_keywords), issue_text)
+        if not terms:
+            continue  # 語が一致しないスキルは、ジャンルが同じでも一致とみなさない
+        strength = _strength(len(terms))
+        genre = bool(category_1 and skill_master.get(name) == category_1)
+        if genre:
+            strength = min(STRENGTH_MAX, strength + GENRE_BONUS)
+        skill_hits.append({
+            "name": name, "level": _to_int(employee.get(f"{slot}_level"), 1),
+            "years": _to_int(employee.get(f"{slot}_year"), 0),
+            "terms": terms, "strength": strength, "genre": genre,
+        })
 
-        relevance = _skill_relevance(name, category_1, issue_text, skill_master, skill_keywords)
-        if relevance <= 0.0:
-            continue
+    cert_hits: list[dict] = []
+    for cert in _cert_names(employee.get("certifications")):
+        terms = _hits(_cert_terms(cert), issue_text)
+        if terms:
+            cert_hits.append({"name": cert, "terms": terms, "strength": _strength(len(terms))})
 
-        level = _to_float(employee.get(f"{slot}_level"), default=1.0)
-        years = _to_float(employee.get(f"{slot}_year"), default=0.0)
-        level_factor = min(level, 5.0) / 5.0
-        year_factor = min(years, SKILL_YEARS_CAP) / SKILL_YEARS_CAP
-
-        # 課題との一致度に、スキルのレベル・経験年数を掛け合わせる（最大1.0）
-        slot_score = relevance * (
-            SKILL_BASE + SKILL_LEVEL_WEIGHT * level_factor + SKILL_YEAR_WEIGHT * year_factor
-        )
-
-        if slot_score > best_score:
-            best_score = slot_score
-            best_skill = name
-
-    return best_score, best_skill
+    score = max([h["strength"] for h in skill_hits] + [h["strength"] for h in cert_hits] + [0.0])
+    return score, skill_hits, cert_hits
 
 
-def _performance(
-    employee_id: str, performance_by_employee: dict[str, list[dict]], issue_terms: list[str]
-) -> tuple[float, Optional[str]]:
+def _experience_vectorizer(performance_rows: list[dict]):
+    """業績の文（key_project＋comment）全体から作る TF-IDF（文字N-gram）。同じデータの間は使い回す。"""
+    key = (id(performance_rows), len(performance_rows))
+    cached = _tfidf_cache.get("exp")
+    if cached and cached[0] == key:
+        return cached[1]
+    try:
+        from sklearn.feature_extraction.text import TfidfVectorizer
+    except ImportError:
+        _tfidf_cache["exp"] = (key, None)
+        return None
+    texts = [_record_text(r) for r in performance_rows]
+    vectorizer = TfidfVectorizer(analyzer="char_wb", ngram_range=(2, 3), sublinear_tf=True)
+    matrix = vectorizer.fit_transform(texts)
+    pack = (vectorizer, matrix, {id(r): i for i, r in enumerate(performance_rows)})
+    _tfidf_cache["exp"] = (key, pack)
+    return pack
+
+
+def _record_text(record: dict) -> str:
+    return f"{record.get('key_project') or ''} {record.get('comment') or ''}".strip()
+
+
+def _experience_match(
+    employee_id: str, performance_by_employee: dict[str, list[dict]], performance_rows: list[dict],
+    issue_text: str, dictionary_terms: list[str],
+) -> tuple[float, Optional[dict]]:
     """
-    業績スコア(0-1)と、課題に関連する過去実績の説明文（無ければNone）を返す。
-    評価ランクだけでなく、評価コメントの文章も読む（論調・課題に関連する実績）。評価データが無ければ中間値0.5。
+    経験の一致（0〜1）と、その根拠になった業績1件を返す。
+      語の一致   : 課題文の辞書語が、その人の業績の文に出てくるか（種類数で強さを決める）
+      文の類似度 : 文字N-gram の TF-IDF コサイン類似度（辞書に無い言い換えを拾う）
+    二つのうち高い方を採用する。
     """
     records = performance_by_employee.get(employee_id, [])
-    if not records:
-        return 0.5, None
+    if not records or not issue_text:
+        return 0.0, None
 
-    latest = max(records, key=lambda r: int(r["fiscal_year"]))
-    score = RATING_SCORE.get(latest.get("performance_rating") or "", 0.5)
+    # 語の一致（全年度分の業績を合算して、種類数で強さを決める）
+    all_hit_terms: dict[str, None] = {}
+    best_record_by_terms: Optional[dict] = None
+    best_term_count = 0
+    for record in records:
+        hit = _hits(dictionary_terms, _record_text(record))
+        for term in hit:
+            all_hit_terms[term] = None
+        if len(hit) > best_term_count:
+            best_term_count = len(hit)
+            best_record_by_terms = {"record": record, "terms": hit}
+    term_score = _strength(len(all_hit_terms))
 
-    # 2) 直近年度の評価コメントの論調
-    comment = latest.get("comment") or ""
-    tone = sum(term in comment for term in POSITIVE_TERMS) - sum(term in comment for term in NEGATIVE_TERMS)
-    score += max(-TONE_CAP, min(TONE_CAP, TONE_STEP * tone))
+    # 文の類似度
+    sim_score = 0.0
+    best_sim = 0.0
+    best_record_by_sim: Optional[dict] = None
+    pack = _experience_vectorizer(performance_rows)
+    if pack:
+        vectorizer, matrix, index_of = pack
+        from sklearn.metrics.pairwise import cosine_similarity
 
-    # 3) 課題に関連する過去実績（全年度の案件名・評価コメント）
-    hit_terms: set[str] = set()
-    latest_hit_record: Optional[dict] = None  # 表示用: 課題に関連する語を含む、最も新しい年度の実績
-    for record in sorted(records, key=lambda r: int(r["fiscal_year"]), reverse=True):
-        text = f"{record.get('key_project') or ''} {record.get('comment') or ''}"
-        hits = [term for term in issue_terms if term in text]
-        hit_terms.update(hits)
-        if hits and latest_hit_record is None:
-            latest_hit_record = record
-    score += min(EVIDENCE_CAP, EVIDENCE_STEP * len(hit_terms))
+        issue_vec = vectorizer.transform([issue_text])
+        for record in records:
+            i = index_of.get(id(record))
+            if i is None:
+                continue
+            sim = float(cosine_similarity(issue_vec, matrix[i])[0][0])
+            if sim > best_sim:
+                best_sim = sim
+                best_record_by_sim = {"record": record, "sim": sim}
+        if best_sim >= EXPERIENCE_MIN_SIM:
+            sim_score = min(1.0, (best_sim - EXPERIENCE_MIN_SIM) / (EXPERIENCE_FULL_SIM - EXPERIENCE_MIN_SIM))
 
-    evidence = None
-    if latest_hit_record:
-        evidence = f"「{latest_hit_record.get('key_project')}」（{latest_hit_record.get('comment')}）"
-    return round(max(0.0, min(1.0, score)), 3), evidence
-
-
-def _availability_score(employee_id: str, active_counts: dict[str, int]) -> float:
-    """実績ベースの現稼働プロジェクト数から、余裕度を0-1で算出（表示用。スコアには含めない）。"""
-    count = active_counts.get(employee_id, 0)
-    return round(max(0.0, 1.0 - count / MAX_ACTIVE_ASSIGNMENTS), 3)
+    if term_score >= sim_score and term_score > 0:
+        evidence = dict(best_record_by_terms or {})
+        evidence["terms"] = list(all_hit_terms)
+        return term_score, evidence
+    if sim_score > 0 and best_record_by_sim:
+        return sim_score, best_record_by_sim
+    return 0.0, None
 
 
-def _availability_note(availability_score: float) -> str:
-    if availability_score >= 0.66:
+# ----------------------------------------------------------------------------
+# 表示用（タグ・稼働・判断根拠）
+# ----------------------------------------------------------------------------
+
+def _age_band(age) -> Optional[str]:
+    a = _to_int(age, -1)
+    return f"{a // 10 * 10}代" if a >= 0 else None
+
+
+def _availability_note(active_projects: int) -> str:
+    if active_projects <= 1:
         return "稼働に余裕あり"
-    if availability_score >= 0.34:
+    if active_projects == 2:
         return "稼働はやや逼迫"
     return "稼働はほぼ埋まっている"
 
 
-def _feature_text(
-    employee: dict, matched_skill: Optional[str], performance_score: float, evidence: Optional[str]
-) -> str:
-    """app.pyの候補カード（feature列）にそのまま表示できる、スキルと業績の説明文を組み立てる。"""
-    if matched_skill:
-        slot = "skill1" if employee.get("skill1") == matched_skill else "skill2"
-        level = employee.get(f"{slot}_level", "-")
-        years = employee.get(f"{slot}_year", "-")
-        skill_part = f"{matched_skill}（Lv{level}・経験{years}年）を保有"
-    else:
-        skill_part = "直接一致するスキルは見つからず"
+def _tag_groups(employee: dict, active_projects: int) -> dict:
+    """候補者に付けるタグを、種類別にまとめる（画面では種類ごとに絞り込める）。"""
+    groups: dict = {}
+    band = _age_band(employee.get("age"))
+    if band:
+        groups["年代"] = band
+    groups["部署"] = employee["department"]
+    if employee.get("position"):
+        groups["役職"] = employee["position"]
+    if employee.get("years_of_experience") is not None:
+        groups["経験"] = f"経験{employee['years_of_experience']}年"
+    groups["参加案件"] = f"参加案件{active_projects}件"
+    certs = _cert_names(employee.get("certifications"))
+    if certs:
+        groups["資格"] = certs
+    return groups
 
-    if performance_score >= 0.75:
-        perf_note = "直近の業績評価は良好"
-    elif performance_score >= 0.5:
-        perf_note = "直近の業績評価は標準的"
-    else:
-        perf_note = "直近の業績評価はやや苦戦気味"
 
-    text = f"{skill_part}。{perf_note}。"
-    if evidence:
-        text += f"この課題に関連する実績: {evidence}。"
-    return text
+def _tags(groups: dict) -> list[str]:
+    tags: list[str] = []
+    for value in groups.values():
+        tags.extend(value if isinstance(value, list) else [value])
+    return tags
+
+
+def _terms_text(terms: list[str]) -> str:
+    return "・".join(f"『{t}』" for t in terms)
+
+
+def _explain(
+    match_type: str, skill_hits: list[dict], cert_hits: list[dict], experience: Optional[dict],
+    skill_score: float, experience_score: float, match_score: float,
+) -> list[str]:
+    lines: list[str] = []
+    for h in sorted(skill_hits, key=lambda h: (-h["level"], -h["years"])):
+        genre = "（ジャンルも一致して加点）" if h["genre"] else ""
+        lines.append(f"スキル『{h['name']}』（Lv{h['level']}・{h['years']}年）: 課題文の語 {_terms_text(h['terms'])} に一致{genre}")
+    for h in cert_hits:
+        lines.append(f"資格『{h['name']}』: 課題文の語 {_terms_text(h['terms'])} に関連")
+    if experience:
+        rec = experience["record"]
+        what = f"{rec.get('fiscal_year')}年度『{rec.get('key_project')}』（{rec.get('comment')}）"
+        if experience.get("terms"):
+            lines.append(f"過去の実績 {what}: 課題文の語 {_terms_text(experience['terms'])} に一致")
+        else:
+            lines.append(f"過去の実績 {what}: 課題文との文の類似度 {experience['sim']:.0%}")
+    lines.append(
+        f"スコア {match_score:.2f} = スキル一致 {skill_score:.2f}×{W_SKILL} + 経験一致 {experience_score:.2f}×{W_EXPERIENCE}"
+        f"（{match_type}。評価ランクは使っていません）"
+    )
+    return lines
 
 
 # ----------------------------------------------------------------------------
 # 公開API
 # ----------------------------------------------------------------------------
 
+_TIER = {"スキル一致": 0, "資格のみ": 1, "経験のみ": 2}
+
+
 def match_employees(
     category_1: Optional[str] = None,
     issue_text: str = "",
     department: Optional[str] = None,
     exclude_employee_ids: Optional[list[str]] = None,
-    top_n: int = 3,
+    top_n: int = 20,
 ) -> list[Candidate]:
     """
-    課題（ジャンル + 相談文）に対して、対応候補となる社員をスコア順に返す。
+    課題（issue_summary）に対して、対応候補となる社員を並び順どおりに返す。
 
     Args:
-        category_1: 課題のジャンル（category1_masterのcategory_1に準拠）。
-                    Noneの場合はカテゴリ一致を使わず、issue_textとの部分一致のみで判定する。
-        issue_text: 相談内容の要約文（issue_summary等）。空文字でもよい。
+        category_1: 課題のジャンル。指定すると、ジャンルが一致するスキルに少しだけ加点する（語が一致していることが前提）。
+        issue_text: 課題の文（issue_summary。似た相談をまとめた場合はそれらをつなげた文）。
         department: 指定した場合、その部署の社員のみを候補にする（Noneなら全社対象）。
         exclude_employee_ids: 除外したい社員ID（相談者本人など）。
-        top_n: 返す最大件数。
+        top_n: 返す最大件数（既定20）。
 
-    Returns:
-        match_score降順のCandidateリスト（関連スキルが1つも無い社員は候補に含めない）。
+    並び順: ①スキル一致（一致した語の種類数→レベル→年数の高い順）②資格のみ（語の種類数→社会人経験の長い順）③経験のみ（経験一致の高い順）
+    スキル・資格・経験のいずれにも一致しない社員は、候補に含めない。
     """
+    if not (issue_text or "").strip():
+        return []
+
     employees = load_employees()
     skill_master = load_skill_master()
     skill_keywords = load_skill_keywords()
     performance_by_employee = load_performance()
-    active_counts = load_active_assignment_counts()
+    performance_rows = _fetch("performance_records")
+    active_counts = load_active_project_counts()
     exclude = set(exclude_employee_ids or [])
-    issue_terms = _issue_terms(issue_text, skill_keywords)
+    dictionary_terms = _issue_dictionary_terms(issue_text, skill_keywords)
 
-    candidates: list[Candidate] = []
+    scored: list[tuple[tuple, Candidate]] = []
     for employee_id, employee in employees.items():
         if employee_id in exclude:
             continue
         if department and employee.get("department") != department:
             continue
 
-        skill_score, matched_skill = _skill_score(employee, category_1, issue_text, skill_master, skill_keywords)
-        if skill_score <= 0.0:
-            continue  # 関連スキルが全く無い社員は候補にしない
+        skill_score, skill_hits, cert_hits = _skill_match(employee, category_1, issue_text, skill_master, skill_keywords)
+        experience_score, experience = _experience_match(
+            employee_id, performance_by_employee, performance_rows, issue_text, dictionary_terms
+        )
+        if skill_score <= 0.0 and experience_score <= 0.0:
+            continue
 
-        performance_score, evidence = _performance(employee_id, performance_by_employee, issue_terms)
-        availability_score = _availability_score(employee_id, active_counts)
+        match_type = "スキル一致" if skill_hits else ("資格のみ" if cert_hits else "経験のみ")
+        match_score = round(W_SKILL * skill_score + W_EXPERIENCE * experience_score, 3)
 
-        total_score = W_SKILL * skill_score + W_PERFORMANCE * performance_score
+        # 表示・並び順に使うスキル: 語が最もよく当たったもの → レベル → 年数
+        best_skill = max(skill_hits, key=lambda h: (min(len(h["terms"]), SORT_HIT_CAP), h["level"], h["years"])) if skill_hits else None
+        matched_terms: list[str] = []
+        for h in skill_hits + cert_hits:
+            matched_terms += [t for t in h["terms"] if t not in matched_terms]
+        if experience:
+            matched_terms += [t for t in experience.get("terms", []) if t not in matched_terms]
 
+        active_projects = active_counts.get(employee_id, 0)
         manager = employees.get(employee.get("manager_id") or "")
+        tag_groups = _tag_groups(employee, active_projects)
+        explanation = _explain(match_type, skill_hits, cert_hits, experience, skill_score, experience_score, match_score)
 
-        candidates.append(
-            Candidate(
-                employee_id=employee_id,
-                name=employee["name"],
-                department=employee["department"],
-                position=employee.get("position") or "",
-                manager_name=manager["name"] if manager else None,
-                match_score=round(total_score, 3),
-                feature=_feature_text(employee, matched_skill, performance_score, evidence),
-                matched_skill=matched_skill,
-                skill_score=round(skill_score, 3),
-                performance_score=performance_score,
-                availability_score=availability_score,
-                availability_note=_availability_note(availability_score),
-            )
+        candidate = Candidate(
+            employee_id=employee_id, name=employee["name"], department=employee["department"],
+            position=employee.get("position") or "", manager_name=manager["name"] if manager else None,
+            match_score=match_score, skill_score=round(skill_score, 3), experience_score=round(experience_score, 3),
+            match_type=match_type,
+            matched_skill=best_skill["name"] if best_skill else None,
+            matched_skill_level=best_skill["level"] if best_skill else None,
+            matched_skill_years=best_skill["years"] if best_skill else None,
+            matched_skill_terms=list(best_skill["terms"]) if best_skill else [],
+            matched_terms=matched_terms, tags=_tags(tag_groups), tag_groups=tag_groups,
+            active_projects=active_projects, availability_note=_availability_note(active_projects),
+            explanation=explanation, feature="。".join(explanation),
         )
 
-    candidates.sort(key=lambda c: c.match_score, reverse=True)
-    return candidates[:top_n]
+        tier = _TIER[match_type]
+        years_of_experience = _to_int(employee.get("years_of_experience"), 0)
+        if tier == 0:
+            hit_count = min(len(best_skill["terms"]), SORT_HIT_CAP)
+            sort_key = (0, -hit_count, -best_skill["level"], -best_skill["years"], -match_score, employee_id)
+        elif tier == 1:
+            hit_count = min(max(len(h["terms"]) for h in cert_hits), SORT_HIT_CAP)
+            sort_key = (1, -hit_count, -years_of_experience, -match_score, employee_id)
+        else:
+            sort_key = (2, -experience_score, -years_of_experience, employee_id)
+        scored.append((sort_key, candidate))
+
+    scored.sort(key=lambda pair: pair[0])
+    return [c for _, c in scored[:top_n]]
 
 
-def match_for_issue_id(issue_id: str, top_n: int = 3, exclude_employee_ids: Optional[list[str]] = None) -> list[Candidate]:
-    """extracted_issues の issue_id を指定して、そのままマッチングする（ダッシュボード連携用）。"""
+def match_for_issue_id(issue_id: str, top_n: int = 20, exclude_employee_ids: Optional[list[str]] = None) -> list[Candidate]:
+    """extracted_issues の issue_id を指定して、そのままマッチングする。"""
     issue = load_extracted_issues().get(issue_id)
     if issue is None:
         raise ValueError(f"issue_id '{issue_id}' が extracted_issues に見つかりません")
 
     return match_employees(
-        category_1=issue["category_1"],
-        issue_text=issue.get("issue_summary") or "",
-        exclude_employee_ids=exclude_employee_ids,
-        top_n=top_n,
+        category_1=issue["category_1"], issue_text=issue.get("issue_summary") or "",
+        exclude_employee_ids=exclude_employee_ids, top_n=top_n,
     )
 
 
 def guess_category_1(query_text: str) -> Optional[str]:
-    """
-    自由記述の相談文から、最もキーワードが一致したcategory_1を推定する簡易ヒューリスティック。
-    将来ai_advisor.pyでLLMによる意図解析に置き換わるまでの暫定ロジック。
-    一致するキーワードが無ければ None（カテゴリ指定なしの全文一致マッチングにフォールバック）。
-    """
+    """自由記述の相談文から、最もキーワードが一致したcategory_1を推定する簡易ヒューリスティック。"""
     best_category: Optional[str] = None
     best_hits = 0
     for category, keywords in CATEGORY_HINT_KEYWORDS.items():
@@ -485,36 +601,34 @@ def guess_category_1(query_text: str) -> Optional[str]:
 
 
 def match_for_query(
-    query_text: str,
-    department: Optional[str] = None,
-    exclude_employee_ids: Optional[list[str]] = None,
-    top_n: int = 3,
+    query_text: str, department: Optional[str] = None,
+    exclude_employee_ids: Optional[list[str]] = None, top_n: int = 20,
 ) -> list[Candidate]:
-    """
-    マネージャーの自由記述の質問（recommendationsのmanager_query相当）から
-    候補人材を提案する。カテゴリはguess_category_1()で簡易推定する。
-
-    ※ 精度はキーワードヒューリスティックの範囲にとどまる。ai_advisor.py実装後は
-      LLMにcategory_1・issue_textを整形させてmatch_employees()に渡す形へ置き換え可能。
-    """
-    category_1 = guess_category_1(query_text)
+    """マネージャーの自由記述の質問から候補人材を提案する。カテゴリは guess_category_1() で簡易推定する。"""
     return match_employees(
-        category_1=category_1,
-        issue_text=query_text,
-        department=department,
-        exclude_employee_ids=exclude_employee_ids,
-        top_n=top_n,
+        category_1=guess_category_1(query_text), issue_text=query_text, department=department,
+        exclude_employee_ids=exclude_employee_ids, top_n=top_n,
     )
 
 
 def to_ui_dict(candidate: Candidate) -> dict:
-    """app.py の CANDIDATES の形（name/feature/manager/match_score）＋稼働状況（availability）に変換する。"""
+    """画面用の辞書。従来のキー（name/feature/manager/match_score/availability）に、新しい項目を足している。"""
     return {
+        "employee_id": candidate.employee_id,
         "name": candidate.name,
         "feature": candidate.feature,
         "manager": candidate.manager_name or "（上長未設定）",
         "match_score": candidate.match_score,
         "availability": candidate.availability_note,
+        "match_type": candidate.match_type,
+        "skill_score": candidate.skill_score,
+        "experience_score": candidate.experience_score,
+        "tags": candidate.tags,
+        "tag_groups": candidate.tag_groups,
+        "position": candidate.position,
+        "department": candidate.department,
+        "explanation": candidate.explanation,
+        "matched_terms": candidate.matched_terms,
     }
 
 
@@ -527,25 +641,13 @@ def to_ui_list(candidates: list[Candidate]) -> list[dict]:
 # ----------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    print("=" * 60)
-    print("課題ログ(extracted_issues)に対するマッチング")
-    print("=" * 60)
-    issues = load_extracted_issues()
-    for issue_id, issue in issues.items():
-        print(f"\n[{issue_id}] {issue['department']} / {issue['category_1']}（urgency={issue['urgency']}）")
-        print(f"  相談内容: {issue['issue_summary']}")
-        for candidate in match_for_issue_id(issue_id, top_n=3):
-            print(f"    -> {candidate.name}（{candidate.department}/{candidate.position}）"
-                  f" score={candidate.match_score}  {candidate.feature} [{candidate.availability_note}]")
-
-    print("\n" + "=" * 60)
-    print("自由記述クエリ(recommendationsのmanager_query)に対するマッチング")
-    print("=" * 60)
-    for rec in _fetch("recommendations"):
-        query = rec["manager_query"]
-        guessed = guess_category_1(query)
-        print(f"\nQ. {query}")
-        print(f"  推定カテゴリ: {guessed}")
-        for candidate in match_for_query(query, exclude_employee_ids=[rec["manager_id"]], top_n=3):
-            print(f"    -> {candidate.name}（{candidate.department}/{candidate.position}）"
-                  f" score={candidate.match_score}  {candidate.feature} [{candidate.availability_note}]")
+    samples = [
+        ("技術検討", "再生PET繊維で強度が低下する原因と対策を知りたい"),
+        ("技術検討", "難燃性とリサイクル性を両立する材料設計の事例を探している"),
+        ("他部署連携", "海外顧客からSDSの提出を求められたが手順が分からない"),
+    ]
+    for category_1, text in samples:
+        print("=" * 60)
+        print(f"[{category_1}] {text}")
+        for rank, c in enumerate(match_employees(category_1, text, top_n=5), 1):
+            print(f"  {rank}. {c.name}（{c.department}/{c.position}）{c.match_type} score={c.match_score}  tags={c.tags}")

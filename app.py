@@ -13,6 +13,8 @@ Supabase の chat_logs テーブルを実データソースとして使用する
 """
 
 import os
+from collections import Counter
+from datetime import timedelta
 
 import pandas as pd
 import plotly.express as px
@@ -98,27 +100,32 @@ TABLE_NAME = "chat_logs"
 PAGE_SIZE = 1000  # Supabaseの1リクエストあたり取得上限
 
 # 人材マッチングの設定。候補者は matching_engine.py が Supabase の社員・スキル・業績データから算出する
-MATCH_TOP_N = 3         # 表示する候補者の人数
-MATCH_SAMPLE_LOGS = 10  # 課題文として渡す、今週の相談要約の件数（新しい順）
+MATCH_TOP_N = 20         # 表示する候補者の最大人数
+MATCH_SAMPLE_LOGS = 10   # 課題文として渡す、似た相談の要約の最大件数（新しい順）
+MATCH_DEFAULT_DAYS = 28  # 課題を選ぶ期間の初期値（最新の相談から遡る日数）
+GROUP_SIMILARITY = 0.5   # 似た相談を1項目にまとめる類似度（文字N-gramのTF-IDFコサイン。大きいほど厳しい）
+ALL_GENRES = "（すべて）"
 CANDIDATES: list[dict] = []  # ③で算出する。④のAIアドバイスの根拠にも使う
+SELECTED_ISSUE: dict | None = None  # ③でマネージャーが選んだ課題（似た相談をまとめた1項目）。未選択ならNone
 
 # AIアドバイザーに渡す固定プロンプト（ユーザーが質問を入力するのではなく、
-# 集計結果そのものを根拠に自動でアドバイスを生成させる）
+# ③で選んだ課題と集計結果そのものを根拠に自動でアドバイスを生成させる）
 ADVISOR_PROMPT = (
-    "①②の今週の集計結果（ジャンル別・課題別の件数と前週比、具体的な課題の例、"
-    "支援候補となる社員）を踏まえて、マネージャーが今週取るべきアクションを"
-    "提案してください。特にどのジャンル・課題への対応を優先すべきか、"
-    "誰にどう動いてもらうと良いかを具体的に述べてください。"
+    "マネージャーが③で選んだ課題について、①②の今週の集計結果（ジャンル別・課題別の件数と前週比、"
+    "具体的な課題の例）と、支援候補となる社員を踏まえて、マネージャーが取るべきアクションを"
+    "提案してください。この課題への具体的な対応と、誰にどう動いてもらうと良いかを述べてください。"
 )
 
-# APIキー未設定・API呼び出し失敗時のフォールバック回答。固定文ではなく、今週のデータから組み立てる
+# APIキー未設定・API呼び出し失敗時のフォールバック回答。固定文ではなく、選んだ課題と候補者から組み立てる
 def fallback_response() -> str:
-    names = "、".join(c["name"] for c in CANDIDATES) or "（該当する候補者なし）"
+    if SELECTED_ISSUE is None:
+        return "［AIは未使用］③で課題を選ぶと、その課題に対するアドバイスを生成できます。"
+    names = "、".join(c["name"] for c in CANDIDATES[:3]) or "（該当する候補者なし）"
     return (
-        f"［フォールバック回答／AIは未使用］ 今週は「{top_category_this_week}」の相談が最多"
-        f"（{int(this_week_counts[top_category_this_week])}件）です。"
-        f"まず対応できる候補者（{names}）に、暫定的な支援を相談することを検討してください。"
-        "「🤖 今週の結果からAIアドバイスを生成」を押すと、AIがより具体的な提案を作ります。"
+        f"［フォールバック回答／AIは未使用］ 選んだ課題「{SELECTED_ISSUE['rep']}」"
+        f"（類似{SELECTED_ISSUE['count']}件）について、まず対応できる候補者（{names}）に、"
+        "暫定的な支援を相談することを検討してください。"
+        "「🤖 選んだ課題についてAIアドバイスを生成」を押すと、AIがより具体的な提案を作ります。"
     )
 
 
@@ -143,7 +150,7 @@ def load_chat_logs() -> pd.DataFrame:
     while True:
         res = (
             client.table(TABLE_NAME)
-            .select("log_id, timestamp, category_1, category_2, issue_summary")
+            .select("log_id, employee_id, timestamp, category_1, category_2, issue_summary")
             .order("timestamp")
             .range(start, start + PAGE_SIZE - 1)
             .execute()
@@ -154,7 +161,7 @@ def load_chat_logs() -> pd.DataFrame:
             break
         start += PAGE_SIZE
 
-    df = pd.DataFrame(rows, columns=["log_id", "timestamp", "category_1", "category_2", "issue_summary"])
+    df = pd.DataFrame(rows, columns=["log_id", "employee_id", "timestamp", "category_1", "category_2", "issue_summary"])
     if df.empty:
         return df
 
@@ -212,6 +219,55 @@ def build_weekly_dataset(df: pd.DataFrame):
     return weekly_pivot, weekly_issue_pivot, cross_tab, this_week_start
 
 
+def group_similar_issues(df: pd.DataFrame) -> list[dict]:
+    """
+    似た相談（issue_summary）を1項目にまとめる。文字N-gramのTF-IDFコサイン類似度が GROUP_SIMILARITY 以上なら同じ項目。
+    各項目: id(最新ログのlog_id) / rep(代表=最新の要約) / summaries(新しい順) / count / category_1(最多のジャンル。未分類のみならNone)
+            / employee_ids(相談者。候補から外すだけで画面には出さない) / label(選択肢の表示)
+    """
+    rows = df.dropna(subset=["issue_summary"]).sort_values("timestamp", ascending=False).reset_index(drop=True)
+    if rows.empty:
+        return []
+    texts = rows["issue_summary"].tolist()
+    assigned = [-1] * len(texts)
+    members: list[list[int]] = []
+    try:
+        from sklearn.feature_extraction.text import TfidfVectorizer
+        from sklearn.metrics.pairwise import cosine_similarity
+
+        sim = cosine_similarity(TfidfVectorizer(analyzer="char_wb", ngram_range=(2, 3), sublinear_tf=True).fit_transform(texts))
+    except Exception:  # scikit-learn が使えないときは、まとめずに1件ずつ
+        sim = None
+    for i in range(len(texts)):
+        if assigned[i] >= 0:
+            continue
+        group = [i]
+        assigned[i] = len(members)
+        if sim is not None:
+            for j in range(i + 1, len(texts)):
+                if assigned[j] < 0 and sim[i, j] >= GROUP_SIMILARITY:
+                    group.append(j)
+                    assigned[j] = len(members)
+        members.append(group)
+
+    groups = []
+    for idxs in members:
+        part = rows.iloc[idxs]
+        genres = [g for g in part["category_1"] if g != UNCLASSIFIED]
+        rep = texts[idxs[0]]
+        count = len(idxs)
+        short = rep if len(rep) <= 60 else rep[:60] + "…"
+        groups.append({
+            "id": part.iloc[0]["log_id"], "rep": rep, "summaries": [texts[i] for i in idxs], "count": count,
+            "category_1": Counter(genres).most_common(1)[0][0] if genres else None,
+            "employee_ids": [e for e in part["employee_id"].dropna().unique()],
+            "label": f"{short}（類似{count}件）" if count > 1 else short,
+            "latest": part["timestamp"].max(),
+        })
+    groups.sort(key=lambda g: (-g["count"], -g["latest"].value))
+    return groups
+
+
 def week_bounds(start: pd.Timestamp):
     return start, start + pd.Timedelta(days=6)
 
@@ -236,17 +292,28 @@ def build_advisor_context(this_week_logs: pd.DataFrame) -> str:
     ) or "- （該当ログなし）"
 
     candidate_lines = "\n".join(
-        f"- {c['name']}（上司: {c['manager']}）: {c['feature']}（{c['availability']}）" for c in CANDIDATES
+        f"- {c['name']}（{c['match_type']}／{'・'.join(c['tags'])}）: 課題文との一致語 {'・'.join(c['matched_terms']) or 'なし'}"
+        for c in CANDIDATES[:5]
     ) or "- （該当する候補者なし）"
 
+    if SELECTED_ISSUE is not None:
+        shown = "\n".join(f"- {t}" for t in SELECTED_ISSUE["summaries"][:5])
+        selected_block = (
+            f"■ マネージャーが選んだ課題（類似の相談 {SELECTED_ISSUE['count']}件を1項目にまとめたもの）\n"
+            f"代表: {SELECTED_ISSUE['rep']}\n{shown}\n\n"
+        )
+    else:
+        selected_block = ""
+
     return (
+        f"{selected_block}"
         "■ 今週のジャンル別相談件数\n"
         f"{genre_lines}\n\n"
         "■ 今週の課題別件数（ジャンルとは別分類）\n"
         f"{issue_lines}\n\n"
         "■ 相談ログからの具体的な課題例（抜粋）\n"
         f"{concrete_lines}\n\n"
-        "■ 支援候補となる社員\n"
+        "■ 支援候補となる社員（スキル・資格・過去の実績が課題に一致した人。上位5名）\n"
         f"{candidate_lines}"
     )
 
@@ -505,58 +572,143 @@ with st.expander(f"具体的な課題を見る（今週 {len(this_week_logs)} �
 st.divider()
 
 # ----------------------------------------------------------------------------
-# セクション3: 人材マッチング
+# セクション3: 人材マッチング（課題を選ぶと、その課題に詳しそうな人を探す）
 # ----------------------------------------------------------------------------
 
 st.subheader("③ 人材マッチング")
-
-# 今週の最多ジャンルの相談要約（新しい順）を課題文として渡し、対応できる社員を探す
-top_logs = this_week_logs[this_week_logs["category_1"] == top_category_this_week]
-issue_text = "。".join(
-    top_logs.sort_values("timestamp", ascending=False)["issue_summary"].dropna().head(MATCH_SAMPLE_LOGS)
-)
-try:
-    CANDIDATES = to_ui_list(match_employees(category_1=top_category_this_week, issue_text=issue_text, top_n=MATCH_TOP_N))
-except Exception as e:
-    st.error(f"人材マッチングの実行に失敗しました: {e}")
-
 st.caption(
-    f"今週最多カテゴリ「{top_category_this_week}」の相談（{len(top_logs)}件）に対する支援候補。"
-    "スキル・業績から算出し、稼働状況は点数に含めず参考として表示します。"
+    "調べたい課題を選ぶと、その課題に詳しそうな人を探して並べます。課題を変えると結果も変わります。"
+    "最終的に誰に相談するかは、タグを見て人が選びます。"
 )
 
-if not CANDIDATES:
-    st.info("該当する候補者が見つかりませんでした。")
+period_min = logs_df["timestamp"].min().date()
+period_max = logs_df["timestamp"].max().date()
+default_start = max(period_min, period_max - timedelta(days=MATCH_DEFAULT_DAYS - 1))
 
-for person in CANDIDATES:
-    with st.container(border=True):
-        c1, c2 = st.columns([1, 3])
-        with c1:
-            st.markdown(f"**{person['name']}**")
-            st.caption(f"上司: {person['manager']}")
-            st.caption(f"マッチ度 {person['match_score']:.2f}")
-            st.caption(f"稼働: {person['availability']}")
-        with c2:
-            st.write(person["feature"])
+sel1, sel2 = st.columns(2)
+period = sel1.date_input(
+    "期間", value=(default_start, period_max), min_value=period_min, max_value=period_max, key="match_period"
+)
+if isinstance(period, (tuple, list)) and len(period) == 2:
+    period_start, period_end = period
+    period_df = logs_df[(logs_df["timestamp"].dt.date >= period_start) & (logs_df["timestamp"].dt.date <= period_end)]
+else:
+    st.info("期間の終わりの日も選んでください。")
+    period_start = period_end = period_max
+    period_df = logs_df.iloc[0:0]
+
+genre_options = [ALL_GENRES] + [g for g in CATEGORIES if g in set(period_df["category_1"])]
+genre = sel2.selectbox("ジャンルで絞り込み", genre_options, key="match_genre")
+scope_df = period_df if genre == ALL_GENRES else period_df[period_df["category_1"] == genre]
+
+issue_groups = group_similar_issues(scope_df)
+issue_by_id = {g["id"]: g for g in issue_groups}
+selected_id = st.selectbox(
+    f"課題（{len(scope_df)}件の相談を、似たものをまとめて{len(issue_groups)}項目にしています）",
+    options=list(issue_by_id),
+    index=None,
+    placeholder="課題を選んでください",
+    format_func=lambda i: issue_by_id[i]["label"],
+    key=f"match_issue_{period_start}_{period_end}_{genre}",  # 絞り込みを変えたら選び直し
+)
+
+if selected_id is None:
+    st.info("課題を選ぶと、候補者が表示されます。")
+else:
+    SELECTED_ISSUE = issue_by_id[selected_id]
+    if SELECTED_ISSUE["count"] > 1:
+        with st.expander(f"まとめた{SELECTED_ISSUE['count']}件の相談を見る"):
+            for text in SELECTED_ISSUE["summaries"]:
+                st.write(f"- {text}")
+    issue_text = "。".join(SELECTED_ISSUE["summaries"][:MATCH_SAMPLE_LOGS])
+    try:
+        # 相談した本人は候補から外す（誰の相談かは画面に出さない）
+        CANDIDATES = to_ui_list(match_employees(
+            category_1=SELECTED_ISSUE["category_1"], issue_text=issue_text,
+            exclude_employee_ids=SELECTED_ISSUE["employee_ids"], top_n=MATCH_TOP_N,
+        ))
+    except Exception as e:
+        st.error(f"人材マッチングの実行に失敗しました: {e}")
+
+    with st.expander("このマッチングの仕組み"):
+        st.markdown(
+            "- **スコア = スキル一致 × 0.8 ＋ 経験一致 × 0.2**（表示用）\n"
+            "- **スキル一致**: その人の skill1・skill2・資格が、課題の文の語（辞書）に当たるか。語が多く当たるほど強い。"
+            "ジャンルが同じなら少しだけ加点（ジャンルだけでは候補になりません）\n"
+            "- **経験一致**: 過去の業績（案件名・コメント）が課題に関連するか。語の一致と、文の類似度の両方で見ます\n"
+            "- **評価ランク（S・A・B…）はマッチングにも並び順にも使っていません**\n"
+            "- **並び順**: ①スキルが一致した人（一致した語の種類が多い→スキルのレベルが高い→年数が長い順）"
+            "②資格だけ一致した人 ③経験だけ一致した人。スコアの高さではなく、このルールで並べています\n"
+            "- 相談した本人は候補から外しています。タグは、探している人が自分で選ぶための目印です"
+        )
+
+    if not CANDIDATES:
+        st.info("該当する候補者が見つかりませんでした。")
+    else:
+        # タグ（種類ごと）で絞り込み。種類の中はどれか一致、種類をまたぐときは全部一致
+        tag_kinds = ["部署", "年代", "役職", "資格", "参加案件"]
+        tag_cols = st.columns(len(tag_kinds))
+        chosen: dict[str, list[str]] = {}
+        for col, kind in zip(tag_cols, tag_kinds):
+            values: list[str] = []
+            for person in CANDIDATES:
+                v = person["tag_groups"].get(kind)
+                for item in (v if isinstance(v, list) else [v]):
+                    if item and item not in values:
+                        values.append(item)
+            chosen[kind] = col.multiselect(kind, sorted(values), key=f"match_tag_{kind}_{selected_id}")
+
+        def matches_tags(person: dict) -> bool:
+            for kind, picked in chosen.items():
+                if not picked:
+                    continue
+                v = person["tag_groups"].get(kind)
+                have = v if isinstance(v, list) else [v]
+                if not any(item in picked for item in have):
+                    return False
+            return True
+
+        shown_candidates = [p for p in CANDIDATES if matches_tags(p)]
+        st.caption(f"候補 {len(shown_candidates)}名（条件に当てはまった {len(CANDIDATES)}名のうち）")
+
+        TAG_COLORS = {"年代": "blue", "部署": "green", "役職": "orange", "経験": "gray", "参加案件": "violet", "資格": "red"}
+        for person in shown_candidates:
+            with st.container(border=True):
+                c1, c2 = st.columns([1, 3])
+                with c1:
+                    st.markdown(f"**{person['name']}**")
+                    st.caption(f"{person['match_type']}｜マッチ度 {person['match_score']:.2f}")
+                    st.caption(f"上司: {person['manager']}")
+                with c2:
+                    badges = []
+                    for kind, v in person["tag_groups"].items():
+                        for item in (v if isinstance(v, list) else [v]):
+                            badges.append(f":{TAG_COLORS.get(kind, 'gray')}-badge[{item}]")
+                    st.markdown(" ".join(badges))
+                    with st.expander("なぜこの人が出たか（判断根拠）"):
+                        for line in person["explanation"]:
+                            st.write(f"- {line}")
 
 st.divider()
 
 # ----------------------------------------------------------------------------
-# セクション4: AIアドバイザーの回答
+# セクション4: AIアドバイザーの回答（③で選んだ課題に対する助言）
 # ----------------------------------------------------------------------------
 
 st.subheader("④ AIアドバイザーの回答")
 st.caption(
-    "①②の相談ログ集計データ（ジャンル別・課題別件数、具体例、候補者情報）を根拠に、"
-    "OpenAI API が今週取るべきアクションを自動で提案します。"
-    "OPENAI_API_KEY が未設定の場合はフォールバックの固定回答を表示します。"
+    "③で選んだ課題と、①②の相談ログ集計データ（ジャンル別・課題別件数、具体例）、支援候補を根拠に、"
+    "OpenAI API が取るべきアクションを提案します。課題を選び直すと、回答は消えます。"
+    "OPENAI_API_KEY が未設定の場合はフォールバックの回答を表示します。"
 )
 
-if "advisor_response" not in st.session_state:
+advisor_key = SELECTED_ISSUE["id"] if SELECTED_ISSUE else None
+if "advisor_response" not in st.session_state or st.session_state.get("advisor_for") != advisor_key:
     st.session_state["advisor_response"] = fallback_response()
+    st.session_state["advisor_for"] = advisor_key
 
-if st.button("🤖 今週の結果からAIアドバイスを生成"):
-    with st.spinner("AIアドバイザーが今週の結果を分析しています..."):
+if st.button("🤖 選んだ課題についてAIアドバイスを生成", disabled=SELECTED_ISSUE is None):
+    with st.spinner("AIアドバイザーが課題を分析しています..."):
         context = build_advisor_context(this_week_logs)
         st.session_state["advisor_response"] = generate_advisor_response(context)
 
