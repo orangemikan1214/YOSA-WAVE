@@ -94,7 +94,7 @@ def assign_colors(names: list[str], known: dict[str, str]) -> dict[str, str]:
 # 「今週」の基準。
 # True : chat_logs 内で最新のログがある週を「今週」とする（サンプルデータが過去日付のため）
 # False: 実行日の週を「今週」とする（本番運用向け）
-ANCHOR_TO_LATEST_DATA = True
+ANCHOR_TO_LATEST_DATA = False
 
 TABLE_NAME = "chat_logs"
 PAGE_SIZE = 1000  # Supabaseの1リクエストあたり取得上限
